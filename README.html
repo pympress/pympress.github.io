@@ -103,11 +103,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="pympress-logo-what-is-pympress">
+  <section id="pympress-logo-what-is-pympress">
 <h1><img alt="Pympress logo" src="https://raw.githubusercontent.com/Cimbali/pympress/master/pympress/share/pixmaps/pympress-32.png" /> What is Pympress?<a class="headerlink" href="#pympress-logo-what-is-pympress" title="Permalink to this headline">¶</a></h1>
 <p>Pympress is a PDF presentation tool designed for dual-screen setups such as presentations and public talks.
 Highly configurable, fully-featured, and portable</p>
-<p>It comes with many great features (<a class="reference external" href="#functionalities">more below</a>):</p>
+<p>It comes with many great features (<span class="xref myst">more below</span>):</p>
 <ul class="simple">
 <li><p>supports embedded gifs (out of the box), videos, and audios (with VLC or Gstreamer integration)</p></li>
 <li><p>text annotations displayed in the presenter window</p></li>
@@ -118,7 +118,7 @@ Highly configurable, fully-featured, and portable</p>
 <p>Here is what the 2 screen setup looks like, with a big notes slide next to 2 small slides (current and next) on the presenter side:
 <img alt="A screenshot with Pympress’ 2 screens" src="https://cimbali.github.io/pympress/resources/pympress-screenshot.png" /></p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="installing-github-version-badge">
+<section id="installing-github-version-badge">
 <h1>Installing <a class="reference external" href="https://github.com/Cimbali/pympress/releases/latest"><img alt="github version badge" src="https://img.shields.io/github/v/release/Cimbali/pympress?label=Latest%20GitHub%20release&amp;logo=github" /></a><a class="headerlink" href="#installing-github-version-badge" title="Permalink to this headline">¶</a></h1>
 <ul>
 <li><p>Ubuntu <img alt="ubuntu logo" src="https://cimbali.github.io/pympress/os-icons/ubuntu.png" /> 20.04 focal or newer, Debian <img alt="debian logo" src="https://cimbali.github.io/pympress/os-icons/debian.png" /> 11 Bullseye or newer
@@ -171,13 +171,13 @@ Those libraries really should already be installed on your system.</p></li>
 </ul>
 </details>
 </li>
-<li><p>Other systems, directly from PyPI <img alt="pypi version badge" src="https://img.shields.io/pypi/v/pympress?logo=pypi&amp;logoColor=yellow" /> − requires <a class="reference external" href="#dependencies">python, gtk+3, poppler, and their python bindings</a>:</p>
+<li><p>Other systems, directly from PyPI <img alt="pypi version badge" src="https://img.shields.io/pypi/v/pympress?logo=pypi&amp;logoColor=yellow" /> − requires <span class="xref myst">python, gtk+3, poppler, and their python bindings</span>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;pympress&quot;</span>
 </pre></div>
 </div>
 <details><summary>Troubleshooting</summary>
 <ul class="simple">
-<li><p>Make sure you have all <a class="reference external" href="#dependencies">the dependencies</a>. (These are already included in binary packages or their dependencies.)</p></li>
+<li><p>Make sure you have all <span class="xref myst">the dependencies</span>. (These are already included in binary packages or their dependencies.)</p></li>
 <li><p>Using pip, you may want to install with the <code class="docutils literal notranslate"><span class="pre">--user</span></code> option, or install from github or downloaded sources.
 See <a class="reference external" href="https://docs.python.org/3.7/installing/index.html">the python documentation on installing</a>.</p></li>
 <li><p>If your python environment lacks the Gobject Introspections module, try</p>
@@ -197,7 +197,7 @@ See <a class="reference external" href="https://pygobject.readthedocs.io/en/late
 VLC is not distributed with pympress, but it is certainly available in your system’s package manager and <a class="reference external" href="https://www.videolan.org/vlc/">on their website</a>.</p>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="usage">
+<section id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <section id="opening-a-file">
 <h2>Opening a file<a class="headerlink" href="#opening-a-file" title="Permalink to this headline">¶</a></h2>
@@ -285,7 +285,7 @@ with the + and - buttons of the spin box, or simply by typing in the number of t
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="dependencies">
+<section id="dependencies">
 <h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h1>
 <p>Pympress relies on:</p>
 <ul class="simple">
@@ -322,7 +322,7 @@ For example, on ubuntu, you can run the following as root to make sure you have 
 </pre></div>
 </div>
 <p>And on Arch Linux:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pacman -S --needed python python-pip gtk3 poppler cairo gobject-introspection poppler-glib python-gobject
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pacman -S --needed python python-pip gtk3 poppler cairo gobject-introspection poppler-glib python-gobject gst-plugin-gtk
 </pre></div>
 </div>
 </section>
@@ -335,7 +335,7 @@ For example, on ubuntu, you can run the following as root to make sure you have 
 </section>
 <section id="on-windows">
 <h2>On windows<a class="headerlink" href="#on-windows" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="#installing">binary installer for windows</a> comes with pympress and all its dependencies packaged.</p>
+<p>The <span class="xref myst">binary installer for windows</span> comes with pympress and all its dependencies packaged.</p>
 <p>Alternately, in order to install from pypi or from source on windows, there are two ways to get the dependencies:</p>
 <ol class="arabic">
 <li><p>using MSYS2 (replace x86_64 with i686 if you’re using a 32 bit machine).</p>
@@ -355,7 +355,7 @@ For example, on ubuntu, you can run the following as root to make sure you have 
 This strategy has not been used successfully yet, due to problems building Poppler with its introspection bidings (i.e. typelib) − see <a class="reference external" href="https://github.com/Cimbali/pympress/issues/109">#109</a>.</p>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="contributing">
+<section id="contributing">
 <h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
 <p>Feel free to clone this repo and use it, modify it, redistribute it, etc, under the GPLv2+.
 A <a class="reference external" href="https://github.com/Cimbali/pympress/graphs/contributors">number of contributors</a> have taken part in the development of pympress and submitted pull requests to improve it.</p>
@@ -394,7 +394,7 @@ and <!-- last translator --> Cimbali.</p>
 <section id="packages">
 <h2>Packages<a class="headerlink" href="#packages" title="Permalink to this headline">¶</a></h2>
 <p>Official releases are made to <a class="reference external" href="https://pypi.org/">PyPI</a> and with <a class="reference external" href="https://github.com/Cimbali/pympress/releases">github releases</a>.
-The community maintains a number of other packages or recipes to install pympress (see <a class="reference external" href="#installing-">Install section</a>). Any additions welcome.</p>
+The community maintains a number of other packages or recipes to install pympress (see <span class="xref myst">Install section</span>). Any additions welcome.</p>
 </section>
 </section>
 
