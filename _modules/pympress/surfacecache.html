@@ -212,9 +212,7 @@
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc_lock</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">new_doc</span>
 
-        <span class="k">for</span> <span class="n">widget_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">locks</span><span class="p">:</span>
-            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">locks</span><span class="p">[</span><span class="n">widget_name</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">surface_cache</span><span class="p">[</span><span class="n">widget_name</span><span class="p">]</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_cache</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="SurfaceCache.disable_prerender"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.disable_prerender">[docs]</a>    <span class="k">def</span> <span class="nf">disable_prerender</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_name</span><span class="p">):</span>
@@ -392,7 +390,8 @@
         <span class="n">page</span><span class="o">.</span><span class="n">render_cairo</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span><span class="p">,</span> <span class="n">wtype</span><span class="p">)</span>
         <span class="k">del</span> <span class="n">context</span>
 
-        <span class="c1"># Save if possible and necessary</span>
+        <span class="c1"># Save if possible and necessary − using PDF page numbering</span>
+        <span class="n">page_nb</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">page_nb</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">locks</span><span class="p">[</span><span class="n">widget_name</span><span class="p">]:</span>
             <span class="n">pc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">surface_cache</span><span class="p">[</span><span class="n">widget_name</span><span class="p">]</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">ww</span><span class="p">,</span> <span class="n">wh</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">surface_size</span><span class="p">[</span><span class="n">widget_name</span><span class="p">]</span> <span class="ow">and</span> <span class="n">page_nb</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pc</span><span class="p">:</span>
