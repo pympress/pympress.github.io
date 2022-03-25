@@ -214,7 +214,13 @@ or
 <p>A few of the fancier functionalities are listed here:</p>
 <ul>
 <li><p><strong>Two-screen display</strong>: See on your laptop or tablet display the current slide, the next slide, the talk time and wall-clock time, and annotations (either PDF annotations, beamer notes on second slide, or Libreoffice notes pages).
-The position of the beamer or Libreoffice notes in the slide is detected automatically and can be overridden via a menu option.</p></li>
+The position of the beamer or Libreoffice notes in the slide is detected automatically and can be overridden via a menu option.</p>
+<p>If you do not want to use second-slide beamer notes but prefer to have notes on their own pages, you can enable auto-detection of these notes.
+Use the following snippet that prefixes the page labels with <code class="docutils literal notranslate"><span class="pre">notes:</span></code> on notes pages:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\addtobeamertemplate</span><span class="nb">{</span>note page<span class="nb">}{}{</span><span class="k">\thispdfpagelabel</span><span class="nb">{</span>notes:<span class="k">\insertframenumber</span><span class="nb">}}</span>
+</pre></div>
+</div>
+</li>
 <li><p><strong>Media support</strong>: supports playing video, audio, and gif files embedded in (or linked from) the PDF file.</p></li>
 <li><p><strong>Highlight mode</strong>: Allows one to draw freehand on the slide currently on screen.</p></li>
 <li><p><strong>Go To Slide</strong>: To jump to a selected slide without flashing through the whole presentation on the projector, press <code class="docutils literal notranslate"><span class="pre">G</span></code> or click the “current  slide” box.
