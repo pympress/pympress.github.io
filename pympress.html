@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -93,14 +94,14 @@
            <div itemprop="articleBody">
              
   <section id="pympress-package">
-<h1>Pympress package<a class="headerlink" href="#pympress-package" title="Permalink to this headline">¶</a></h1>
+<h1>Pympress package<a class="headerlink" href="#pympress-package" title="Permalink to this heading">¶</a></h1>
 <p>This page contains the inline documentation, generated from the code using sphinx.</p>
 <p>The code is documented in the source using the <a class="reference external" href="https://google.github.io/styleguide/pyguide.html">Google style</a> for docstrings. Sphinx has gathered a <a class="reference external" href="http://www.sphinx-doc.org/en/latest/ext/example_google.html">set of examples</a> which serves as a better crash course than the full style reference.</p>
 <p>Retructured text (rst) can be used inside the comments and docstrings.</p>
 <section id="module-pympress.surfacecache">
-<span id="modules"></span><h2>Modules<a class="headerlink" href="#module-pympress.surfacecache" title="Permalink to this headline">¶</a></h2>
+<span id="modules"></span><h2>Modules<a class="headerlink" href="#module-pympress.surfacecache" title="Permalink to this heading">¶</a></h2>
 <section id="pympress-surfacecache-pages-prerendering-and-caching">
-<h3><a class="reference internal" href="#module-pympress.surfacecache" title="pympress.surfacecache"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pympress.surfacecache</span></code></a> – pages prerendering and caching<a class="headerlink" href="#pympress-surfacecache-pages-prerendering-and-caching" title="Permalink to this headline">¶</a></h3>
+<h3><a class="reference internal" href="#module-pympress.surfacecache" title="pympress.surfacecache"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pympress.surfacecache</span></code></a> – pages prerendering and caching<a class="headerlink" href="#pympress-surfacecache-pages-prerendering-and-caching" title="Permalink to this heading">¶</a></h3>
 <p>This modules contains stuff needed for caching pages and prerendering them. This
 is done by the <a class="reference internal" href="#pympress.surfacecache.SurfaceCache" title="pympress.surfacecache.SurfaceCache"><code class="xref py py-class docutils literal notranslate"><span class="pre">SurfaceCache</span></code></a> class, using several
 <a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://www.cairographics.org/documentation/pycairo/3/reference/surfaces.html#cairo.ImageSurface" title="(in Pycairo v1.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageSurface</span></code></a> for storing rendered pages.</p>
@@ -369,7 +370,7 @@ widget names and its values are document types from ui.</p>
 
 </section>
 <span class="target" id="module-pympress.editable_label"></span><section id="pympress-editable-label-a-label-that-can-be-swapped-out-for-an-editable-entry">
-<h3><a class="reference internal" href="#module-pympress.editable_label" title="pympress.editable_label"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pympress.editable_label</span></code></a> – A label that can be swapped out for an editable entry<a class="headerlink" href="#pympress-editable-label-a-label-that-can-be-swapped-out-for-an-editable-entry" title="Permalink to this headline">¶</a></h3>
+<h3><a class="reference internal" href="#module-pympress.editable_label" title="pympress.editable_label"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pympress.editable_label</span></code></a> – A label that can be swapped out for an editable entry<a class="headerlink" href="#pympress-editable-label-a-label-that-can-be-swapped-out-for-an-editable-entry" title="Permalink to this heading">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="pympress.editable_label.EditableLabel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pympress.editable_label.</span></span><span class="sig-name descname"><span class="pre">EditableLabel</span></span><a class="reference internal" href="_modules/pympress/editable_label.html#EditableLabel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.editable_label.EditableLabel" title="Permalink to this definition">¶</a></dt>
@@ -502,7 +503,7 @@ behaviour), otherwise pass the key presses on to the button for normal behaviour
 <dl class="py class">
 <dt class="sig sig-object py" id="pympress.editable_label.EstimatedTalkTime">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pympress.editable_label.</span></span><span class="sig-name descname"><span class="pre">EstimatedTalkTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">builder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/editable_label.html#EstimatedTalkTime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.editable_label.EstimatedTalkTime" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pympress.editable_label.EditableLabel" title="pympress.editable_label.EditableLabel"><code class="xref py py-class docutils literal notranslate"><span class="pre">pympress.editable_label.EditableLabel</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#pympress.editable_label.EditableLabel" title="pympress.editable_label.EditableLabel"><code class="xref py py-class docutils literal notranslate"><span class="pre">EditableLabel</span></code></a></p>
 <p>A label that displays the time elapsed since the start of the talk, that can be edited to select talk duration.</p>
 <p>The duration of the talk will cause the label to blink and change colour as the elapsed time gets closer to the
 targeted talk duration.</p>
@@ -591,7 +592,7 @@ targeted talk duration.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pympress.editable_label.PageNumber">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pympress.editable_label.</span></span><span class="sig-name descname"><span class="pre">PageNumber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">builder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_num_scroll</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/editable_label.html#PageNumber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.editable_label.PageNumber" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pympress.editable_label.EditableLabel" title="pympress.editable_label.EditableLabel"><code class="xref py py-class docutils literal notranslate"><span class="pre">pympress.editable_label.EditableLabel</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#pympress.editable_label.EditableLabel" title="pympress.editable_label.EditableLabel"><code class="xref py py-class docutils literal notranslate"><span class="pre">EditableLabel</span></code></a></p>
 <p>A label that displays “current page / max page”, that can be edited to select a page to which to go.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -797,7 +798,7 @@ targeted talk duration.</p>
 
 </section>
 <span class="target" id="module-pympress.talk_time"></span><section id="pympress-talk-time-manages-the-clock-of-elapsed-talk-time">
-<h3><a class="reference internal" href="#module-pympress.talk_time" title="pympress.talk_time"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pympress.talk_time</span></code></a> – Manages the clock of elapsed talk time<a class="headerlink" href="#pympress-talk-time-manages-the-clock-of-elapsed-talk-time" title="Permalink to this headline">¶</a></h3>
+<h3><a class="reference internal" href="#module-pympress.talk_time" title="pympress.talk_time"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pympress.talk_time</span></code></a> – Manages the clock of elapsed talk time<a class="headerlink" href="#pympress-talk-time-manages-the-clock-of-elapsed-talk-time" title="Permalink to this heading">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="pympress.talk_time.TimeCounter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pympress.talk_time.</span></span><span class="sig-name descname"><span class="pre">TimeCounter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">builder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ett</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timing_tracker</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoplay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/talk_time.html#TimeCounter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.talk_time.TimeCounter" title="Permalink to this definition">¶</a></dt>
