@@ -14,6 +14,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -30,7 +31,7 @@
 	<a href="../../index.html" class="icon icon-home"> Docs home</a>
 	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
 	<div class="version">
-		v1.7.1
+		v1.7.2
 	</div>
 
 	
@@ -156,7 +157,7 @@
         <span class="s1">&#39;talk-time&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;The estimated (intended) talk time in minutes&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span>
                       <span class="n">_</span><span class="p">(</span><span class="s1">&#39;(and optionally seconds)&#39;</span><span class="p">),</span> <span class="s1">&#39;mm[:ss]&#39;</span><span class="p">),</span>
         <span class="s1">&#39;notes&#39;</span><span class="p">:</span>     <span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Set the position of notes on the pdf page&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span>
-                      <span class="n">_</span><span class="p">(</span><span class="s1">&#39;(none, left, right, top, bottom, or after).&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span>
+                      <span class="n">_</span><span class="p">(</span><span class="s1">&#39;(none, left, right, top, bottom, after, odd, or prefix).&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span>
                       <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Overrides the detection from the file.&#39;</span><span class="p">),</span> <span class="s1">&#39;&lt;position&gt;&#39;</span><span class="p">),</span>
         <span class="s1">&#39;log&#39;</span><span class="p">:</span>       <span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Set level of verbosity in log file:&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span>
                       <span class="n">_</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">, or </span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span> <span class="s1">&#39;WARNING&#39;</span><span class="p">,</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">,</span> <span class="s1">&#39;CRITICAL&#39;</span><span class="p">),</span> <span class="s1">&#39;&lt;level&gt;&#39;</span><span class="p">),</span>
@@ -204,7 +205,7 @@
 <div class="viewcode-block" id="Pympress.quit"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.quit">[docs]</a>    <span class="k">def</span> <span class="nf">quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Quit and ignore other arguments e.g. sent by signals.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">unsaved_changes</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gui</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">unsaved_changes</span><span class="p">():</span>
             <span class="k">return</span>
 
         <span class="n">Gtk</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">quit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -376,6 +377,8 @@
                 <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">activate_action</span><span class="p">(</span><span class="s1">&#39;notes-pos&#39;</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">activate_action</span><span class="p">(</span><span class="s1">&#39;notes-pos&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">activate_action</span><span class="p">(</span><span class="s1">&#39;notes-pos&#39;</span><span class="p">,</span> <span class="s1">&#39;after&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;o&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">activate_action</span><span class="p">(</span><span class="s1">&#39;notes-pos&#39;</span><span class="p">,</span> <span class="s1">&#39;odd&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">activate_action</span><span class="p">(</span><span class="s1">&#39;notes-pos&#39;</span><span class="p">,</span> <span class="s1">&#39;map&#39;</span><span class="p">)</span>  <span class="c1"># prefix -&gt; map</span>
 
             <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s2">&quot;talk-time&quot;</span><span class="p">:</span>
                 <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">arg</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)]</span>
@@ -402,7 +405,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2020 Cimbali.</p>
+    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2022 Cimbali.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

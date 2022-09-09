@@ -14,6 +14,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -30,7 +31,7 @@
 	<a href="../../index.html" class="icon icon-home"> Docs home</a>
 	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
 	<div class="version">
-		v1.7.1
+		v1.7.2
 	</div>
 
 	
@@ -171,21 +172,29 @@
                 <span class="k">pass</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">__recursive_translate_widgets</span><span class="p">(</span><span class="n">a_widget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__recursive_translate_menu</span><span class="p">(</span><span class="n">menu</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Calls gettext on all strings we can find in widgets, and recursively on its children.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            a_widget (:class:`~GObject.Object`): an object built by the builder, usually a widget</span>
+<span class="sd">            menu (:class:`~Gio.Menu`): the menu to translate</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Builder</span><span class="o">.</span><span class="n">__translate_widget_strings</span><span class="p">(</span><span class="n">a_widget</span><span class="p">)</span>
+        <span class="n">menu_items</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">menu</span><span class="o">.</span><span class="n">get_n_items</span><span class="p">()):</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">MenuItem</span><span class="o">.</span><span class="n">new_from_model</span><span class="p">(</span><span class="n">menu</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a_widget</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
-            <span class="c1"># NB: Parent-loop in widgets would cause infinite loop here, but that&#39;s absurd (right?)</span>
-            <span class="c1"># NB2: maybe forall instead of foreach if we miss some strings?</span>
-            <span class="n">a_widget</span><span class="o">.</span><span class="n">foreach</span><span class="p">(</span><span class="n">Builder</span><span class="o">.</span><span class="n">__recursive_translate_widgets</span><span class="p">)</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get_attribute_value</span><span class="p">(</span><span class="n">Gio</span><span class="o">.</span><span class="n">MENU_ATTRIBUTE_LABEL</span><span class="p">,</span> <span class="n">GLib</span><span class="o">.</span><span class="n">VariantType</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">label</span><span class="p">:</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="n">label</span><span class="o">.</span><span class="n">get_string</span><span class="p">()))</span>
 
-        <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a_widget</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MenuItem</span><span class="p">)</span> <span class="ow">and</span> <span class="n">a_widget</span><span class="o">.</span><span class="n">get_submenu</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">Builder</span><span class="o">.</span><span class="n">__recursive_translate_widgets</span><span class="p">(</span><span class="n">a_widget</span><span class="o">.</span><span class="n">get_submenu</span><span class="p">())</span>
+            <span class="n">menu_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+            <span class="n">link_iter</span> <span class="o">=</span> <span class="n">menu</span><span class="o">.</span><span class="n">iterate_item_links</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+            <span class="k">while</span> <span class="n">link_iter</span><span class="o">.</span><span class="n">next</span><span class="p">():</span>
+                <span class="n">Builder</span><span class="o">.</span><span class="n">__recursive_translate_menu</span><span class="p">(</span><span class="n">link_iter</span><span class="o">.</span><span class="n">get_value</span><span class="p">())</span>
+
+        <span class="n">menu</span><span class="o">.</span><span class="n">remove_all</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">menu_items</span><span class="p">:</span>
+            <span class="n">menu</span><span class="o">.</span><span class="n">append_item</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Builder.get_callback_handler"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.get_callback_handler">[docs]</a>    <span class="k">def</span> <span class="nf">get_callback_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler_name</span><span class="p">):</span>
@@ -257,7 +266,10 @@
 
         <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">new_objects</span><span class="p">:</span>
             <span class="c1"># pass new objects to manual translation</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__translate_widget_strings</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Gio</span><span class="o">.</span><span class="n">Menu</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__recursive_translate_menu</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__translate_widget_strings</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 
             <span class="c1"># Instrospectively load objects. If we have a self.attr == None and this attr is the name of a built object,</span>
             <span class="c1"># link it together.</span>
@@ -473,7 +485,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2020 Cimbali.</p>
+    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2022 Cimbali.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

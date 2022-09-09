@@ -14,6 +14,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -30,7 +31,7 @@
 	<a href="../../index.html" class="icon icon-home"> Docs home</a>
 	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
 	<div class="version">
-		v1.7.1
+		v1.7.2
 	</div>
 
 	
@@ -171,8 +172,16 @@
     <span class="n">LEFT</span>    <span class="o">=</span> <span class="mi">5</span>
     <span class="c1">#: Full page + draw another page for notes, which is after the slides</span>
     <span class="n">AFTER</span>   <span class="o">=</span> <span class="mi">6</span>
-    <span class="c1">#: Complemntary of AFTER: for a notes page, the slide page is BEFORE by half a document</span>
+    <span class="c1">#: Complementary of AFTER: for a notes page, the slide page is BEFORE by half a document</span>
     <span class="n">BEFORE</span>  <span class="o">=</span> <span class="mi">7</span>
+    <span class="c1">#: Slides on even pages (0-indexed), notes on uneven pages</span>
+    <span class="n">ODD</span>     <span class="o">=</span> <span class="mi">8</span>
+    <span class="c1">#: Complementary of ODD</span>
+    <span class="n">EVEN</span>    <span class="o">=</span> <span class="mi">9</span>
+    <span class="c1">#: An arbitrary mapping of notes pages to slide pages</span>
+    <span class="n">MAP</span>     <span class="o">=</span> <span class="mi">10</span>
+    <span class="c1">#: Reverse the arbitrary mapping MAP</span>
+    <span class="n">RMAP</span>    <span class="o">=</span> <span class="mi">11</span>
 
 <div class="viewcode-block" id="PdfPage.complement"><a class="viewcode-back" href="../../pympress.html#pympress.ui.PdfPage.complement">[docs]</a>    <span class="k">def</span> <span class="nf">complement</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Return the enum value for the other part of the page.</span>
@@ -198,6 +207,10 @@
             <span class="k">return</span> <span class="s1">&#39;vertical&#39;</span>
         <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="n">PdfPage</span><span class="o">.</span><span class="n">AFTER</span> <span class="ow">or</span> <span class="n">val</span> <span class="o">==</span> <span class="n">PdfPage</span><span class="o">.</span><span class="n">BEFORE</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;page number&#39;</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="n">PdfPage</span><span class="o">.</span><span class="n">EVEN</span> <span class="ow">or</span> <span class="n">val</span> <span class="o">==</span> <span class="n">PdfPage</span><span class="o">.</span><span class="n">ODD</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;page parity&#39;</span>
+        <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="n">PdfPage</span><span class="o">.</span><span class="n">MAP</span> <span class="ow">or</span> <span class="n">val</span> <span class="o">==</span> <span class="n">PdfPage</span><span class="o">.</span><span class="n">RMAP</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;page mapping&#39;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span></div>
 
@@ -766,8 +779,8 @@
 <div class="viewcode-block" id="Document"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document">[docs]</a><span class="k">class</span> <span class="nc">Document</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; This is the main document handling class.</span>
 
-<span class="sd">    .. note:: The internal page numbering scheme is the same as in Poppler: it</span>
-<span class="sd">       starts at 0.</span>
+<span class="sd">    The page numbering starts as 0 and is aware of notes (i.e. number of pages may change to account for note pages).</span>
+<span class="sd">    The document page numbers are the same as in Poppler, and also start at 0 but do not depend on notes.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        builder (:class:`pympress.builder.Builder`):  A builder to load callbacks</span>
@@ -790,14 +803,16 @@
     <span class="n">pages_cache</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="c1">#: `set` of :class:`~pathlib.Path` representing the temporary files which need to be removed</span>
     <span class="n">temp_files</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="c1">#: History of pages we have visited</span>
+    <span class="c1">#: History of pages we have visited, using note-aware page numbers</span>
     <span class="n">history</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1">#: Our position in the history</span>
     <span class="n">hist_pos</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="c1">#: `dict` of all the page labels</span>
+    <span class="c1">#: `list` of slide page labels, indexed on note-aware page numbers</span>
     <span class="n">page_labels</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="c1">#: `bool` indicating whether the second half of pages are in fact notes pages</span>
-    <span class="n">notes_after</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1">#: `list` of all the page labels, indexed on document page numbers</span>
+    <span class="n">doc_page_labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1">#: `list` of (slide&#39;s document page number, notes&#39; document page number) tuples, or `None` if there are no notes</span>
+    <span class="n">notes_mapping</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#: `bool` indicating whether there were modifications to the document</span>
     <span class="n">changes</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -830,13 +845,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="c1"># Pages number</span>
-        <span class="k">if</span> <span class="n">pop_doc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">get_n_pages</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span><span class="p">)]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Pages numbers and labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">pop_doc</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">get_n_pages</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doc_page_labels</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc_page_labels</span>
 
         <span class="c1"># Pages cache</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pages_cache</span> <span class="o">=</span> <span class="p">{}</span>
@@ -987,6 +999,9 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            :class:`~pympress.document.PdfPage`: the notes mode</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">label</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;notes:&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">PdfPage</span><span class="o">.</span><span class="n">MAP</span>
+
         <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">current_page</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">page</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">page</span><span class="o">.</span><span class="n">can_render</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">PdfPage</span><span class="o">.</span><span class="n">NONE</span>
@@ -1026,13 +1041,37 @@
         <span class="k">return</span> <span class="n">PdfPage</span><span class="o">.</span><span class="n">NONE</span></div>
 
 
-<div class="viewcode-block" id="Document.set_notes_after"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.set_notes_after">[docs]</a>    <span class="k">def</span> <span class="nf">set_notes_after</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notes_after</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Set whether there are notes pages after normal pages (aka Libreoffice notes mode)</span>
+<div class="viewcode-block" id="Document.set_notes_pos"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.set_notes_pos">[docs]</a>    <span class="k">def</span> <span class="nf">set_notes_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notes_direction</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Set whether where the notes pages are relative to normal pages</span>
+
+<span class="sd">        Valid values are returned by :meth:`~pympress.document.PdfPage.direction`</span>
+<span class="sd">        - page number (aka Libreoffice notes mode)</span>
+<span class="sd">        - page parity (can not be detected automatically, where every other page contains notes)</span>
+<span class="sd">        - page mapping (where labels of notes pages are corresponding slide labels prefixed with “notes:”)</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            notes_after (`bool`):  Whether there are notes pages</span>
+<span class="sd">            notes_direction (`str`):  Where the notes pages are</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">notes_after</span> <span class="o">=</span> <span class="n">notes_after</span></div>
+        <span class="k">if</span> <span class="n">notes_direction</span> <span class="o">==</span> <span class="s1">&#39;page number&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">notes_mapping</span> <span class="o">=</span> <span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="n">notes_direction</span> <span class="o">==</span> <span class="s1">&#39;page parity&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">notes_mapping</span> <span class="o">=</span> <span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="n">notes_direction</span> <span class="o">==</span> <span class="s1">&#39;page mapping&#39;</span><span class="p">:</span>
+            <span class="n">notes_mapping</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">prev_label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doc_page_labels</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">doc_page_labels</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]])):</span>
+                <span class="c1"># Here the condition (could be adjusted) is 2 successive pages labeled &lt;label&gt; and notes:&lt;label&gt;,</span>
+                <span class="c1"># with the prior page not being a notes page.</span>
+                <span class="k">if</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">notes_mapping</span> <span class="ow">and</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;notes:&#39;</span> <span class="o">+</span> <span class="n">prev_label</span><span class="p">:</span>
+                    <span class="n">notes_mapping</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">notes_mapping</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">notes_mapping</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">notes_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">notes_mapping</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc_page_labels</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">doc_page_labels</span><span class="p">[</span><span class="n">page</span><span class="p">]</span> <span class="k">for</span> <span class="n">page</span><span class="p">,</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes_mapping</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="Document.page"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.page">[docs]</a>    <span class="k">def</span> <span class="nf">page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
@@ -1046,6 +1085,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">number</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages_number</span><span class="p">()</span> <span class="ow">or</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes_mapping</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes_mapping</span><span class="p">[</span><span class="n">number</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
 
         <span class="k">if</span> <span class="n">number</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages_cache</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pages_cache</span><span class="p">[</span><span class="n">number</span><span class="p">]</span> <span class="o">=</span> <span class="n">Page</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="n">number</span><span class="p">),</span> <span class="n">number</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
@@ -1064,8 +1108,11 @@
         <span class="k">if</span> <span class="n">number</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages_number</span><span class="p">()</span> <span class="ow">or</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes_after</span><span class="p">:</span>
-            <span class="n">number</span> <span class="o">=</span> <span class="n">number</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages_number</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes_mapping</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes_mapping</span><span class="p">[</span><span class="n">number</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
         <span class="k">if</span> <span class="n">number</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages_cache</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pages_cache</span><span class="p">[</span><span class="n">number</span><span class="p">]</span> <span class="o">=</span> <span class="n">Page</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="n">number</span><span class="p">),</span> <span class="n">number</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
@@ -1078,7 +1125,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            `int`: the number of pages in the document</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes_after</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span></div>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes_mapping</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes_mapping</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span></div>
 
 
 <div class="viewcode-block" id="Document.has_labels"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.has_labels">[docs]</a>    <span class="k">def</span> <span class="nf">has_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1087,7 +1134,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: False iff there are no labels or they are just the page numbers</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span> <span class="o">!=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span><span class="p">)]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc_page_labels</span> <span class="o">!=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nb_pages</span><span class="p">)]</span></div>
 
 
 <div class="viewcode-block" id="Document.lookup_label"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.lookup_label">[docs]</a>    <span class="k">def</span> <span class="nf">lookup_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">prefix_unique</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -1129,7 +1176,7 @@
 
 
 <div class="viewcode-block" id="Document.goto"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.goto">[docs]</a>    <span class="k">def</span> <span class="nf">goto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Switch to another page.</span>
+        <span class="sd">&quot;&quot;&quot; Switch to another page. Validates the number and returns one in the correct range. Also updates history.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            number (`int`):  number of the destination page</span>
@@ -1335,7 +1382,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2020 Cimbali.</p>
+    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2022 Cimbali.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -14,6 +14,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -30,7 +31,7 @@
 	<a href="../../index.html" class="icon icon-home"> Docs home</a>
 	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
 	<div class="version">
-		v1.7.1
+		v1.7.2
 	</div>
 
 	
@@ -120,7 +121,10 @@
 
 <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;frozen&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
     <span class="c1"># doesn’t play too well with cx_Freeze</span>
-    <span class="kn">import</span> <span class="nn">pkg_resources</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">importlib.resources</span> <span class="k">as</span> <span class="nn">importlib_resources</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">importlib_resources</span>
 
 <span class="n">IS_POSIX</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span>
 <span class="n">IS_MAC_OS</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;darwin&#39;</span>
@@ -147,21 +151,23 @@
     <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;frozen&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">info</span>
 
+    <span class="n">git_dir</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;pympress&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;.git&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">git_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">info</span>
+
     <span class="c1"># Try and get a git describe output in case we are on a dirty/editable version</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">get_distribution</span><span class="p">(</span><span class="s1">&#39;pympress&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">module_path</span>
-
-        <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;git --git-dir=</span><span class="si">{}</span><span class="s1">/.git describe --tags --long --dirty&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-        <span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>  <span class="c1"># after spliting in case path has whitespace</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;git --git-dir=</span><span class="si">{}</span><span class="s1"> describe --tags --long --dirty&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">git_dir</span><span class="p">)</span>  <span class="c1"># after spliting in case path has whitespace</span>
 
         <span class="n">git_version</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">)</span>
 
         <span class="c1"># answer format is: {last tag}-{commit count since tag}-g{commit sha1 hash}[-dirty]</span>
-        <span class="n">tag</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">sha</span><span class="p">,</span> <span class="n">dirty</span> <span class="o">=</span> <span class="p">(</span><span class="n">git_version</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">tag</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">sha</span><span class="p">,</span> <span class="n">dirty</span> <span class="o">=</span> <span class="p">(</span><span class="n">git_version</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">count</span> <span class="o">!=</span> <span class="s1">&#39;0&#39;</span> <span class="ow">or</span> <span class="n">dirty</span><span class="p">:</span>
             <span class="n">info</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">+</span><span class="si">{}</span><span class="s1">@</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">),</span> <span class="n">count</span><span class="p">,</span> <span class="n">sha</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">))</span>
 
-    <span class="k">except</span> <span class="p">(</span><span class="n">pkg_resources</span><span class="o">.</span><span class="n">DistributionNotFound</span><span class="p">,</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">):</span>
+    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Failed to get git describe output&#39;</span><span class="p">,</span> <span class="n">exc_info</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 
     <span class="k">finally</span><span class="p">:</span>
@@ -181,10 +187,10 @@
 <span class="sd">        :class:`~pathlib.Path`: The path to the resource</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;frozen&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="o">*</span><span class="n">path_parts</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">req</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">Requirement</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;pympress&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;pympress&#39;</span><span class="p">,)</span> <span class="o">+</span> <span class="n">path_parts</span><span class="p">)))</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;pympress&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">root</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="o">*</span><span class="n">path_parts</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="get_locale_dir"><a class="viewcode-back" href="../../pympress.html#pympress.util.get_locale_dir">[docs]</a><span class="k">def</span> <span class="nf">get_locale_dir</span><span class="p">():</span>
@@ -372,7 +378,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2020 Cimbali.</p>
+    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2022 Cimbali.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

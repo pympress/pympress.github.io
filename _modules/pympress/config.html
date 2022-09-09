@@ -14,6 +14,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -30,7 +31,7 @@
 	<a href="../../index.html" class="icon icon-home"> Docs home</a>
 	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
 	<div class="version">
-		v1.7.1
+		v1.7.2
 	</div>
 
 	
@@ -139,7 +140,8 @@
         <span class="s1">&#39;notes&#39;</span><span class="p">:</span>      <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">placeable_widgets</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">-</span> <span class="p">{</span><span class="s2">&quot;annotations&quot;</span><span class="p">,</span> <span class="s2">&quot;highlight&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;annotations&quot;</span><span class="p">}),</span>
         <span class="s1">&#39;plain&#39;</span><span class="p">:</span>      <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">placeable_widgets</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">-</span> <span class="p">{</span><span class="s2">&quot;notes&quot;</span><span class="p">,</span> <span class="s2">&quot;highlight&quot;</span><span class="p">},),</span>
         <span class="s1">&#39;note_pages&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">placeable_widgets</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">-</span> <span class="p">{</span><span class="s2">&quot;current&quot;</span><span class="p">,</span> <span class="s2">&quot;highlight&quot;</span><span class="p">},),</span>
-        <span class="s1">&#39;highlight&#39;</span><span class="p">:</span>  <span class="p">({</span><span class="s2">&quot;highlight&quot;</span><span class="p">},</span> <span class="nb">set</span><span class="p">(</span><span class="n">placeable_widgets</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">-</span> <span class="p">{</span><span class="s2">&quot;highlight&quot;</span><span class="p">})</span>
+        <span class="s1">&#39;highlight&#39;</span><span class="p">:</span>  <span class="p">({</span><span class="s2">&quot;highlight&quot;</span><span class="p">},</span> <span class="nb">set</span><span class="p">(</span><span class="n">placeable_widgets</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">-</span> <span class="p">{</span><span class="s2">&quot;highlight&quot;</span><span class="p">}),</span>
+        <span class="s1">&#39;highlight_notes&#39;</span><span class="p">:</span>  <span class="p">({</span><span class="s2">&quot;highlight&quot;</span><span class="p">},</span> <span class="nb">set</span><span class="p">(</span><span class="n">placeable_widgets</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">-</span> <span class="p">{</span><span class="s2">&quot;highlight&quot;</span><span class="p">}),</span>
     <span class="p">}</span>
 
     <span class="c1">#: `dict` mapping accelerator keys to actions</span>
@@ -471,9 +473,12 @@
                     <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">w_desc</span><span class="p">[</span><span class="s1">&#39;proportions&#39;</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span> <span class="ow">or</span> \
                             <span class="nb">any</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">float</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">w_desc</span><span class="p">[</span><span class="s1">&#39;proportions&#39;</span><span class="p">])</span> <span class="ow">or</span> \
                             <span class="nb">len</span><span class="p">(</span><span class="n">w_desc</span><span class="p">[</span><span class="s1">&#39;proportions&#39;</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">w_desc</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">])</span> <span class="ow">or</span> \
-                            <span class="nb">abs</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">w_desc</span><span class="p">[</span><span class="s1">&#39;proportions&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-10</span><span class="p">:</span>
-                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;&quot;proportions&quot; must be a list of floats (one per separator), &#39;</span> <span class="o">-</span>
-                                         <span class="s1">&#39;between 0 and 1, at node </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w_desc</span><span class="p">))</span>
+                            <span class="nb">sum</span><span class="p">(</span><span class="n">w_desc</span><span class="p">[</span><span class="s1">&#39;proportions&#39;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mf">1e-2</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;&quot;proportions&quot; must be a list of floats (one per separator), &#39;</span>
+                                         <span class="s1">&#39;that sum to 1, at node </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w_desc</span><span class="p">))</span>
+                    <span class="k">elif</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">w_desc</span><span class="p">[</span><span class="s1">&#39;proportions&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-10</span><span class="p">:</span>
+                        <span class="n">w_desc</span><span class="p">[</span><span class="s1">&#39;proportions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">w_desc</span><span class="p">[</span><span class="s1">&#39;proportions&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">w_desc</span><span class="p">[</span><span class="s1">&#39;proportions&#39;</span><span class="p">]]</span>
+
 
                 <span class="n">next_visits</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">w_desc</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
@@ -591,7 +596,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2020 Cimbali.</p>
+    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2022 Cimbali.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

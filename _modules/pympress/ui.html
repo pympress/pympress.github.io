@@ -14,6 +14,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -30,7 +31,7 @@
 	<a href="../../index.html" class="icon icon-home"> Docs home</a>
 	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
 	<div class="version">
-		v1.7.1
+		v1.7.2
 	</div>
 
 	
@@ -581,7 +582,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">shortcuts_window</span> <span class="o">=</span> <span class="n">shortcuts_builder</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s1">&#39;shortcuts_window&#39;</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">command</span><span class="p">,</span> <span class="n">shortcut_list</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="s1">&#39;shortcuts&#39;</span><span class="p">):</span>
-            <span class="n">display_shortcut</span> <span class="o">=</span> <span class="n">shortcuts_builder</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s1">&#39;shortcut_&#39;</span> <span class="o">+</span> <span class="n">command</span><span class="p">)</span>
+            <span class="n">display_shortcut</span> <span class="o">=</span> <span class="n">shortcuts_builder</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s1">&#39;shortcut_&#39;</span> <span class="o">+</span> <span class="n">command</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;::&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">))</span>
             <span class="k">if</span> <span class="n">display_shortcut</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">display_shortcut</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">accelerator</span> <span class="o">=</span> <span class="n">shortcut_list</span>
 
@@ -781,7 +782,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">file_watcher</span><span class="o">.</span><span class="n">stop_watching</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preview_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_page</span><span class="p">)</span>
 
         <span class="c1"># Guess notes mode by default if the document has notes</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">reloading</span><span class="p">:</span>
@@ -796,7 +796,7 @@
             <span class="k">if</span> <span class="n">target_mode</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">activate_action</span><span class="p">(</span><span class="s1">&#39;notes-pos&#39;</span><span class="p">,</span> <span class="n">target_mode</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">set_notes_after</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes_mode</span><span class="o">.</span><span class="n">direction</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;page number&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">set_notes_pos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes_mode</span><span class="o">.</span><span class="n">direction</span><span class="p">())</span>
 
         <span class="c1"># Some things that need updating</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">swap_document</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="p">)</span>
@@ -1177,10 +1177,10 @@
         <span class="n">page_notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">notes_page</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preview_page</span><span class="p">)</span>
 
         <span class="c1"># Aspect ratios and queue redraws</span>
-        <span class="k">if</span> <span class="n">draw_notes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">draw_notes</span> <span class="ow">and</span> <span class="n">page_notes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">note_pr</span> <span class="o">=</span> <span class="n">page_notes</span><span class="o">.</span><span class="n">get_aspect_ratio</span><span class="p">(</span><span class="n">draw_notes</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">p_frame_notes</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s1">&#39;ratio&#39;</span><span class="p">,</span> <span class="n">note_pr</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">p_da_notes</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">p_da_notes</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
 
         <span class="n">preview_pr</span> <span class="o">=</span> <span class="n">page_preview</span><span class="o">.</span><span class="n">get_aspect_ratio</span><span class="p">(</span><span class="n">draw_page</span><span class="p">)</span>
 
@@ -1264,14 +1264,18 @@
             <span class="k">if</span> <span class="n">page</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">return</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Unknown widget &quot;</span><span class="si">{}</span><span class="s1">&quot; to draw&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">getname</span><span class="p">())))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Unknown widget &quot;</span><span class="si">{}</span><span class="s1">&quot; to draw&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">get_name</span><span class="p">())))</span>
+
+        <span class="k">if</span> <span class="n">page</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">widget</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_da_notes</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes_mode</span><span class="o">.</span><span class="n">direction</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;page mapping&#39;</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Unexpected missing page to draw for widget &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">get_name</span><span class="p">())))</span>
             <span class="k">return</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">page</span><span class="o">.</span><span class="n">can_render</span><span class="p">():</span>
             <span class="k">return</span>
 
         <span class="n">name</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;0123456789&#39;</span><span class="p">)</span>
-        <span class="n">nb</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">number</span><span class="p">()</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">number</span><span class="p">()</span>  <span class="c1"># Use PDF page numbering for the cache</span>
         <span class="n">wtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get_widget_type</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">(),</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">()</span>
         <span class="n">window</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_window</span><span class="p">()</span>
@@ -1739,7 +1743,7 @@
         <span class="k">if</span> <span class="n">target_mode</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">chosen_notes_mode</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
 
-        <span class="c1"># Update the choice, except for NONE or BEFORE/AFTER</span>
+        <span class="c1"># Update the choice, except for NONE or BEFORE/AFTER or EVEN/ODD</span>
         <span class="k">if</span> <span class="n">target_mode</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">chosen_notes_mode</span> <span class="o">=</span> <span class="n">target_mode</span>
             <span class="n">gaction</span><span class="o">.</span><span class="n">change_state</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
@@ -1770,9 +1774,21 @@
             <span class="k">return</span> <span class="kc">False</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">scribbler</span><span class="o">.</span><span class="n">disable_scribbling</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">set_notes_after</span><span class="p">(</span><span class="n">target_mode</span><span class="o">.</span><span class="n">direction</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;page number&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">set_notes_pos</span><span class="p">(</span><span class="n">target_mode</span><span class="o">.</span><span class="n">direction</span><span class="p">())</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">load_layout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout_name</span><span class="p">(</span><span class="n">target_mode</span><span class="p">))</span>
+
+        <span class="c1"># Transform or clip page number appropriately</span>
+        <span class="n">renumber_page</span> <span class="o">=</span> <span class="p">(</span><span class="n">target_mode</span><span class="o">.</span><span class="n">direction</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;page parity&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes_mode</span><span class="o">.</span><span class="n">direction</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;page parity&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">renumber_page</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preview_page</span> <span class="o">*=</span> <span class="mi">2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">*=</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">renumber_page</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preview_page</span> <span class="o">//=</span> <span class="mi">2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">//=</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">target_mode</span><span class="o">.</span><span class="n">direction</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;page number&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preview_page</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preview_page</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">pages_number</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_page</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">pages_number</span><span class="p">())</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">notes_mode</span> <span class="o">=</span> <span class="n">target_mode</span>
         <span class="n">page_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes_mode</span><span class="o">.</span><span class="n">complement</span><span class="p">()</span>
@@ -1867,7 +1883,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2020 Cimbali.</p>
+    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2022 Cimbali.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

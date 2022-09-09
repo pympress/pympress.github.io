@@ -1,6 +1,6 @@
 var DOCUMENTATION_OPTIONS = {
     URL_ROOT: document.getElementById("documentation_options").getAttribute('data-url_root'),
-    VERSION: 'b&#39;0.6-786-gd56e806&#39;',
+    VERSION: 'b&#39;0.6-789-g88315aa&#39;',
     LANGUAGE: 'en',
     COLLAPSE_INDEX: false,
     BUILDER: 'html',
@@ -10,5 +10,5 @@ var DOCUMENTATION_OPTIONS = {
     SOURCELINK_SUFFIX: '.txt',
     NAVIGATION_WITH_KEYS: false,
     SHOW_SEARCH_SUMMARY: true,
-    ENABLE_SEARCH_SHORTCUTS: false,
+    ENABLE_SEARCH_SHORTCUTS: true,
 };
