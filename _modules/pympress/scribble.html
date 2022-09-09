@@ -573,11 +573,9 @@
 <span class="sd">            widget (:class:`~Gtk.DrawingArea`): The widget where to draw the scribbles.</span>
 <span class="sd">            cairo_context (:class:`~cairo.Context`): The canvas on which to render the drawings</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">scale</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_window</span><span class="p">()</span><span class="o">.</span><span class="n">get_scale_factor</span><span class="p">()</span>
         <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">(),</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">()</span>
         <span class="n">cw</span><span class="p">,</span> <span class="n">ch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span><span class="o">.</span><span class="n">get_width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
 
-        <span class="n">cairo_context</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
         <span class="n">cairo_context</span><span class="o">.</span><span class="n">push_group</span><span class="p">()</span>
 
         <span class="n">cairo_context</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
@@ -611,9 +609,7 @@
 
             <span class="n">cairo_context</span><span class="o">.</span><span class="n">set_source_rgba</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_color</span><span class="p">)[:</span><span class="mi">3</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_color</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="mf">.5</span><span class="p">)</span>
             <span class="n">cairo_context</span><span class="o">.</span><span class="n">close_path</span><span class="p">()</span>
-            <span class="n">cairo_context</span><span class="o">.</span><span class="n">fill</span><span class="p">()</span>
-
-        <span class="n">cairo_context</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">scale</span><span class="p">,</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">scale</span><span class="p">)</span></div>
+            <span class="n">cairo_context</span><span class="o">.</span><span class="n">fill</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="Scribbler.update_color"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.update_color">[docs]</a>    <span class="k">def</span> <span class="nf">update_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">):</span>
