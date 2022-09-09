@@ -515,7 +515,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">next_render</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">return</span>
 
-        <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span><span class="o">.</span><span class="n">get_width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_da</span><span class="o">.</span><span class="n">get_window</span><span class="p">()</span><span class="o">.</span><span class="n">get_scale_factor</span><span class="p">()</span>
+        <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="n">scale</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">/</span> <span class="n">scale</span>
         <span class="n">pen_scale_factor</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ww</span> <span class="o">/</span> <span class="mi">900</span><span class="p">,</span> <span class="n">wh</span> <span class="o">/</span> <span class="mi">900</span><span class="p">)</span>  <span class="c1"># or sqrt of product</span>
 
         <span class="n">cairo_context</span> <span class="o">=</span> <span class="n">cairo</span><span class="o">.</span><span class="n">Context</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span><span class="p">)</span>
@@ -571,18 +572,19 @@
 <span class="sd">            widget (:class:`~Gtk.DrawingArea`): The widget where to draw the scribbles.</span>
 <span class="sd">            cairo_context (:class:`~cairo.Context`): The canvas on which to render the drawings</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_window</span><span class="p">()</span><span class="o">.</span><span class="n">get_scale_factor</span><span class="p">()</span>
         <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">(),</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">()</span>
         <span class="n">cw</span><span class="p">,</span> <span class="n">ch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span><span class="o">.</span><span class="n">get_width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
 
-        <span class="n">cairo_context</span><span class="o">.</span><span class="n">push_group</span><span class="p">()</span>
-
         <span class="n">cairo_context</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 
-        <span class="n">cairo_context</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">ww</span> <span class="o">/</span> <span class="n">cw</span><span class="p">,</span> <span class="n">wh</span> <span class="o">/</span> <span class="n">ch</span><span class="p">)</span>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">ww</span> <span class="o">*</span> <span class="n">scale</span> <span class="o">/</span> <span class="n">cw</span><span class="p">,</span> <span class="n">wh</span> <span class="o">*</span> <span class="n">scale</span> <span class="o">/</span> <span class="n">ch</span><span class="p">)</span>
         <span class="n">cairo_context</span><span class="o">.</span><span class="n">set_source_surface</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span><span class="p">)</span>
         <span class="n">cairo_context</span><span class="o">.</span><span class="n">paint</span><span class="p">()</span>
 
         <span class="n">cairo_context</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">push_group</span><span class="p">()</span>
 
         <span class="n">pen_scale_factor</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ww</span> <span class="o">/</span> <span class="mi">900</span><span class="p">,</span> <span class="n">wh</span> <span class="o">/</span> <span class="mi">900</span><span class="p">)</span>  <span class="c1"># or sqrt of product</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_drawing</span><span class="p">:</span>
@@ -908,8 +910,7 @@
         <span class="n">scale</span> <span class="o">=</span> <span class="n">wh</span> <span class="o">/</span> <span class="n">icon</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
 
         <span class="n">dw</span><span class="p">,</span> <span class="n">dh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_p_da</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_p_da</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">()</span>
-        <span class="n">monitor</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_display</span><span class="p">()</span><span class="o">.</span><span class="n">get_monitor_at_window</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">get_parent_window</span><span class="p">())</span><span class="o">.</span><span class="n">get_geometry</span><span class="p">()</span>
-        <span class="n">pen_scale_factor</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dw</span> <span class="o">/</span> <span class="n">monitor</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">dh</span> <span class="o">/</span> <span class="n">monitor</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="n">pen_scale_factor</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dw</span> <span class="o">/</span> <span class="mi">900</span><span class="p">,</span> <span class="n">dh</span> <span class="o">/</span> <span class="mi">900</span><span class="p">)</span>  <span class="c1"># or sqrt of product</span>
         <span class="n">width</span> <span class="o">*=</span> <span class="n">pen_scale_factor</span>
 
         <span class="n">cairo_context</span><span class="o">.</span><span class="n">push_group</span><span class="p">()</span>
