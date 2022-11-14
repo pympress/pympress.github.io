@@ -17,6 +17,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -93,8 +94,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li> What is Pympress?</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active"> What is Pympress?</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/Cimbali/pympress/blob/master/README.md" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -145,7 +146,6 @@ zypper install python3-pympress
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git clone https://aur.archlinux.org/python-pympress.git
 <span class="nb">cd</span> python-pympress
 makepkg -si
-pacman -S poppler-glib  <span class="c1"># dependency temporarily missing from AUR package</span>
 </pre></div>
 </div>
 <p>Or using any other tool to manage AUR packages (yay, pacaur, etc.):</p>

@@ -45,7 +45,6 @@ Here is what the 2 screen setup looks like, with a big notes slide next to 2 sma
   git clone https://aur.archlinux.org/python-pympress.git
   cd python-pympress
   makepkg -si
-  pacman -S poppler-glib  # dependency temporarily missing from AUR package
   ```
 
   Or using any other tool to manage AUR packages (yay, pacaur, etc.):
