@@ -133,7 +133,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache">[docs]</a><span class="k">class</span> <span class="nc">SurfaceCache</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Pages caching and prerendering made (almost) easy.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Pages caching and prerendering made (almost) easy.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        doc (:class:`~pympress.document.Document`):  the current document</span>
@@ -182,7 +182,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache.add_widget"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.add_widget">[docs]</a>    <span class="k">def</span> <span class="nf">add_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">wtype</span><span class="p">,</span> <span class="n">prerender_enabled</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">zoomed</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Add a widget to the list of widgets that have to be managed (for caching and prerendering).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Add a widget to the list of widgets that have to be managed (for caching and prerendering).</span>
 
 <span class="sd">        This creates new entries for ``widget_name`` in the needed internal data</span>
 <span class="sd">        structures, and creates a new thread for prerendering pages for this widget.</span>
@@ -204,7 +204,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache.swap_document"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.swap_document">[docs]</a>    <span class="k">def</span> <span class="nf">swap_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_doc</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Replaces the current document for which to cache slides with a new one.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Replaces the current document for which to cache slides with a new one.</span>
 
 <span class="sd">        This function also clears the cached pages, since they now belong to an outdated document.</span>
 
@@ -218,7 +218,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache.disable_prerender"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.disable_prerender">[docs]</a>    <span class="k">def</span> <span class="nf">disable_prerender</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Remove a widget from the ones to be prerendered.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Remove a widget from the ones to be prerendered.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget_name (`str`):  string used to identify a widget</span>
@@ -227,7 +227,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache.enable_prerender"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.enable_prerender">[docs]</a>    <span class="k">def</span> <span class="nf">enable_prerender</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Add a widget to the ones to be prerendered.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Add a widget to the ones to be prerendered.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget_name (`str`):  string used to identify a widget</span>
@@ -236,7 +236,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache.set_widget_type"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.set_widget_type">[docs]</a>    <span class="k">def</span> <span class="nf">set_widget_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_name</span><span class="p">,</span> <span class="n">wtype</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Set the document type of a widget.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set the document type of a widget.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget_name (`str`):  string used to identify a widget</span>
@@ -249,7 +249,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache.get_widget_type"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.get_widget_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_widget_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the document type of a widget.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the document type of a widget.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget_name (`str`):  string used to identify a widget</span>
@@ -261,7 +261,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache.clear_cache"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.clear_cache">[docs]</a>    <span class="k">def</span> <span class="nf">clear_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Remove all cached values for a given widget. Useful for zoomed views.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Remove all cached values for a given widget. Useful for zoomed views.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget_name (`str`):  name of the widget that is resized, `None` for all widgets.</span>
@@ -272,7 +272,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache.resize_widget"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.resize_widget">[docs]</a>    <span class="k">def</span> <span class="nf">resize_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_name</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Change the size of a registered widget, thus invalidating all the cached pages.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Change the size of a registered widget, thus invalidating all the cached pages.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget_name (`str`):  name of the widget that is resized</span>
@@ -286,7 +286,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache.get"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_name</span><span class="p">,</span> <span class="n">page_nb</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Fetch a cached, prerendered page for the specified widget.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Fetch a cached, prerendered page for the specified widget.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget_name (`str`):  name of the concerned widget</span>
@@ -305,7 +305,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache.set"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_name</span><span class="p">,</span> <span class="n">page_nb</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Store a rendered page in the cache.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Store a rendered page in the cache.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget_name (`str`):  name of the concerned widget</span>
@@ -322,7 +322,7 @@
 
 
     <span class="k">def</span> <span class="nf">_create_surface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Given a widget, create a cairo Image surface with appropriate size and scaling.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Given a widget, create a cairo Image surface with appropriate size and scaling.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget (:class:`~Gtk.Widget`): the widget for which we’re caching data.</span>
@@ -339,7 +339,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache.prerender"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.prerender">[docs]</a>    <span class="k">def</span> <span class="nf">prerender</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_nb</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Queue a page for prerendering.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Queue a page for prerendering.</span>
 
 <span class="sd">        The specified page will be prerendered for all the registered widgets.</span>
 
@@ -351,7 +351,7 @@
 
 
 <div class="viewcode-block" id="SurfaceCache.renderer"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.renderer">[docs]</a>    <span class="k">def</span> <span class="nf">renderer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_name</span><span class="p">,</span> <span class="n">page_nb</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Rendering function.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Rendering function.</span>
 
 <span class="sd">        This function is meant to be scheduled on the GLib main loop. When run,</span>
 <span class="sd">        it will go through the following steps:</span>

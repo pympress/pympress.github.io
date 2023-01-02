@@ -141,7 +141,7 @@
 
 
 <div class="viewcode-block" id="get_extension"><a class="viewcode-back" href="../../pympress.html#pympress.ui.get_extension">[docs]</a><span class="k">def</span> <span class="nf">get_extension</span><span class="p">(</span><span class="n">mime_type</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Returns a valid filename extension (recognized by python) for a given mime type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns a valid filename extension (recognized by python) for a given mime type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mime_type (`str`): The mime type for which to find an extension</span>
@@ -157,7 +157,7 @@
 
 
 <div class="viewcode-block" id="PdfPage"><a class="viewcode-back" href="../../pympress.html#pympress.ui.PdfPage">[docs]</a><span class="k">class</span> <span class="nc">PdfPage</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Represents the part of a PDF page that we want to draw.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Represents the part of a PDF page that we want to draw.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: No notes on PDF page, only falsy value</span>
     <span class="n">NONE</span>    <span class="o">=</span> <span class="mi">0</span>
@@ -185,19 +185,19 @@
     <span class="n">RMAP</span>    <span class="o">=</span> <span class="mi">11</span>
 
 <div class="viewcode-block" id="PdfPage.complement"><a class="viewcode-back" href="../../pympress.html#pympress.ui.PdfPage.complement">[docs]</a>    <span class="k">def</span> <span class="nf">complement</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return the enum value for the other part of the page.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return the enum value for the other part of the page.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PdfPage</span><span class="p">(</span><span class="n">val</span> <span class="o">^</span> <span class="mi">1</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="PdfPage.scale"><a class="viewcode-back" href="../../pympress.html#pympress.ui.PdfPage.scale">[docs]</a>    <span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return the enum value that does only scaling not shifting.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return the enum value that does only scaling not shifting.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PdfPage</span><span class="p">(</span><span class="n">val</span> <span class="o">|</span> <span class="mi">1</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="PdfPage.direction"><a class="viewcode-back" href="../../pympress.html#pympress.ui.PdfPage.direction">[docs]</a>    <span class="k">def</span> <span class="nf">direction</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Returns whether the pdf page/notes mode is horizontal or vertical.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Returns whether the pdf page/notes mode is horizontal or vertical.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `str`: a string representing the direction that can be used as the key in the config section</span>
@@ -217,7 +217,7 @@
 
 
 <div class="viewcode-block" id="PdfPage.from_screen"><a class="viewcode-back" href="../../pympress.html#pympress.ui.PdfPage.from_screen">[docs]</a>    <span class="k">def</span> <span class="nf">from_screen</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Transform visible part of the page coordinates to full page coordinates.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Transform visible part of the page coordinates to full page coordinates.</span>
 
 <span class="sd">        Pass 2 floats to transform coordinates, 4 to transform margins,</span>
 <span class="sd">        i.e. the second pair of coordinates is taken from the opposite corner.</span>
@@ -246,7 +246,7 @@
 
 
 <div class="viewcode-block" id="PdfPage.to_screen"><a class="viewcode-back" href="../../pympress.html#pympress.ui.PdfPage.to_screen">[docs]</a>    <span class="k">def</span> <span class="nf">to_screen</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Transform full page coordinates to visible part coordinates.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Transform full page coordinates to visible part coordinates.</span>
 
 <span class="sd">        Pass 2 floats to transform coordinates, 4 to transform margins,</span>
 <span class="sd">        i.e. the second pair of coordinates is taken from the opposite corner.</span>
@@ -275,7 +275,7 @@
 
 
 <div class="viewcode-block" id="Link"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Link">[docs]</a><span class="k">class</span> <span class="nc">Link</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; This class encapsulates one hyperlink of the document.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; This class encapsulates one hyperlink of the document.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        x1 (`float`):  first x coordinate of the link rectangle</span>
@@ -302,7 +302,7 @@
 
 
 <div class="viewcode-block" id="Link.is_over"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Link.is_over">[docs]</a>    <span class="k">def</span> <span class="nf">is_over</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Tell if the input coordinates are on the link rectangle.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Tell if the input coordinates are on the link rectangle.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            x (`float`):  input x coordinate</span>
@@ -316,7 +316,7 @@
 
 <div class="viewcode-block" id="Link.build_closure"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Link.build_closure">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">build_closure</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot; Return a lambda that calls fun(\*args, \**kwargs), with the current value of args and kwargs.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot; Return a lambda that calls fun(\*args, \**kwargs), with the current value of args and kwargs.</span>
 
 <span class="sd">        By creating the lambda in a new scope, we bind the arguments.</span>
 
@@ -334,7 +334,7 @@
 
 
 <div class="viewcode-block" id="Page"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page">[docs]</a><span class="k">class</span> <span class="nc">Page</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Class representing a single page.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Class representing a single page.</span>
 
 <span class="sd">    It provides several methods used by the GUI for preparing windows for</span>
 <span class="sd">    displaying pages, managing hyperlinks, etc.</span>
@@ -463,7 +463,7 @@
 
 
 <div class="viewcode-block" id="Page.get_link_action"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.get_link_action">[docs]</a>    <span class="k">def</span> <span class="nf">get_link_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link_type</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the function to be called when the link is followed.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the function to be called when the link is followed.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            link_type (:class:`~Poppler.ActionType`): The type of action to be performed</span>
@@ -554,7 +554,7 @@
 
 
 <div class="viewcode-block" id="Page.get_annot_action"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.get_annot_action">[docs]</a>    <span class="k">def</span> <span class="nf">get_annot_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link_type</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">rect</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the function to be called when the link is followed.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the function to be called when the link is followed.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            link_type (:class:`~Poppler.ActionType`): The link type</span>
@@ -604,19 +604,19 @@
 
 
 <div class="viewcode-block" id="Page.number"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.number">[docs]</a>    <span class="k">def</span> <span class="nf">number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the page number.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the page number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_nb</span></div>
 
 
 <div class="viewcode-block" id="Page.label"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.label">[docs]</a>    <span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the page label.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the page label.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_label</span></div>
 
 
 <div class="viewcode-block" id="Page.get_link_at"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.get_link_at">[docs]</a>    <span class="k">def</span> <span class="nf">get_link_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">PdfPage</span><span class="o">.</span><span class="n">FULL</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the :class:`~pympress.document.Link` corresponding to the given position.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the :class:`~pympress.document.Link` corresponding to the given position.</span>
 
 <span class="sd">        Returns `None` if there is no link at this position.</span>
 
@@ -642,7 +642,7 @@
 
 
 <div class="viewcode-block" id="Page.get_size"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.get_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">PdfPage</span><span class="o">.</span><span class="n">FULL</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the page size.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the page size.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            dtype (:class:`~pympress.document.PdfPage`):  the type of document to consider</span>
@@ -654,7 +654,7 @@
 
 
 <div class="viewcode-block" id="Page.get_aspect_ratio"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.get_aspect_ratio">[docs]</a>    <span class="k">def</span> <span class="nf">get_aspect_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">PdfPage</span><span class="o">.</span><span class="n">FULL</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the page aspect ratio.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the page aspect ratio.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            dtype (:class:`~pympress.document.PdfPage`):  the type of document to consider</span>
@@ -667,7 +667,7 @@
 
 
 <div class="viewcode-block" id="Page.get_annotations"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.get_annotations">[docs]</a>    <span class="k">def</span> <span class="nf">get_annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the list of text annotations on this page.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the list of text annotations on this page.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `list` of `str`: annotations on this page</span>
@@ -676,7 +676,7 @@
 
 
 <div class="viewcode-block" id="Page.new_annotation"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.new_annotation">[docs]</a>    <span class="k">def</span> <span class="nf">new_annotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">rect</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Add an annotation to this page</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Add an annotation to this page</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            pos (`int`): The position in the list of annotations in which to insert this annotation</span>
@@ -705,7 +705,7 @@
 
 
 <div class="viewcode-block" id="Page.set_annotation"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.set_annotation">[docs]</a>    <span class="k">def</span> <span class="nf">set_annotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Add an annotation to this page</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Add an annotation to this page</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            pos (`int`): The number of the annotation</span>
@@ -717,7 +717,7 @@
 
 
 <div class="viewcode-block" id="Page.remove_annotation"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.remove_annotation">[docs]</a>    <span class="k">def</span> <span class="nf">remove_annotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Add an annotation to this page</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Add an annotation to this page</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            pos (`int`): The number of the annotation</span>
@@ -727,7 +727,7 @@
 
 
 <div class="viewcode-block" id="Page.get_media"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.get_media">[docs]</a>    <span class="k">def</span> <span class="nf">get_media</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the list of medias this page might want to play.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the list of medias this page might want to play.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `list`: medias in this page</span>
@@ -736,7 +736,7 @@
 
 
 <div class="viewcode-block" id="Page.render_cairo"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.render_cairo">[docs]</a>    <span class="k">def</span> <span class="nf">render_cairo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cr</span><span class="p">,</span> <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">PdfPage</span><span class="o">.</span><span class="n">FULL</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Render the page on a Cairo surface.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Render the page on a Cairo surface.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            cr (:class:`~Gdk.CairoContext`):  target surface</span>
@@ -768,7 +768,7 @@
 
 
 <div class="viewcode-block" id="Page.can_render"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Page.can_render">[docs]</a>    <span class="k">def</span> <span class="nf">can_render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Informs that rendering *is* necessary (avoids checking the type).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Informs that rendering *is* necessary (avoids checking the type).</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: `True`, do rendering</span>
@@ -778,7 +778,7 @@
 
 
 <div class="viewcode-block" id="Document"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document">[docs]</a><span class="k">class</span> <span class="nc">Document</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; This is the main document handling class.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; This is the main document handling class.</span>
 
 <span class="sd">    The page numbering starts as 0 and is aware of notes (i.e. number of pages may change to account for note pages).</span>
 <span class="sd">    The document page numbers are the same as in Poppler, and also start at 0 but do not depend on notes.</span>
@@ -856,7 +856,7 @@
 
 
 <div class="viewcode-block" id="Document.get_structure"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.get_structure">[docs]</a>    <span class="k">def</span> <span class="nf">get_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index_iter</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Gets the structure of the document from its index.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Gets the structure of the document from its index.</span>
 
 <span class="sd">        Recursive, pass the iterator.</span>
 
@@ -928,7 +928,7 @@
 
 <div class="viewcode-block" id="Document.create"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.create">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">uri</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Initializes a Document by passing it a :class:`~Poppler.Document`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Initializes a Document by passing it a :class:`~Poppler.Document`.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            builder (:class:`pympress.builder.Builder`):  A builder to load callbacks</span>
@@ -948,19 +948,19 @@
 
 
 <div class="viewcode-block" id="Document.made_changes"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.made_changes">[docs]</a>    <span class="k">def</span> <span class="nf">made_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Notify the document that some changes were made (e.g. annotations edited)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Notify the document that some changes were made (e.g. annotations edited)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">changes</span> <span class="o">=</span> <span class="kc">True</span></div>
 
 
 <div class="viewcode-block" id="Document.has_changes"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.has_changes">[docs]</a>    <span class="k">def</span> <span class="nf">has_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return whether that some changes were made (e.g. annotations edited)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return whether that some changes were made (e.g. annotations edited)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">changes</span></div>
 
 
 <div class="viewcode-block" id="Document.save_changes"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.save_changes">[docs]</a>    <span class="k">def</span> <span class="nf">save_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dest_uri</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Save the changes</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Save the changes</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            dest_uri (`str` or `None`): The URI where to save the file, or None to save in-place</span>
@@ -991,7 +991,7 @@
 
 
 <div class="viewcode-block" id="Document.guess_notes"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.guess_notes">[docs]</a>    <span class="k">def</span> <span class="nf">guess_notes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">horizontal</span><span class="p">,</span> <span class="n">vertical</span><span class="p">,</span> <span class="n">current_page</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get our best guess for the document mode.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get our best guess for the document mode.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            horizontal (`str`): A string representing the preference for horizontal slides</span>
@@ -1043,7 +1043,7 @@
 
 
 <div class="viewcode-block" id="Document.set_notes_pos"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.set_notes_pos">[docs]</a>    <span class="k">def</span> <span class="nf">set_notes_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notes_direction</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Set whether where the notes pages are relative to normal pages</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set whether where the notes pages are relative to normal pages</span>
 
 <span class="sd">        Valid values are returned by :meth:`~pympress.document.PdfPage.direction`</span>
 <span class="sd">        - page number (aka Libreoffice notes mode)</span>
@@ -1076,7 +1076,7 @@
 
 
 <div class="viewcode-block" id="Document.page"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.page">[docs]</a>    <span class="k">def</span> <span class="nf">page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the specified page.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the specified page.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            number (`int`):  number of the page to return</span>
@@ -1098,7 +1098,7 @@
 
 
 <div class="viewcode-block" id="Document.notes_page"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.notes_page">[docs]</a>    <span class="k">def</span> <span class="nf">notes_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the specified page.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the specified page.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            number (`int`):  number of the page to return</span>
@@ -1121,7 +1121,7 @@
 
 
 <div class="viewcode-block" id="Document.pages_number"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.pages_number">[docs]</a>    <span class="k">def</span> <span class="nf">pages_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the number of pages in the document.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the number of pages in the document.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `int`: the number of pages in the document</span>
@@ -1130,7 +1130,7 @@
 
 
 <div class="viewcode-block" id="Document.has_labels"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.has_labels">[docs]</a>    <span class="k">def</span> <span class="nf">has_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return whether this document has useful labels.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return whether this document has useful labels.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: False iff there are no labels or they are just the page numbers</span>
@@ -1139,7 +1139,7 @@
 
 
 <div class="viewcode-block" id="Document.lookup_label"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.lookup_label">[docs]</a>    <span class="k">def</span> <span class="nf">lookup_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">prefix_unique</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Find a page from its label.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Find a page from its label.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            label (`str`): the label we are searching for</span>
@@ -1177,7 +1177,7 @@
 
 
 <div class="viewcode-block" id="Document.goto"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.goto">[docs]</a>    <span class="k">def</span> <span class="nf">goto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Switch to another page. Validates the number and returns one in the correct range. Also updates history.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Switch to another page. Validates the number and returns one in the correct range. Also updates history.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            number (`int`):  number of the destination page</span>
@@ -1199,7 +1199,7 @@
 
 
 <div class="viewcode-block" id="Document.label_after"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.label_after">[docs]</a>    <span class="k">def</span> <span class="nf">label_after</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Switch to the next page with different label.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Switch to the next page with different label.</span>
 
 <span class="sd">        If we&#39;re within a set of pages with the same label we want to go to the last one.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1222,7 +1222,7 @@
 
 
 <div class="viewcode-block" id="Document.label_before"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.label_before">[docs]</a>    <span class="k">def</span> <span class="nf">label_before</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Switch to the previous page with different label.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Switch to the previous page with different label.</span>
 
 <span class="sd">        If we&#39;re within a set of pages with the same label we want to go *before* the first one.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1235,7 +1235,7 @@
 
 
 <div class="viewcode-block" id="Document.hist_next"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.hist_next">[docs]</a>    <span class="k">def</span> <span class="nf">hist_next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Switch to the page we viewed next.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Switch to the page we viewed next.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hist_pos</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">None</span>
@@ -1245,7 +1245,7 @@
 
 
 <div class="viewcode-block" id="Document.hist_prev"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.hist_prev">[docs]</a>    <span class="k">def</span> <span class="nf">hist_prev</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Switch to the page we viewed before.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Switch to the page we viewed before.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hist_pos</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
@@ -1255,7 +1255,7 @@
 
 
 <div class="viewcode-block" id="Document.get_uri"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.get_uri">[docs]</a>    <span class="k">def</span> <span class="nf">get_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Gives access to the URI, rather than the path, of this document.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Gives access to the URI, rather than the path, of this document.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `str`: the URI to the file currently opened.</span>
@@ -1264,7 +1264,7 @@
 
 
 <div class="viewcode-block" id="Document.get_full_path"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.get_full_path">[docs]</a>    <span class="k">def</span> <span class="nf">get_full_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Returns full path, extrapolated from a path relative to this document or to the current directory.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Returns full path, extrapolated from a path relative to this document or to the current directory.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            filename (:class:`~pathlib.Path` or `str`):  Name of the file or relative path to it</span>
@@ -1283,7 +1283,7 @@
 
 
 <div class="viewcode-block" id="Document.remove_on_exit"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.remove_on_exit">[docs]</a>    <span class="k">def</span> <span class="nf">remove_on_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Remember a temporary file to delete later.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Remember a temporary file to delete later.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            filename (:class:`~pathlib.Path`): The path to the file to delete</span>
@@ -1292,7 +1292,7 @@
 
 
 <div class="viewcode-block" id="Document.cleanup_media_files"><a class="viewcode-back" href="../../pympress.html#pympress.ui.Document.cleanup_media_files">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup_media_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Removes all files that were extracted from the pdf into the filesystem.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Removes all files that were extracted from the pdf into the filesystem.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_files</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
@@ -1301,7 +1301,7 @@
 
 
 <div class="viewcode-block" id="EmptyPage"><a class="viewcode-back" href="../../pympress.html#pympress.ui.EmptyPage">[docs]</a><span class="k">class</span> <span class="nc">EmptyPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; A dummy page, placeholder for when there are no valid pages around.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A dummy page, placeholder for when there are no valid pages around.</span>
 
 <span class="sd">    This page is a non-notes page with an aspect ratio of 1.3 and nothing else inside.</span>
 <span class="sd">    Also, it has no &quot;rendering&quot; capability, and is made harmless by overriding its render function.</span>
@@ -1315,7 +1315,7 @@
 
 
 <div class="viewcode-block" id="EmptyPage.render_cairo"><a class="viewcode-back" href="../../pympress.html#pympress.ui.EmptyPage.render_cairo">[docs]</a>    <span class="k">def</span> <span class="nf">render_cairo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cr</span><span class="p">,</span> <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">PdfPage</span><span class="o">.</span><span class="n">FULL</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Overriding this purely for safety: make sure we do not accidentally try to render.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Overriding this purely for safety: make sure we do not accidentally try to render.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            cr (:class:`~Gdk.CairoContext`):  target surface</span>
@@ -1327,7 +1327,7 @@
 
 
 <div class="viewcode-block" id="EmptyPage.can_render"><a class="viewcode-back" href="../../pympress.html#pympress.ui.EmptyPage.can_render">[docs]</a>    <span class="k">def</span> <span class="nf">can_render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Informs that rendering is *not* necessary (avoids checking the type).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Informs that rendering is *not* necessary (avoids checking the type).</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: `False`, no rendering</span>
@@ -1336,7 +1336,7 @@
 
 
 <div class="viewcode-block" id="EmptyDocument"><a class="viewcode-back" href="../../pympress.html#pympress.ui.EmptyDocument">[docs]</a><span class="k">class</span> <span class="nc">EmptyDocument</span><span class="p">(</span><span class="n">Document</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; A dummy document, placeholder for when no document is open.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A dummy document, placeholder for when no document is open.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">EmptyDocument</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -1344,7 +1344,7 @@
 
 
 <div class="viewcode-block" id="EmptyDocument.page"><a class="viewcode-back" href="../../pympress.html#pympress.ui.EmptyDocument.page">[docs]</a>    <span class="k">def</span> <span class="nf">page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Retrieve a page from the document.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Retrieve a page from the document.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            number (`int`): page number to be retrieved</span>
@@ -1356,7 +1356,7 @@
 
 
 <div class="viewcode-block" id="EmptyDocument.notes_page"><a class="viewcode-back" href="../../pympress.html#pympress.ui.EmptyDocument.notes_page">[docs]</a>    <span class="k">def</span> <span class="nf">notes_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Retrieve a page from the document.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Retrieve a page from the document.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            number (`int`): page number to be retrieved</span>

@@ -121,7 +121,7 @@
 
 
 <div class="viewcode-block" id="TimeLabelColorer"><a class="viewcode-back" href="../../pympress.html#pympress.talk_time.TimeLabelColorer">[docs]</a><span class="k">class</span> <span class="nc">TimeLabelColorer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Manage the colors of a label with a set of colors between which to fade, based on how much time remains.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Manage the colors of a label with a set of colors between which to fade, based on how much time remains.</span>
 
 <span class="sd">    Times are given in seconds (&lt;0 has run out of time). In between timestamps the color will interpolated linearly,</span>
 <span class="sd">    outside of the intervals the closest color will be used.</span>
@@ -164,7 +164,7 @@
 
 
 <div class="viewcode-block" id="TimeLabelColorer.load_color_from_css"><a class="viewcode-back" href="../../pympress.html#pympress.talk_time.TimeLabelColorer.load_color_from_css">[docs]</a>    <span class="k">def</span> <span class="nf">load_color_from_css</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style_context</span><span class="p">,</span> <span class="n">class_name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Add class class_name to the time label and return its color.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Add class class_name to the time label and return its color.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            label_time (:class:`Gtk.Label`): the label where the talk time is displayed</span>
@@ -187,13 +187,13 @@
 
 
 <div class="viewcode-block" id="TimeLabelColorer.default_color"><a class="viewcode-back" href="../../pympress.html#pympress.talk_time.TimeLabelColorer.default_color">[docs]</a>    <span class="k">def</span> <span class="nf">default_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Forces to reset the default colors on the label.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Forces to reset the default colors on the label.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color_override</span><span class="o">.</span><span class="n">load_from_data</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="TimeLabelColorer.update_time_color"><a class="viewcode-back" href="../../pympress.html#pympress.talk_time.TimeLabelColorer.update_time_color">[docs]</a>    <span class="k">def</span> <span class="nf">update_time_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remaining</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Update the color of the time label based on how much time is remaining.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Update the color of the time label based on how much time is remaining.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            remaining (`int`): Remaining time until estimated talk time is reached, in seconds.</span>
@@ -224,7 +224,7 @@
 
 
 <div class="viewcode-block" id="TimeCounter"><a class="viewcode-back" href="../../pympress.html#pympress.talk_time.TimeCounter">[docs]</a><span class="k">class</span> <span class="nc">TimeCounter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; A double counter, that displays the time elapsed in the talk and a clock.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A double counter, that displays the time elapsed in the talk and a clock.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        builder (builder.Builder): The builder from which to load widgets.</span>
@@ -279,7 +279,7 @@
 
 
 <div class="viewcode-block" id="TimeCounter.switch_pause"><a class="viewcode-back" href="../../pympress.html#pympress.talk_time.TimeCounter.switch_pause">[docs]</a>    <span class="k">def</span> <span class="nf">switch_pause</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Switch the timer between paused mode and running (normal) mode.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Switch the timer between paused mode and running (normal) mode.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: whether the clock&#39;s pause was toggled.</span>
@@ -292,7 +292,7 @@
 
 
 <div class="viewcode-block" id="TimeCounter.pause"><a class="viewcode-back" href="../../pympress.html#pympress.talk_time.TimeCounter.pause">[docs]</a>    <span class="k">def</span> <span class="nf">pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Pause the timer if it is not paused, otherwise do nothing.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Pause the timer if it is not paused, otherwise do nothing.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: whether the clock&#39;s pause was toggled.</span>
@@ -314,7 +314,7 @@
 
 
 <div class="viewcode-block" id="TimeCounter.unpause"><a class="viewcode-back" href="../../pympress.html#pympress.talk_time.TimeCounter.unpause">[docs]</a>    <span class="k">def</span> <span class="nf">unpause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Unpause the timer if it is paused, otherwise do nothing.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Unpause the timer if it is paused, otherwise do nothing.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: whether the clock&#39;s pause was toggled.</span>
@@ -335,7 +335,7 @@
 
 
 <div class="viewcode-block" id="TimeCounter.reset_timer"><a class="viewcode-back" href="../../pympress.html#pympress.talk_time.TimeCounter.reset_timer">[docs]</a>    <span class="k">def</span> <span class="nf">reset_timer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Reset the timer.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Reset the timer.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timing_tracker</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_time</span><span class="p">())</span>
 
@@ -347,7 +347,7 @@
 
 
 <div class="viewcode-block" id="TimeCounter.current_time"><a class="viewcode-back" href="../../pympress.html#pympress.talk_time.TimeCounter.current_time">[docs]</a>    <span class="k">def</span> <span class="nf">current_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Returns the time elapsed in the presentation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Returns the time elapsed in the presentation.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `int`: the time since the presentation started in seconds.</span>
@@ -360,7 +360,7 @@
 
 
 <div class="viewcode-block" id="TimeCounter.update_time"><a class="viewcode-back" href="../../pympress.html#pympress.talk_time.TimeCounter.update_time">[docs]</a>    <span class="k">def</span> <span class="nf">update_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Update the timer and clock labels.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Update the timer and clock labels.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: `True` (to prevent the timer from stopping)</span>

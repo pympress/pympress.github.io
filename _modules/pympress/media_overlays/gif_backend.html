@@ -123,7 +123,7 @@
 
 
 <div class="viewcode-block" id="GifOverlay"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gif_backend.GifOverlay">[docs]</a><span class="k">class</span> <span class="nc">GifOverlay</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">VideoOverlay</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; A simple overlay mimicking the functionality of showing videos, but showing gifs instead.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A simple overlay mimicking the functionality of showing videos, but showing gifs instead.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: A :class:`~GdkPixbuf.PixbufAnimation` containing all the frames and their timing for the displayed gif</span>
     <span class="n">anim</span> <span class="o">=</span> <span class="kc">None</span>
@@ -147,7 +147,7 @@
 
 
 <div class="viewcode-block" id="GifOverlay.set_file"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gif_backend.GifOverlay.set_file">[docs]</a>    <span class="k">def</span> <span class="nf">set_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Sets the media file to be played by the widget.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Sets the media file to be played by the widget.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            filepath (`pathlib.Path`): The path to the media file path</span>
@@ -161,7 +161,7 @@
 
 
 <div class="viewcode-block" id="GifOverlay.set_transform"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gif_backend.GifOverlay.set_transform">[docs]</a>    <span class="k">def</span> <span class="nf">set_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Compute the transform to scale (not stretch nor crop) the gif.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Compute the transform to scale (not stretch nor crop) the gif.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">widget_size</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">movie_zone</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">movie_zone</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">())</span>
         <span class="n">scale</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">widget_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">widget_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -172,7 +172,7 @@
 
 
 <div class="viewcode-block" id="GifOverlay.draw"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gif_backend.GifOverlay.draw">[docs]</a>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Simple resized drawing: get the pixbuf, set the transform, draw the image.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Simple resized drawing: get the pixbuf, set the transform, draw the image.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -186,7 +186,7 @@
 
 
 <div class="viewcode-block" id="GifOverlay.advance_gif"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gif_backend.GifOverlay.advance_gif">[docs]</a>    <span class="k">def</span> <span class="nf">advance_gif</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Advance the gif, queue redrawing if the frame changed, and schedule the next frame.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Advance the gif, queue redrawing if the frame changed, and schedule the next frame.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">advance</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">movie_zone</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
@@ -197,7 +197,7 @@
 
 
 <div class="viewcode-block" id="GifOverlay.do_set_time"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gif_backend.GifOverlay.do_set_time">[docs]</a>    <span class="k">def</span> <span class="nf">do_set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Set the player at time t.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set the player at time t.</span>
 
 <span class="sd">        Should run on the main thread to ensure we avoid vlc plugins&#39; reentrency problems.</span>
 
@@ -224,7 +224,7 @@
 
 <div class="viewcode-block" id="GifOverlay.setup_backend"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gif_backend.GifOverlay.setup_backend">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">setup_backend</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Returns the name of this backend.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Returns the name of this backend.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;GdkPixbuf gif player&#39;</span><span class="p">)</span></div></div>
 </pre></div>

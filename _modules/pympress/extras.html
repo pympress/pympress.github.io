@@ -127,7 +127,7 @@
 
 
 <div class="viewcode-block" id="Annotations"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Annotations">[docs]</a><span class="k">class</span> <span class="nc">Annotations</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Widget displaying a PDF’s text annotations.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Widget displaying a PDF’s text annotations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: The containing :class:`~Gtk.TreeView` widget for the annotations</span>
     <span class="n">annotations_treeview</span> <span class="o">=</span> <span class="kc">None</span>
@@ -150,7 +150,7 @@
 
 
 <div class="viewcode-block" id="Annotations.load_annotations"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Annotations.load_annotations">[docs]</a>    <span class="k">def</span> <span class="nf">load_annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">annot_page</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Add annotations to be displayed (typically on going to a new slide).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Add annotations to be displayed (typically on going to a new slide).</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            annot_page (:class:`~pympress.document.Page`): The page object that contains the annotations</span>
@@ -165,7 +165,7 @@
 
 
 <div class="viewcode-block" id="Annotations.try_cancel"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Annotations.try_cancel">[docs]</a>    <span class="k">def</span> <span class="nf">try_cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Try to cancel editing</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Try to cancel editing</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: whether editing was enabled and thus canceled</span>
@@ -180,7 +180,7 @@
 
 
 <div class="viewcode-block" id="Annotations.key_event"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Annotations.key_event">[docs]</a>    <span class="k">def</span> <span class="nf">key_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Handle a key (press/release) event.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle a key (press/release) event.</span>
 
 <span class="sd">        Needed to forward events directly to the :class:`~Gtk.Entry`, bypassing the global action accelerators.</span>
 
@@ -201,7 +201,7 @@
 
 
 <div class="viewcode-block" id="Annotations.editing_started"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Annotations.editing_started">[docs]</a>    <span class="k">def</span> <span class="nf">editing_started</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell_renderer</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">entry_number</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Handle edit start</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle edit start</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            cell_renderer (:class:`~Gtk.CellRenderer`): The renderer which received the signal</span>
@@ -212,7 +212,7 @@
 
 
 <div class="viewcode-block" id="Annotations.editing_validated"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Annotations.editing_validated">[docs]</a>    <span class="k">def</span> <span class="nf">editing_validated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell_renderer</span><span class="p">,</span> <span class="n">entry_number</span><span class="p">,</span> <span class="n">new_content</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Handle successful edit: store the new cell value in the model and the document</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle successful edit: store the new cell value in the model and the document</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            cell_renderer (:class:`~Gtk.CellRenderer`): The renderer which received the signal</span>
@@ -227,7 +227,7 @@
 
 
 <div class="viewcode-block" id="Annotations.editing_finished"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Annotations.editing_finished">[docs]</a>    <span class="k">def</span> <span class="nf">editing_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell_renderer</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Handle the end of editing</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle the end of editing</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            cell_renderer (:class:`~Gtk.CellRenderer`): The renderer which received the signal</span>
@@ -236,7 +236,7 @@
 
 
 <div class="viewcode-block" id="Annotations.add_annotation"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Annotations.add_annotation">[docs]</a>    <span class="k">def</span> <span class="nf">add_annotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Add an annotation to the the page’s annotation list</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Add an annotation to the the page’s annotation list</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            gaction (:class:`~Gio.Action`): the action triggering the call, which identifies which backend</span>
@@ -249,7 +249,7 @@
 
 
 <div class="viewcode-block" id="Annotations.remove_annotation"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Annotations.remove_annotation">[docs]</a>    <span class="k">def</span> <span class="nf">remove_annotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Remove an annotation to the from the page’s annotation list</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Remove an annotation to the from the page’s annotation list</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            gaction (:class:`~Gio.Action`): the action triggering the call, which identifies which backend</span>
@@ -265,7 +265,7 @@
 
 
 <div class="viewcode-block" id="Media"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media">[docs]</a><span class="k">class</span> <span class="nc">Media</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Class managing statically the medias and media player backends, to enable play/pause callbacks.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Class managing statically the medias and media player backends, to enable play/pause callbacks.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        builder (:class:`~pympress.builder.Builder`): A builder from which to load widgets</span>
@@ -306,7 +306,7 @@
 
 
 <div class="viewcode-block" id="Media.toggle"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media.toggle">[docs]</a>    <span class="k">def</span> <span class="nf">toggle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Toggle a backend (if it was loaded correctly)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Toggle a backend (if it was loaded correctly)</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            gaction (:class:`~Gio.Action`): the action triggering the call, which identifies which backend</span>
@@ -328,21 +328,21 @@
 
 
 <div class="viewcode-block" id="Media.remove_media_overlays"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media.remove_media_overlays">[docs]</a>    <span class="k">def</span> <span class="nf">remove_media_overlays</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Remove current media overlays.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Remove current media overlays.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">media_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_media_overlays</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">(</span><span class="n">media_id</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Media.purge_media_overlays"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media.purge_media_overlays">[docs]</a>    <span class="k">def</span> <span class="nf">purge_media_overlays</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Remove current media overlays.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Remove current media overlays.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">remove_media_overlays</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_media_overlays</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="Media.replace_media_overlays"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media.replace_media_overlays">[docs]</a>    <span class="k">def</span> <span class="nf">replace_media_overlays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">page_type</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Remove current media overlays, add new ones if page contains media.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Remove current media overlays, add new ones if page contains media.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            current_page (:class:`~pympress.document.Page`): The page for which to prepare medias</span>
@@ -387,7 +387,7 @@
 
 
 <div class="viewcode-block" id="Media.resize"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media.resize">[docs]</a>    <span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Resize all media overlays that are a child of an overlay.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Resize all media overlays that are a child of an overlay.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">needs_resizing</span> <span class="o">=</span> <span class="p">(</span><span class="n">which</span> <span class="o">==</span> <span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="n">which</span> <span class="o">==</span> <span class="s1">&#39;presenter&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">which</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">media_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_media_overlays</span><span class="p">:</span>
@@ -396,7 +396,7 @@
 
 
 <div class="viewcode-block" id="Media.adjust_margins_for_mode"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media.adjust_margins_for_mode">[docs]</a>    <span class="k">def</span> <span class="nf">adjust_margins_for_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_type</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Adjust the relative margins of child widgets for notes mode update.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Adjust the relative margins of child widgets for notes mode update.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            page_type (:class:`~pympress.document.PdfPage`): The part of the page to display</span>
@@ -407,7 +407,7 @@
 
 
 <div class="viewcode-block" id="Media.play"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media.play">[docs]</a>    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">media_id</span><span class="p">,</span> <span class="n">gaction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Starts playing a media. Used as a callback.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Starts playing a media. Used as a callback.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            media_id (`int`): A unique identifier of the media to start playing</span>
@@ -422,7 +422,7 @@
 
 
 <div class="viewcode-block" id="Media.hide"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media.hide">[docs]</a>    <span class="k">def</span> <span class="nf">hide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">media_id</span><span class="p">,</span> <span class="n">gaction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Stops playing a media and hides the player. Used as a callback.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Stops playing a media and hides the player. Used as a callback.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            media_id (`int`): A unique identifier of the media to start playing</span>
@@ -436,7 +436,7 @@
 
 
 <div class="viewcode-block" id="Media.hide_all"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media.hide_all">[docs]</a>    <span class="k">def</span> <span class="nf">hide_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Stops all playing medias and hides the players. Used before exit.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Stops all playing medias and hides the players. Used before exit.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_media_overlays</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">is_shown</span><span class="p">():</span> <span class="n">c</span><span class="o">.</span><span class="n">do_hide</span><span class="p">()</span>
@@ -444,7 +444,7 @@
 
 
 <div class="viewcode-block" id="Media.play_pause"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media.play_pause">[docs]</a>    <span class="k">def</span> <span class="nf">play_pause</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">media_id</span><span class="p">,</span> <span class="n">gaction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Toggles playing and pausing a media. Used as a callback.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Toggles playing and pausing a media. Used as a callback.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            media_id (`int`): A unique idientifier of the media to start playing</span>
@@ -455,7 +455,7 @@
 
 
 <div class="viewcode-block" id="Media.set_time"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media.set_time">[docs]</a>    <span class="k">def</span> <span class="nf">set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">media_id</span><span class="p">,</span> <span class="n">gaction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Set the player of a given media at time t. Used as a callback.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set the player of a given media at time t. Used as a callback.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            media_id (`int`): A unique idientifier of the media to start playing</span>
@@ -467,7 +467,7 @@
 
 
     <span class="k">def</span> <span class="nf">_setup_backends</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Load the backends for video overlays.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Load the backends for video overlays.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pympress.media_overlays.gif_backend</span> <span class="kn">import</span> <span class="n">GifOverlay</span>
@@ -516,7 +516,7 @@
 
 
 <div class="viewcode-block" id="Media.get_factory"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Media.get_factory">[docs]</a>    <span class="k">def</span> <span class="nf">get_factory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Returns a class of type :attr:`~_backend`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Returns a class of type :attr:`~_backend`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Search for specific mime type, if no matches fall back to empty lists which mean any mime types</span>
         <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">backend</span> <span class="k">for</span> <span class="n">backend</span><span class="p">,</span> <span class="n">mime_types</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">types_list</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">mime_type</span> <span class="ow">in</span> <span class="n">mime_types</span><span class="p">]</span>
@@ -533,7 +533,7 @@
 
 
 <div class="viewcode-block" id="Cursor"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Cursor">[docs]</a><span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Class managing cursors statically for displays, so we can select the mouse cursor with a simple string.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Class managing cursors statically for displays, so we can select the mouse cursor with a simple string.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: a static `dict` of :class:`~Gdk.Cursor`s, ready to use</span>
     <span class="n">_cursors</span> <span class="o">=</span> <span class="p">{</span>
@@ -551,7 +551,7 @@
 
 <div class="viewcode-block" id="Cursor.set_cursor"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Cursor.set_cursor">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">set_cursor</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">cursor_name</span> <span class="o">=</span> <span class="s1">&#39;parent&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Set the cursor named cursor_name&#39;.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set the cursor named cursor_name&#39;.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget (:class:`~Gtk.Widget`): The widget triggering the cursor change, used to retrieve a Gdk.Window</span>
@@ -569,7 +569,7 @@
 
 
 <div class="viewcode-block" id="Zoom"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Zoom">[docs]</a><span class="k">class</span> <span class="nc">Zoom</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Manage the zoom level (using a cairo matrix), draw area that will be zoomed while it is being selected.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Manage the zoom level (using a cairo matrix), draw area that will be zoomed while it is being selected.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        builder (:class:`~pympress.builder.Builder`): A builder from which to load widgets</span>
@@ -605,7 +605,7 @@
 
 
 <div class="viewcode-block" id="Zoom.start_zooming"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Zoom.start_zooming">[docs]</a>    <span class="k">def</span> <span class="nf">start_zooming</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Setup for the user to select the zooming area.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Setup for the user to select the zooming area.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: whether the event was consumed</span>
@@ -617,7 +617,7 @@
 
 
 <div class="viewcode-block" id="Zoom.stop_zooming"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Zoom.stop_zooming">[docs]</a>    <span class="k">def</span> <span class="nf">stop_zooming</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Cancel the zooming, reset the zoom level to full page.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Cancel the zooming, reset the zoom level to full page.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: whether the event was consumed</span>
@@ -636,7 +636,7 @@
 
 
 <div class="viewcode-block" id="Zoom.try_cancel"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Zoom.try_cancel">[docs]</a>    <span class="k">def</span> <span class="nf">try_cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Cancel the zoom selection, if it was enabled.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Cancel the zoom selection, if it was enabled.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: `True` if the zoom was cancelled, `False` if a zoom selection was not in progress.</span>
@@ -651,7 +651,7 @@
 
 
 <div class="viewcode-block" id="Zoom.get_slide_point"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Zoom.get_slide_point">[docs]</a>    <span class="k">def</span> <span class="nf">get_slide_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Gets the point on the slide on a scale (0..1, 0..1), from its position in the widget.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Gets the point on the slide on a scale (0..1, 0..1), from its position in the widget.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">(),</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">()</span>
         <span class="n">ex</span><span class="p">,</span> <span class="n">ey</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get_coords</span><span class="p">()</span>
@@ -660,7 +660,7 @@
 
 
 <div class="viewcode-block" id="Zoom.get_matrix"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Zoom.get_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">get_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Returns the :class:`~cairo.Matrix` used to perform the zoom for the widget of size ww x wh.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Returns the :class:`~cairo.Matrix` used to perform the zoom for the widget of size ww x wh.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            ww (`float`):  widget width</span>
@@ -674,7 +674,7 @@
 
 
 <div class="viewcode-block" id="Zoom.track_zoom_target"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Zoom.track_zoom_target">[docs]</a>    <span class="k">def</span> <span class="nf">track_zoom_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Draw the zoom&#39;s target rectangle.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Draw the zoom&#39;s target rectangle.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget (:class:`~Gtk.Widget`):  the widget which has received the event.</span>
@@ -693,7 +693,7 @@
 
 
 <div class="viewcode-block" id="Zoom.toggle_zoom_target"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Zoom.toggle_zoom_target">[docs]</a>    <span class="k">def</span> <span class="nf">toggle_zoom_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Start/stop drawing the zoom&#39;s target rectangle.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Start/stop drawing the zoom&#39;s target rectangle.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget (:class:`~Gtk.Widget`):  the widget which has received the event.</span>
@@ -743,7 +743,7 @@
 
 
 <div class="viewcode-block" id="Zoom.draw_zoom_target"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Zoom.draw_zoom_target">[docs]</a>    <span class="k">def</span> <span class="nf">draw_zoom_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Perform the drawings by user.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Perform the drawings by user.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            widget (:class:`~Gtk.DrawingArea`): The widget where to draw the scribbles.</span>
@@ -773,14 +773,14 @@
 
 
 <div class="viewcode-block" id="Zoom.nop"><a class="viewcode-back" href="../../pympress.html#pympress.extras.Zoom.nop">[docs]</a>    <span class="k">def</span> <span class="nf">nop</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Do nothing</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Do nothing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div></div>
 
 
 
 <div class="viewcode-block" id="FileWatcher"><a class="viewcode-back" href="../../pympress.html#pympress.extras.FileWatcher">[docs]</a><span class="k">class</span> <span class="nc">FileWatcher</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; A class that wraps watchdog objects, to trigger callbacks when a file changes.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A class that wraps watchdog objects, to trigger callbacks when a file changes.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: A :class:`~watchdog.observers.Observer` to watch when the file changes</span>
     <span class="n">observer</span> <span class="o">=</span> <span class="kc">None</span>
@@ -813,7 +813,7 @@
 
 
     <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; On finalize, cancel the watchdog observer thread.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; On finalize, cancel the watchdog observer thread.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stop_watching</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">observer</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
@@ -823,7 +823,7 @@
 
 
 <div class="viewcode-block" id="FileWatcher.watch_file"><a class="viewcode-back" href="../../pympress.html#pympress.extras.FileWatcher.watch_file">[docs]</a>    <span class="k">def</span> <span class="nf">watch_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Watches a new file with a new callback. Removes any precedent watched files.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Watches a new file with a new callback. Removes any precedent watched files.</span>
 
 <span class="sd">        If the optional watchdog dependency is missing, does nothing.</span>
 
@@ -851,13 +851,13 @@
 
 
 <div class="viewcode-block" id="FileWatcher.stop_watching"><a class="viewcode-back" href="../../pympress.html#pympress.extras.FileWatcher.stop_watching">[docs]</a>    <span class="k">def</span> <span class="nf">stop_watching</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Remove all files that are being watched.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Remove all files that are being watched.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">observer</span><span class="o">.</span><span class="n">unschedule_all</span><span class="p">()</span></div>
 
 
     <span class="k">def</span> <span class="nf">_enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Call callback with delay, to avoid repeated calls in short periods of time.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Call callback with delay, to avoid repeated calls in short periods of time.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            event (:class:`~watchdog.events.FileSystemEvent`): the event that caused the callback to be triggered</span>
@@ -870,7 +870,7 @@
 
 
     <span class="k">def</span> <span class="nf">_call</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Call the callback.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Call the callback.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="mi">0</span>
