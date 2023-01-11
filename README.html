@@ -265,6 +265,7 @@ with the + and - buttons of the spin box, or simply by typing in the number of t
 <li><p>Gstreamer installed (enabled by default), with plugins gstreamer-good/-bad/-ugly based on which codecs you need, or</p></li>
 <li><p>VLC installed (and the python-vlc module), with <code class="docutils literal notranslate"><span class="pre">enabled</span> <span class="pre">=</span> <span class="pre">on</span></code> under the <code class="docutils literal notranslate"><span class="pre">[vlc]</span></code> section of your config file.</p></li>
 </ul>
+<p>On macOS, issues with the gstreamer brew formula may require users to set <code class="docutils literal notranslate"><span class="pre">GST_PLUGIN_SYSTEM_PATH</span></code> manually. For default homebrew configurations the value should be <code class="docutils literal notranslate"><span class="pre">/opt/homebrew/lib/gstreamer-1.0/</span></code>. Make sure to set this environmental variable globally, or pympress might not pick it up.</p>
 <p>To produce PDFs with media inclusion, the ideal method is to use beamer’s multimedia package, always with <code class="docutils literal notranslate"><span class="pre">\movie</span></code>:</p>
 <div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\documentclass</span><span class="nb">{</span>beamer<span class="nb">}</span>
 <span class="k">\usepackage</span><span class="nb">{</span>multimedia<span class="nb">}</span>
