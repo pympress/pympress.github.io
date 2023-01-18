@@ -186,6 +186,7 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">GLib</span><span class="o">.</span><span class="n">set_application_name</span><span class="p">(</span><span class="s1">&#39;pympress&#39;</span><span class="p">)</span>
+        <span class="n">GLib</span><span class="o">.</span><span class="n">set_prgname</span><span class="p">(</span><span class="s1">&#39;io.github.pympress&#39;</span><span class="p">)</span>
         <span class="n">Gtk</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application_id</span><span class="o">=</span><span class="s1">&#39;io.github.pympress&#39;</span><span class="p">,</span>
                                  <span class="n">flags</span><span class="o">=</span><span class="n">Gio</span><span class="o">.</span><span class="n">ApplicationFlags</span><span class="o">.</span><span class="n">HANDLES_OPEN</span> <span class="o">|</span> <span class="n">Gio</span><span class="o">.</span><span class="n">ApplicationFlags</span><span class="o">.</span><span class="n">CAN_OVERRIDE_APP_ID</span><span class="p">)</span>
 
