@@ -83,6 +83,16 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pympress-ui-gui-management"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pympress.ui</span></code> – GUI management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pympress.ui.ScreenArea"><code class="docutils literal notranslate"><span class="pre">ScreenArea</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.ui.ScreenArea.contains"><code class="docutils literal notranslate"><span class="pre">ScreenArea.contains()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.ui.ScreenArea.equal"><code class="docutils literal notranslate"><span class="pre">ScreenArea.equal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.ui.ScreenArea.intersection"><code class="docutils literal notranslate"><span class="pre">ScreenArea.intersection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.ui.ScreenArea.intersects"><code class="docutils literal notranslate"><span class="pre">ScreenArea.intersects()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.ui.ScreenArea.least_intersection"><code class="docutils literal notranslate"><span class="pre">ScreenArea.least_intersection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.ui.ScreenArea.lookup_monitors"><code class="docutils literal notranslate"><span class="pre">ScreenArea.lookup_monitors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.ui.ScreenArea.most_intersection"><code class="docutils literal notranslate"><span class="pre">ScreenArea.most_intersection()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#pympress.ui.UI"><code class="docutils literal notranslate"><span class="pre">UI</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.accel_group"><code class="docutils literal notranslate"><span class="pre">UI.accel_group</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.adjust_bottom_bar_font"><code class="docutils literal notranslate"><span class="pre">UI.adjust_bottom_bar_font()</span></code></a></li>
@@ -173,6 +183,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.resize_panes"><code class="docutils literal notranslate"><span class="pre">UI.resize_panes</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.save_file"><code class="docutils literal notranslate"><span class="pre">UI.save_file()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.save_file_as"><code class="docutils literal notranslate"><span class="pre">UI.save_file_as()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.screens_changed"><code class="docutils literal notranslate"><span class="pre">UI.screens_changed()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.scribbler"><code class="docutils literal notranslate"><span class="pre">UI.scribbler</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.set_screensaver"><code class="docutils literal notranslate"><span class="pre">UI.set_screensaver()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.setup_screens"><code class="docutils literal notranslate"><span class="pre">UI.setup_screens()</span></code></a></li>
@@ -828,7 +839,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.app.Pympress.do_activate">
-<span class="sig-name descname"><span class="pre">do_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1678213408.0929508</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/app.html#Pympress.do_activate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.app.Pympress.do_activate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">do_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1678217276.04846</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/app.html#Pympress.do_activate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.app.Pympress.do_activate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activate: show UI windows.</p>
 <p>Build them if they do not exist, otherwise bring to front.</p>
 </dd></dl>
@@ -971,6 +982,50 @@ current page in full size, and the Presenter window, which displays both the
 current and the next page, as well as a time counter and a clock.</p>
 <p>Both windows are managed by the <a class="reference internal" href="#pympress.ui.UI" title="pympress.ui.UI"><code class="xref py py-class docutils literal notranslate"><span class="pre">UI</span></code></a> class.</p>
 </section>
+<dl class="py class">
+<dt class="sig sig-object py" id="pympress.ui.ScreenArea">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pympress.ui.</span></span><span class="sig-name descname"><span class="pre">ScreenArea</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.11/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.ui.ScreenArea.contains">
+<span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.contains"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.contains" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.ui.ScreenArea.equal">
+<span class="sig-name descname"><span class="pre">equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.equal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.ui.ScreenArea.intersection">
+<span class="sig-name descname"><span class="pre">intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.intersection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.intersection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.ui.ScreenArea.intersects">
+<span class="sig-name descname"><span class="pre">intersects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.intersects"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.intersects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.ui.ScreenArea.least_intersection">
+<span class="sig-name descname"><span class="pre">least_intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">candidates</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.least_intersection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.least_intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the rectangle that intersects least with <code class="xref py py-obj docutils literal notranslate"><span class="pre">rect</span></code> in <code class="xref py py-obj docutils literal notranslate"><span class="pre">candidates</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.ui.ScreenArea.lookup_monitors">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lookup_monitors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">windows</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.lookup_monitors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.lookup_monitors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the info on the monitors</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.ui.ScreenArea.most_intersection">
+<span class="sig-name descname"><span class="pre">most_intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">candidates</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.most_intersection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.most_intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the rectangle that intersects most with <code class="xref py py-obj docutils literal notranslate"><span class="pre">rect</span></code> in <code class="xref py py-obj docutils literal notranslate"><span class="pre">candidates</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="pympress.ui.UI">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pympress.ui.</span></span><span class="sig-name descname"><span class="pre">UI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#UI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.UI" title="Permalink to this definition">¶</a></dt>
@@ -1444,7 +1499,7 @@ force (<a class="reference external" href="https://docs.python.org/3.11/library/
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.ui.UI.move_window">
-<span class="sig-name descname"><span class="pre">move_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_monitor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_monitor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#UI.move_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.UI.move_window" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">move_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">win</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_bounds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#UI.move_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.UI.move_window" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move window from monitor number from_monitor to monitor to_monitor.</p>
 </dd></dl>
 
@@ -1793,6 +1848,17 @@ moving the middle pane is done (which happens at the end of a mouse resize)</p>
 <dd><p>Remove the current document.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.ui.UI.screens_changed">
+<span class="sig-name descname"><span class="pre">screens_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#UI.screens_changed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.UI.screens_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle ::monitors-changed events</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>screen</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gdk-3.0/classes/Screen.html#Gdk.Screen" title="(in Gdk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Screen</span></code></a>) – the screen</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.ui.UI.scribbler">
 <span class="sig-name descname"><span class="pre">scribbler</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pympress.ui.UI.scribbler" title="Permalink to this definition">¶</a></dt>
@@ -1812,8 +1878,16 @@ moving the middle pane is done (which happens at the end of a mouse resize)</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.ui.UI.setup_screens">
-<span class="sig-name descname"><span class="pre">setup_screens</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#UI.setup_screens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.UI.setup_screens" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets up the position of the windows.</p>
+<span class="sig-name descname"><span class="pre">setup_screens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#UI.setup_screens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.UI.setup_screens" title="Permalink to this definition">¶</a></dt>
+<dd><p>If multiple monitors, fullscreen windows on monitors according to config.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>screen</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gdk-3.0/classes/Screen.html#Gdk.Screen" title="(in Gdk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Screen</span></code></a>) – the screen</p></li>
+<li><p><strong>event_name</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – a description of what caused the screen setup event, for debugging</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -4320,7 +4394,7 @@ clicking while ctrl pressed.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.pointer.Pointer.pointer">
-<span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GdkPixbuf.Pixbuf</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f25d8da2e00</span> <span class="pre">(GdkPixbuf</span> <span class="pre">at</span> <span class="pre">0x55c18e80c240)&gt;</span></em><a class="headerlink" href="#pympress.pointer.Pointer.pointer" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GdkPixbuf.Pixbuf</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f87c5beeb40</span> <span class="pre">(GdkPixbuf</span> <span class="pre">at</span> <span class="pre">0x55a02405c640)&gt;</span></em><a class="headerlink" href="#pympress.pointer.Pointer.pointer" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://lazka.github.io/pgi-docs/GdkPixbuf-2.0/classes/Pixbuf.html#GdkPixbuf.Pixbuf" title="(in GdkPixbuf 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pixbuf</span></code></a> to read XML descriptions of GUIs and load them.</p>
 </dd></dl>
 
@@ -5361,7 +5435,7 @@ of all the resizeable items (if and only if resizeable).</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.config.Config.widget_reqs">
-<span class="sig-name descname"><span class="pre">widget_reqs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'highlight':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'notes',</span> <span class="pre">'next',</span> <span class="pre">'current',</span> <span class="pre">'annotations'}),</span> <span class="pre">'highlight_notes':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'notes',</span> <span class="pre">'next',</span> <span class="pre">'current',</span> <span class="pre">'annotations'}),</span> <span class="pre">'note_pages':</span> <span class="pre">({'notes',</span> <span class="pre">'next',</span> <span class="pre">'annotations'},),</span> <span class="pre">'notes':</span> <span class="pre">({'next',</span> <span class="pre">'current',</span> <span class="pre">'notes'},</span> <span class="pre">{'annotations'}),</span> <span class="pre">'plain':</span> <span class="pre">({'next',</span> <span class="pre">'current',</span> <span class="pre">'annotations'},)}</span></em><a class="headerlink" href="#pympress.config.Config.widget_reqs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">widget_reqs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'highlight':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'next',</span> <span class="pre">'notes',</span> <span class="pre">'current',</span> <span class="pre">'annotations'}),</span> <span class="pre">'highlight_notes':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'next',</span> <span class="pre">'notes',</span> <span class="pre">'current',</span> <span class="pre">'annotations'}),</span> <span class="pre">'note_pages':</span> <span class="pre">({'next',</span> <span class="pre">'notes',</span> <span class="pre">'annotations'},),</span> <span class="pre">'notes':</span> <span class="pre">({'notes',</span> <span class="pre">'current',</span> <span class="pre">'next'},</span> <span class="pre">{'annotations'}),</span> <span class="pre">'plain':</span> <span class="pre">({'next',</span> <span class="pre">'current',</span> <span class="pre">'annotations'},)}</span></em><a class="headerlink" href="#pympress.config.Config.widget_reqs" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> mapping layout ids to tuples of their expected and optional widgets</p>
 </dd></dl>
 
