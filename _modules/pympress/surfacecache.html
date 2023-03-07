@@ -163,6 +163,9 @@
     <span class="c1">#: accesses to :attr:`surface_cache` and :attr:`surface_size`</span>
     <span class="n">locks</span> <span class="o">=</span> <span class="p">{}</span>
 
+    <span class="c1">#: Set of widgets for which we ignore the max</span>
+    <span class="n">unlimited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
     <span class="c1">#: The current :class:`~pympress.document.Document`.</span>
     <span class="n">doc</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -181,7 +184,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">doc_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="SurfaceCache.add_widget"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.add_widget">[docs]</a>    <span class="k">def</span> <span class="nf">add_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">wtype</span><span class="p">,</span> <span class="n">prerender_enabled</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">zoomed</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="SurfaceCache.add_widget"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.add_widget">[docs]</a>    <span class="k">def</span> <span class="nf">add_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">wtype</span><span class="p">,</span> <span class="n">prerender_enabled</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">zoomed</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ignore_max</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Add a widget to the list of widgets that have to be managed (for caching and prerendering).</span>
 
 <span class="sd">        This creates new entries for ``widget_name`` in the needed internal data</span>
@@ -192,6 +195,7 @@
 <span class="sd">            wtype (`int`):  type of document handled by the widget (see :attr:`surface_type`)</span>
 <span class="sd">            prerender_enabled (`bool`):  whether this widget is initially in the list of widgets to prerender</span>
 <span class="sd">            zoomed (`bool`): whether we will cache a zoomed portion of the widget</span>
+<span class="sd">            ignore_max (`bool`): whether we will cache an unlimited number of slides</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">widget_name</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;0123456789&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s1">&#39;_zoomed&#39;</span> <span class="k">if</span> <span class="n">zoomed</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">locks</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">widget_name</span><span class="p">,</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()):</span>
@@ -200,7 +204,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">surface_type</span><span class="p">[</span><span class="n">widget_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">wtype</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">surface_factory</span><span class="p">[</span><span class="n">widget_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_create_surface</span><span class="p">,</span> <span class="n">widget</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">prerender_enabled</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">zoomed</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">enable_prerender</span><span class="p">(</span><span class="n">widget_name</span><span class="p">)</span></div>
+                <span class="bp">self</span><span class="o">.</span><span class="n">enable_prerender</span><span class="p">(</span><span class="n">widget_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ignore_max</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">unlimited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">widget_name</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SurfaceCache.swap_document"><a class="viewcode-back" href="../../pympress.html#pympress.surfacecache.SurfaceCache.swap_document">[docs]</a>    <span class="k">def</span> <span class="nf">swap_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_doc</span><span class="p">):</span>
@@ -398,10 +404,11 @@
             <span class="n">pc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">surface_cache</span><span class="p">[</span><span class="n">widget_name</span><span class="p">]</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">ww</span><span class="p">,</span> <span class="n">wh</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">surface_size</span><span class="p">[</span><span class="n">widget_name</span><span class="p">]</span> <span class="ow">and</span> <span class="n">page_nb</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pc</span><span class="p">:</span>
                 <span class="n">pc</span><span class="p">[</span><span class="n">page_nb</span><span class="p">]</span> <span class="o">=</span> <span class="n">surface</span>
-                <span class="n">pc</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="n">page_nb</span><span class="p">)</span>
 
-            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">pc</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_pages</span><span class="p">:</span>
-                <span class="n">pc</span><span class="o">.</span><span class="n">popitem</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">widget_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">unlimited</span><span class="p">:</span>
+                <span class="n">pc</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="n">page_nb</span><span class="p">)</span>
+                <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">pc</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_pages</span><span class="p">:</span>
+                    <span class="n">pc</span><span class="o">.</span><span class="n">popitem</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">GLib</span><span class="o">.</span><span class="n">SOURCE_REMOVE</span></div></div>
 

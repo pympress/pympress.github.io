@@ -179,7 +179,7 @@
     <span class="n">scribble_clear</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1">#: A :class:`~Gtk.OffscreenWindow` where we render the scribbling interface when it&#39;s not shown</span>
-    <span class="n">off_render</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">scribble_off_render</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#: :class:`~Gtk.Box` in the Presenter window, where we insert scribbling.</span>
     <span class="n">p_central</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -250,7 +250,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">load_ui</span><span class="p">(</span><span class="s1">&#39;highlight&#39;</span><span class="p">)</span>
         <span class="n">builder</span><span class="o">.</span><span class="n">load_widgets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">get_application</span><span class="p">()</span><span class="o">.</span><span class="n">add_window</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">off_render</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_application</span><span class="p">()</span><span class="o">.</span><span class="n">add_window</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_off_render</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">on_draw</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">get_callback_handler</span><span class="p">(</span><span class="s1">&#39;on_draw&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">track_motions</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">get_callback_handler</span><span class="p">(</span><span class="s1">&#39;track_motions&#39;</span><span class="p">)</span>
@@ -503,7 +503,7 @@
 
 
 <div class="viewcode-block" id="Scribbler.prerender"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.prerender">[docs]</a>    <span class="k">def</span> <span class="nf">prerender</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Clear scribbles to cached.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Commit scribbles to cache so they are faster to draw on the slide</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
@@ -804,7 +804,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribbling_mode</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">off_render</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_overlay</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scribble_off_render</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_overlay</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_layout</span><span class="p">(</span><span class="s1">&#39;highlight&#39;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">p_central</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
@@ -832,7 +832,7 @@
 
         <span class="n">extras</span><span class="o">.</span><span class="n">Cursor</span><span class="o">.</span><span class="n">set_cursor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_p_da</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_layout</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">off_render</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_overlay</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scribble_off_render</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_overlay</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">get_application</span><span class="p">()</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;highlight&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">change_state</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_boolean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribbling_mode</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pen_action</span><span class="o">.</span><span class="n">set_enabled</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribbling_mode</span><span class="p">)</span>

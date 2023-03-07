@@ -113,8 +113,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.click_link"><code class="docutils literal notranslate"><span class="pre">UI.click_link()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.close_file"><code class="docutils literal notranslate"><span class="pre">UI.close_file()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.close_shortcuts"><code class="docutils literal notranslate"><span class="pre">UI.close_shortcuts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.compute_frame_grid"><code class="docutils literal notranslate"><span class="pre">UI.compute_frame_grid()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.config"><code class="docutils literal notranslate"><span class="pre">UI.config</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.current_page"><code class="docutils literal notranslate"><span class="pre">UI.current_page</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.deck"><code class="docutils literal notranslate"><span class="pre">UI.deck</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.do_page_change"><code class="docutils literal notranslate"><span class="pre">UI.do_page_change()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.doc"><code class="docutils literal notranslate"><span class="pre">UI.doc</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.ui.UI.doc_goto_end"><code class="docutils literal notranslate"><span class="pre">UI.doc_goto_end()</span></code></a></li>
@@ -216,6 +218,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#pympress.document.Document.doc"><code class="docutils literal notranslate"><span class="pre">Document.doc</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.document.Document.doc_page_labels"><code class="docutils literal notranslate"><span class="pre">Document.doc_page_labels</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.document.Document.get_full_path"><code class="docutils literal notranslate"><span class="pre">Document.get_full_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.document.Document.get_last_label_pages"><code class="docutils literal notranslate"><span class="pre">Document.get_last_label_pages()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.document.Document.get_structure"><code class="docutils literal notranslate"><span class="pre">Document.get_structure()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.document.Document.get_uri"><code class="docutils literal notranslate"><span class="pre">Document.get_uri()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.document.Document.goto"><code class="docutils literal notranslate"><span class="pre">Document.goto()</span></code></a></li>
@@ -361,6 +364,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#pympress.surfacecache.SurfaceCache.surface_size"><code class="docutils literal notranslate"><span class="pre">SurfaceCache.surface_size</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.surfacecache.SurfaceCache.surface_type"><code class="docutils literal notranslate"><span class="pre">SurfaceCache.surface_type</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.surfacecache.SurfaceCache.swap_document"><code class="docutils literal notranslate"><span class="pre">SurfaceCache.swap_document()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.surfacecache.SurfaceCache.unlimited"><code class="docutils literal notranslate"><span class="pre">SurfaceCache.unlimited</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pympress-scribble-manage-user-drawings-on-the-current-slide"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pympress.scribble</span></code> – Manage user drawings on the current slide</a></li>
@@ -381,7 +385,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.load_preset"><code class="docutils literal notranslate"><span class="pre">Scribbler.load_preset()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.mouse_pos"><code class="docutils literal notranslate"><span class="pre">Scribbler.mouse_pos</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.next_render"><code class="docutils literal notranslate"><span class="pre">Scribbler.next_render</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.off_render"><code class="docutils literal notranslate"><span class="pre">Scribbler.off_render</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.on_configure_da"><code class="docutils literal notranslate"><span class="pre">Scribbler.on_configure_da()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.on_draw"><code class="docutils literal notranslate"><span class="pre">Scribbler.on_draw()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.on_eraser_button_draw"><code class="docutils literal notranslate"><span class="pre">Scribbler.on_eraser_button_draw()</span></code></a></li>
@@ -411,6 +414,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.scribble_color_toolbox"><code class="docutils literal notranslate"><span class="pre">Scribbler.scribble_color_toolbox</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.scribble_drawing"><code class="docutils literal notranslate"><span class="pre">Scribbler.scribble_drawing</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.scribble_list"><code class="docutils literal notranslate"><span class="pre">Scribbler.scribble_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.scribble_off_render"><code class="docutils literal notranslate"><span class="pre">Scribbler.scribble_off_render</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.scribble_overlay"><code class="docutils literal notranslate"><span class="pre">Scribbler.scribble_overlay</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.scribble_p_da"><code class="docutils literal notranslate"><span class="pre">Scribbler.scribble_p_da</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.scribble.Scribbler.scribble_p_eb"><code class="docutils literal notranslate"><span class="pre">Scribbler.scribble_p_eb</span></code></a></li>
@@ -576,6 +580,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#pympress.config.Config.register_actions"><code class="docutils literal notranslate"><span class="pre">Config.register_actions()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.config.Config.save_config"><code class="docutils literal notranslate"><span class="pre">Config.save_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.config.Config.shortcuts"><code class="docutils literal notranslate"><span class="pre">Config.shortcuts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.config.Config.static_layout"><code class="docutils literal notranslate"><span class="pre">Config.static_layout</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.config.Config.toggle_portable_config"><code class="docutils literal notranslate"><span class="pre">Config.toggle_portable_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.config.Config.toggle_start"><code class="docutils literal notranslate"><span class="pre">Config.toggle_start()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.config.Config.update_layout_from_widgets"><code class="docutils literal notranslate"><span class="pre">Config.update_layout_from_widgets()</span></code></a></li>
@@ -839,7 +844,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.app.Pympress.do_activate">
-<span class="sig-name descname"><span class="pre">do_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1678219058.838476</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/app.html#Pympress.do_activate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.app.Pympress.do_activate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">do_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1678219203.542136</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/app.html#Pympress.do_activate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.app.Pympress.do_activate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activate: show UI windows.</p>
 <p>Build them if they do not exist, otherwise bring to front.</p>
 </dd></dl>
@@ -1273,6 +1278,20 @@ force (<a class="reference external" href="https://docs.python.org/3.11/library/
 <dd><p>Destroy the shortcuts window once it is hidden.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.ui.UI.compute_frame_grid">
+<span class="sig-name descname"><span class="pre">compute_frame_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid_ar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_frames</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#UI.compute_frame_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.UI.compute_frame_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the arragement of frames in a grid to maximise their size given respective aspect ratios</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grid_ar</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a>) – aspect ratio of grid containing the slides</p></li>
+<li><p><strong>n_frames</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>) – the number of frames</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.ui.UI.config">
 <span class="sig-name descname"><span class="pre">config</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pympress.ui.UI.config" title="Permalink to this definition">¶</a></dt>
@@ -1283,6 +1302,12 @@ force (<a class="reference external" href="https://docs.python.org/3.11/library/
 <dt class="sig sig-object py" id="pympress.ui.UI.current_page">
 <span class="sig-name descname"><span class="pre">current_page</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#pympress.ui.UI.current_page" title="Permalink to this definition">¶</a></dt>
 <dd><p>number of page currently displayed in Content window’s miniatures</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pympress.ui.UI.deck">
+<span class="sig-name descname"><span class="pre">deck</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pympress.ui.UI.deck" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class <code class="xref py py-class docutils literal notranslate"><span class="pre">Overview</span></code> displaying a view of all slides</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1790,7 +1815,7 @@ moving the middle pane is done (which happens at the end of a mouse resize)</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.ui.UI.p_frame_cur">
 <span class="sig-name descname"><span class="pre">p_frame_cur</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pympress.ui.UI.p_frame_cur" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/AspectFrame.html#Gtk.AspectFrame" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AspectFrame</span></code></a> for the current slide copy in the Presenter window.</p>
+<dd><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/AspectFrame.html#Gtk.AspectFrame" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AspectFrame</span></code></a> for the current slide copy in the Presenter window.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -2308,6 +2333,13 @@ The document page numbers are the same as in Poppler, and also start at 0 but do
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.11/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.document.Document.get_last_label_pages">
+<span class="sig-name descname"><span class="pre">get_last_label_pages</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/document.html#Document.get_last_label_pages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.document.Document.get_last_label_pages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the last page number for each consecutively distinct page label</p>
+<p>In other words, squash together consecutive same labels</p>
 </dd></dl>
 
 <dl class="py method">
@@ -3461,7 +3493,7 @@ scheduled on the main thread at idle times using GLib.idle_add().</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.surfacecache.SurfaceCache.add_widget">
-<span class="sig-name descname"><span class="pre">add_widget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prerender_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoomed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/surfacecache.html#SurfaceCache.add_widget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.surfacecache.SurfaceCache.add_widget" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">add_widget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prerender_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoomed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/surfacecache.html#SurfaceCache.add_widget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.surfacecache.SurfaceCache.add_widget" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a widget to the list of widgets that have to be managed (for caching and prerendering).</p>
 <p>This creates new entries for <code class="docutils literal notranslate"><span class="pre">widget_name</span></code> in the needed internal data
 structures, and creates a new thread for prerendering pages for this widget.</p>
@@ -3472,6 +3504,7 @@ structures, and creates a new thread for prerendering pages for this widget.</p>
 <li><p><strong>wtype</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>) – type of document handled by the widget (see <a class="reference internal" href="#pympress.surfacecache.SurfaceCache.surface_type" title="pympress.surfacecache.SurfaceCache.surface_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">surface_type</span></code></a>)</p></li>
 <li><p><strong>prerender_enabled</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – whether this widget is initially in the list of widgets to prerender</p></li>
 <li><p><strong>zoomed</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – whether we will cache a zoomed portion of the widget</p></li>
+<li><p><strong>ignore_max</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – whether we will cache an unlimited number of slides</p></li>
 </ul>
 </dd>
 </dl>
@@ -3698,6 +3731,12 @@ widget names and its values are document types from ui.</p>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pympress.surfacecache.SurfaceCache.unlimited">
+<span class="sig-name descname"><span class="pre">unlimited</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#pympress.surfacecache.SurfaceCache.unlimited" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set of widgets for which we ignore the max</p>
+</dd></dl>
+
 </dd></dl>
 
 <span class="target" id="module-pympress.scribble"></span><section id="pympress-scribble-manage-user-drawings-on-the-current-slide">
@@ -3864,12 +3903,6 @@ widget names and its values are document types from ui.</p>
 <dd><p>The next scribble to render (i.e. that is not rendered in cache)</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="pympress.scribble.Scribbler.off_render">
-<span class="sig-name descname"><span class="pre">off_render</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pympress.scribble.Scribbler.off_render" title="Permalink to this definition">¶</a></dt>
-<dd><p>A <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/OffscreenWindow.html#Gtk.OffscreenWindow" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OffscreenWindow</span></code></a> where we render the scribbling interface when it’s not shown</p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.scribble.Scribbler.on_configure_da">
 <span class="sig-name descname"><span class="pre">on_configure_da</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/scribble.html#Scribbler.on_configure_da"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.scribble.Scribbler.on_configure_da" title="Permalink to this definition">¶</a></dt>
@@ -4004,7 +4037,7 @@ widget names and its values are document types from ui.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.scribble.Scribbler.prerender">
 <span class="sig-name descname"><span class="pre">prerender</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/scribble.html#Scribbler.prerender"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.scribble.Scribbler.prerender" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clear scribbles to cached.</p>
+<dd><p>Commit scribbles to cache so they are faster to draw on the slide</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -4117,6 +4150,12 @@ widget names and its values are document types from ui.</p>
 <dt class="sig sig-object py" id="pympress.scribble.Scribbler.scribble_list">
 <span class="sig-name descname"><span class="pre">scribble_list</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pympress.scribble.Scribbler.scribble_list" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of scribbles to be drawn, as tuples of color <a class="reference external" href="https://lazka.github.io/pgi-docs/Gdk-3.0/classes/RGBA.html#Gdk.RGBA" title="(in Gdk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">RGBA</span></code></a>, width <a class="reference external" href="https://docs.python.org/3.11/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, and a <a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of points.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pympress.scribble.Scribbler.scribble_off_render">
+<span class="sig-name descname"><span class="pre">scribble_off_render</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pympress.scribble.Scribbler.scribble_off_render" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/OffscreenWindow.html#Gtk.OffscreenWindow" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OffscreenWindow</span></code></a> where we render the scribbling interface when it’s not shown</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -4483,7 +4522,7 @@ clicking while ctrl pressed.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.pointer.Pointer.pointer">
-<span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GdkPixbuf.Pixbuf</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7fb2795fecc0</span> <span class="pre">(GdkPixbuf</span> <span class="pre">at</span> <span class="pre">0x5569727cf240)&gt;</span></em><a class="headerlink" href="#pympress.pointer.Pointer.pointer" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GdkPixbuf.Pixbuf</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f74f097ad40</span> <span class="pre">(GdkPixbuf</span> <span class="pre">at</span> <span class="pre">0x55e24a83aa40)&gt;</span></em><a class="headerlink" href="#pympress.pointer.Pointer.pointer" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://lazka.github.io/pgi-docs/GdkPixbuf-2.0/classes/Pixbuf.html#GdkPixbuf.Pixbuf" title="(in GdkPixbuf 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pixbuf</span></code></a> to read XML descriptions of GUIs and load them.</p>
 </dd></dl>
 
@@ -5398,6 +5437,12 @@ that can be dynamically rearranged, mapping to their names</p>
 <dd><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> mapping accelerator keys to actions</p>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pympress.config.Config.static_layout">
+<span class="sig-name descname"><span class="pre">static_layout</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'deck-overview':</span> <span class="pre">'deck'}</span></em><a class="headerlink" href="#pympress.config.Config.static_layout" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>-tree of presenter layouts that are not configurable</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.config.Config.toggle_portable_config">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">toggle_portable_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gaction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/config.html#Config.toggle_portable_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.config.Config.toggle_portable_config" title="Permalink to this definition">¶</a></dt>
@@ -5524,7 +5569,7 @@ of all the resizeable items (if and only if resizeable).</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.config.Config.widget_reqs">
-<span class="sig-name descname"><span class="pre">widget_reqs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'highlight':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'notes',</span> <span class="pre">'current',</span> <span class="pre">'annotations',</span> <span class="pre">'next'}),</span> <span class="pre">'highlight_notes':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'notes',</span> <span class="pre">'current',</span> <span class="pre">'annotations',</span> <span class="pre">'next'}),</span> <span class="pre">'note_pages':</span> <span class="pre">({'notes',</span> <span class="pre">'annotations',</span> <span class="pre">'next'},),</span> <span class="pre">'notes':</span> <span class="pre">({'notes',</span> <span class="pre">'current',</span> <span class="pre">'next'},</span> <span class="pre">{'annotations'}),</span> <span class="pre">'plain':</span> <span class="pre">({'current',</span> <span class="pre">'annotations',</span> <span class="pre">'next'},)}</span></em><a class="headerlink" href="#pympress.config.Config.widget_reqs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">widget_reqs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'highlight':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'next',</span> <span class="pre">'current',</span> <span class="pre">'notes',</span> <span class="pre">'annotations'}),</span> <span class="pre">'highlight_notes':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'next',</span> <span class="pre">'current',</span> <span class="pre">'notes',</span> <span class="pre">'annotations'}),</span> <span class="pre">'note_pages':</span> <span class="pre">({'next',</span> <span class="pre">'annotations',</span> <span class="pre">'notes'},),</span> <span class="pre">'notes':</span> <span class="pre">({'next',</span> <span class="pre">'current',</span> <span class="pre">'notes'},</span> <span class="pre">{'annotations'}),</span> <span class="pre">'plain':</span> <span class="pre">({'next',</span> <span class="pre">'current',</span> <span class="pre">'annotations'},)}</span></em><a class="headerlink" href="#pympress.config.Config.widget_reqs" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> mapping layout ids to tuples of their expected and optional widgets</p>
 </dd></dl>
 

@@ -130,6 +130,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: `dict`-tree of presenter layouts for various modes</span>
     <span class="n">layout</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1">#: `dict`-tree of presenter layouts that are not configurable</span>
+    <span class="n">static_layout</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;deck-overview&#39;</span><span class="p">:</span> <span class="s1">&#39;deck&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
 
     <span class="c1">#: `dict` of strings that are the valid representations of widgets from the presenter window</span>
     <span class="c1">#: that can be dynamically rearranged, mapping to their names</span>
@@ -576,7 +580,10 @@
 <div class="viewcode-block" id="Config.get_layout"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.get_layout">[docs]</a>    <span class="k">def</span> <span class="nf">get_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Getter for the `~layout_name` layout.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">[</span><span class="n">layout_name</span><span class="p">]</span></div>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">[</span><span class="n">layout_name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">static_layout</span><span class="p">[</span><span class="n">layout_name</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="Config.update_layout_from_widgets"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.update_layout_from_widgets">[docs]</a>    <span class="k">def</span> <span class="nf">update_layout_from_widgets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout_name</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">pane_handle_pos</span><span class="p">):</span>
@@ -587,6 +594,8 @@
 <span class="sd">            widget (:class:`~Gtk.Widget`): the widget that will contain the layout.</span>
 <span class="sd">            pane_handle_pos (`dict`): Map of :class:`~Gtk.Paned` to the relative handle position (float in 0..1)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">layout_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">static_layout</span><span class="p">:</span>
+            <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_layout_tree</span><span class="p">(</span><span class="n">layout_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget_layout_to_tree</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">pane_handle_pos</span><span class="p">))</span></div></div>
 </pre></div>
 
