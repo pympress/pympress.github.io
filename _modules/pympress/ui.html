@@ -1912,8 +1912,17 @@
 
 
 <div class="viewcode-block" id="ScreenArea"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea">[docs]</a><span class="k">class</span> <span class="nc">ScreenArea</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Convenience class to represent monitors or windows in terms of the area (position and size) they use on screen</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="ScreenArea.most_intersection"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.most_intersection">[docs]</a>    <span class="k">def</span> <span class="nf">most_intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Find the rectangle that intersects most with `~rect` in `~candidates` &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Find the rectangle that intersects most with `~rect` in `~candidates`</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            candidates (iterable of `ScreenArea`s): The monitor areas to check for intersection</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `ScreenArea`: The best candidate screen area, i.e. that has the largest intersection</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">areas</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">geom</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
             <span class="n">intersection</span> <span class="o">=</span> <span class="n">geom</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -1928,7 +1937,14 @@
 
 
 <div class="viewcode-block" id="ScreenArea.least_intersection"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.least_intersection">[docs]</a>    <span class="k">def</span> <span class="nf">least_intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Find the rectangle that intersects least with `~rect` in `~candidates` &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Find the rectangle that intersects least with `~rect` in `~candidates`</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            candidates (iterable of `ScreenArea`s): The monitor areas to check for intersection</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `ScreenArea`: The best candidate screen area, i.e. that has the smallest intersection</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">areas</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">geom</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
             <span class="n">intersection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
@@ -1938,6 +1954,7 @@
                 <span class="n">areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intersection</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">intersection</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">candidates</span><span class="p">[</span><span class="n">areas</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">areas</span><span class="p">))]</span></div>
+
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
@@ -1949,10 +1966,20 @@
 
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;ScreenArea(at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s1"> size </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="si">}</span><span class="s1">)&#39;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return a complete representation of the object &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;ScreenArea(</span><span class="si">{}</span><span class="s1">at </span><span class="si">{}</span><span class="s1"> size </span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                                                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="ScreenArea.intersection"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.intersection">[docs]</a>    <span class="k">def</span> <span class="nf">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Compute the intersection of 2 screen areas</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (`ScreenArea`): The screen area to compare with</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `ScreenArea` or `None`: An area representing the intersection, or `None` if there is no intersection</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">width</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">height</span><span class="p">:</span>
@@ -1966,20 +1993,53 @@
 
 
 <div class="viewcode-block" id="ScreenArea.equal"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.equal">[docs]</a>    <span class="k">def</span> <span class="nf">equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Check whether 2 areas cover the exact same space</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (`ScreenArea`): The screen area to compare with</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `bool`: `True` iff the areas are identical</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">height</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ScreenArea.contains"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Check whether this area contains `~other`</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (`ScreenArea`): The screen area to compare with</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `bool`: `True` iff the area is contained</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ScreenArea.intersects"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.intersects">[docs]</a>    <span class="k">def</span> <span class="nf">intersects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Check whether this area intersects `~other`</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (`ScreenArea`): The screen area to compare with</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `bool`: `True` iff the areas have an intersection</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span></div>
 
 
 <div class="viewcode-block" id="ScreenArea.lookup_monitors"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.lookup_monitors">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">lookup_monitors</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="o">*</span><span class="n">windows</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the info on the monitors &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the info on the monitors</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            display (:class:`~Gdk.Display`):  the current screen</span>
+<span class="sd">            *windows (`tuple` of :class:`~Gtk.Window`):  windows for wich to look up the monitor position</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `tuple` of `ScreenArea`: The monitor areas for each window, followed by</span>
+<span class="sd">                                     the best monitor areas for primary and non-primary monitors</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Helpful for debugging</span>
         <span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="n">mon</span><span class="o">.</span><span class="n">get_manufacturer</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">mon</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span> <span class="k">for</span> <span class="n">mon</span> <span class="ow">in</span> <span class="p">(</span>
             <span class="n">display</span><span class="o">.</span><span class="n">get_monitor</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">display</span><span class="o">.</span><span class="n">get_n_monitors</span><span class="p">())</span>

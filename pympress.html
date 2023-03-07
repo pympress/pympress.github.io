@@ -839,7 +839,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.app.Pympress.do_activate">
-<span class="sig-name descname"><span class="pre">do_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1678217276.04846</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/app.html#Pympress.do_activate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.app.Pympress.do_activate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">do_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1678218931.8074338</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/app.html#Pympress.do_activate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.app.Pympress.do_activate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activate: show UI windows.</p>
 <p>Build them if they do not exist, otherwise bring to front.</p>
 </dd></dl>
@@ -986,42 +986,131 @@ current and the next page, as well as a time counter and a clock.</p>
 <dt class="sig sig-object py" id="pympress.ui.ScreenArea">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pympress.ui.</span></span><span class="sig-name descname"><span class="pre">ScreenArea</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.11/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Convenience class to represent monitors or windows in terms of the area (position and size) they use on screen</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.ui.ScreenArea.contains">
 <span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.contains"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.contains" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check whether this area contains <code class="xref py py-obj docutils literal notranslate"><span class="pre">other</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#pympress.ui.ScreenArea" title="pympress.ui.ScreenArea"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScreenArea</span></code></a>) – The screen area to compare with</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.11/library/constants.html#True" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> iff the area is contained</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.ui.ScreenArea.equal">
 <span class="sig-name descname"><span class="pre">equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.equal" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check whether 2 areas cover the exact same space</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#pympress.ui.ScreenArea" title="pympress.ui.ScreenArea"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScreenArea</span></code></a>) – The screen area to compare with</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.11/library/constants.html#True" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> iff the areas are identical</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.ui.ScreenArea.intersection">
 <span class="sig-name descname"><span class="pre">intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.intersection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.intersection" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Compute the intersection of 2 screen areas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#pympress.ui.ScreenArea" title="pympress.ui.ScreenArea"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScreenArea</span></code></a>) – The screen area to compare with</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An area representing the intersection, or <a class="reference external" href="https://docs.python.org/3.11/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> if there is no intersection</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pympress.ui.ScreenArea" title="pympress.ui.ScreenArea"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScreenArea</span></code></a> or <a class="reference external" href="https://docs.python.org/3.11/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.ui.ScreenArea.intersects">
 <span class="sig-name descname"><span class="pre">intersects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.intersects"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.intersects" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check whether this area intersects <code class="xref py py-obj docutils literal notranslate"><span class="pre">other</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#pympress.ui.ScreenArea" title="pympress.ui.ScreenArea"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScreenArea</span></code></a>) – The screen area to compare with</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.11/library/constants.html#True" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> iff the areas have an intersection</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.ui.ScreenArea.least_intersection">
 <span class="sig-name descname"><span class="pre">least_intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">candidates</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.least_intersection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.least_intersection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the rectangle that intersects least with <code class="xref py py-obj docutils literal notranslate"><span class="pre">rect</span></code> in <code class="xref py py-obj docutils literal notranslate"><span class="pre">candidates</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>candidates</strong> (iterable of <a href="#id1"><span class="problematic" id="id2">`</span></a>ScreenArea`s) – The monitor areas to check for intersection</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The best candidate screen area, i.e. that has the smallest intersection</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pympress.ui.ScreenArea" title="pympress.ui.ScreenArea"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScreenArea</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.ui.ScreenArea.lookup_monitors">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lookup_monitors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">windows</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.lookup_monitors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.lookup_monitors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the info on the monitors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gdk-3.0/classes/Display.html#Gdk.Display" title="(in Gdk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Display</span></code></a>) – the current screen</p></li>
+<li><p><strong>*windows</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Window.html#Gtk.Window" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Window</span></code></a>) – windows for wich to look up the monitor position</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The monitor areas for each window, followed by</dt><dd><p>the best monitor areas for primary and non-primary monitors</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference internal" href="#pympress.ui.ScreenArea" title="pympress.ui.ScreenArea"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScreenArea</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.ui.ScreenArea.most_intersection">
 <span class="sig-name descname"><span class="pre">most_intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">candidates</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/ui.html#ScreenArea.most_intersection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.ui.ScreenArea.most_intersection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the rectangle that intersects most with <code class="xref py py-obj docutils literal notranslate"><span class="pre">rect</span></code> in <code class="xref py py-obj docutils literal notranslate"><span class="pre">candidates</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>candidates</strong> (iterable of <a href="#id3"><span class="problematic" id="id4">`</span></a>ScreenArea`s) – The monitor areas to check for intersection</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The best candidate screen area, i.e. that has the largest intersection</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pympress.ui.ScreenArea" title="pympress.ui.ScreenArea"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScreenArea</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -4394,7 +4483,7 @@ clicking while ctrl pressed.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.pointer.Pointer.pointer">
-<span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GdkPixbuf.Pixbuf</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f87c5beeb40</span> <span class="pre">(GdkPixbuf</span> <span class="pre">at</span> <span class="pre">0x55a02405c640)&gt;</span></em><a class="headerlink" href="#pympress.pointer.Pointer.pointer" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GdkPixbuf.Pixbuf</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f6f182252c0</span> <span class="pre">(GdkPixbuf</span> <span class="pre">at</span> <span class="pre">0x562a57552a40)&gt;</span></em><a class="headerlink" href="#pympress.pointer.Pointer.pointer" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://lazka.github.io/pgi-docs/GdkPixbuf-2.0/classes/Pixbuf.html#GdkPixbuf.Pixbuf" title="(in GdkPixbuf 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pixbuf</span></code></a> to read XML descriptions of GUIs and load them.</p>
 </dd></dl>
 
@@ -5435,7 +5524,7 @@ of all the resizeable items (if and only if resizeable).</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.config.Config.widget_reqs">
-<span class="sig-name descname"><span class="pre">widget_reqs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'highlight':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'next',</span> <span class="pre">'notes',</span> <span class="pre">'current',</span> <span class="pre">'annotations'}),</span> <span class="pre">'highlight_notes':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'next',</span> <span class="pre">'notes',</span> <span class="pre">'current',</span> <span class="pre">'annotations'}),</span> <span class="pre">'note_pages':</span> <span class="pre">({'next',</span> <span class="pre">'notes',</span> <span class="pre">'annotations'},),</span> <span class="pre">'notes':</span> <span class="pre">({'notes',</span> <span class="pre">'current',</span> <span class="pre">'next'},</span> <span class="pre">{'annotations'}),</span> <span class="pre">'plain':</span> <span class="pre">({'next',</span> <span class="pre">'current',</span> <span class="pre">'annotations'},)}</span></em><a class="headerlink" href="#pympress.config.Config.widget_reqs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">widget_reqs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'highlight':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'current',</span> <span class="pre">'annotations',</span> <span class="pre">'notes',</span> <span class="pre">'next'}),</span> <span class="pre">'highlight_notes':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'current',</span> <span class="pre">'annotations',</span> <span class="pre">'notes',</span> <span class="pre">'next'}),</span> <span class="pre">'note_pages':</span> <span class="pre">({'annotations',</span> <span class="pre">'notes',</span> <span class="pre">'next'},),</span> <span class="pre">'notes':</span> <span class="pre">({'current',</span> <span class="pre">'notes',</span> <span class="pre">'next'},</span> <span class="pre">{'annotations'}),</span> <span class="pre">'plain':</span> <span class="pre">({'current',</span> <span class="pre">'annotations',</span> <span class="pre">'next'},)}</span></em><a class="headerlink" href="#pympress.config.Config.widget_reqs" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> mapping layout ids to tuples of their expected and optional widgets</p>
 </dd></dl>
 
