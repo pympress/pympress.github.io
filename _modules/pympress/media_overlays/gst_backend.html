@@ -115,7 +115,6 @@
 
 <span class="kn">import</span> <span class="nn">gi</span>
 <span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s1">&#39;Gtk&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0&#39;</span><span class="p">)</span>
-<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s1">&#39;Gst&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">GLib</span><span class="p">,</span> <span class="n">Gst</span>
 
 
@@ -130,6 +129,8 @@
 
     <span class="c1">#: A :class:`~Gst.Playbin` to be play videos</span>
     <span class="n">playbin</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: A :class:`~Gst.Base.Sink` to display video content</span>
+    <span class="n">sink</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># Create GStreamer playbin</span>
@@ -163,14 +164,14 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">PLAYING</span></div>
 
 
-<div class="viewcode-block" id="GstOverlay.set_file"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.set_file">[docs]</a>    <span class="k">def</span> <span class="nf">set_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Sets the media file to be played by the widget.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            filepath (`pathlib.Path`): The path to the media file path</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s1">&#39;uri&#39;</span><span class="p">,</span> <span class="n">filepath</span><span class="o">.</span><span class="n">as_uri</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">READY</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">READY</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="GstOverlay.mute"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.mute">[docs]</a>    <span class="k">def</span> <span class="nf">mute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
@@ -188,7 +189,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">do_update_duration</span><span class="p">)</span>
         <span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_update_time</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">media_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;audio&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="GstOverlay.do_update_duration"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_update_duration">[docs]</a>    <span class="k">def</span> <span class="nf">do_update_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>

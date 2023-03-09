@@ -146,7 +146,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">movie_zone</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;configure-event&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_transform</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="GifOverlay.set_file"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gif_backend.GifOverlay.set_file">[docs]</a>    <span class="k">def</span> <span class="nf">set_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Sets the media file to be played by the widget.</span>
 
 <span class="sd">        Args:</span>
@@ -157,7 +157,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">set_transform</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">advance_gif</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">advance_gif</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="GifOverlay.set_transform"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gif_backend.GifOverlay.set_transform">[docs]</a>    <span class="k">def</span> <span class="nf">set_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
