@@ -273,6 +273,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pympress.document.Media"><code class="docutils literal notranslate"><span class="pre">Media</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.document.Media.autoplay"><code class="docutils literal notranslate"><span class="pre">Media.autoplay</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.document.Media.content_type"><code class="docutils literal notranslate"><span class="pre">Media.content_type</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.document.Media.filename"><code class="docutils literal notranslate"><span class="pre">Media.filename</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.document.Media.poster"><code class="docutils literal notranslate"><span class="pre">Media.poster</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pympress.document.Media.relative_margins"><code class="docutils literal notranslate"><span class="pre">Media.relative_margins</span></code></a></li>
@@ -843,7 +844,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.app.Pympress.do_activate">
-<span class="sig-name descname"><span class="pre">do_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1678372053.955978</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/app.html#Pympress.do_activate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.app.Pympress.do_activate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">do_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1678391049.866951</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/app.html#Pympress.do_activate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.app.Pympress.do_activate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activate: show UI windows.</p>
 <p>Build them if they do not exist, otherwise bring to front.</p>
 </dd></dl>
@@ -2808,13 +2809,19 @@ Also, it has no “rendering” capability, and is made harmless by overriding i
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pympress.document.Media">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pympress.document.</span></span><span class="sig-name descname"><span class="pre">Media</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_margins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoplay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_controls</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pympress.document.Media" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pympress.document.</span></span><span class="sig-name descname"><span class="pre">Media</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_margins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoplay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_controls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pympress.document.Media" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
 <p>A class that holds all the properties for media files</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.document.Media.autoplay">
 <span class="sig-name descname"><span class="pre">autoplay</span></span><a class="headerlink" href="#pympress.document.Media.autoplay" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pympress.document.Media.content_type">
+<span class="sig-name descname"><span class="pre">content_type</span></span><a class="headerlink" href="#pympress.document.Media.content_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 6</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -4521,7 +4528,7 @@ clicking while ctrl pressed.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.pointer.Pointer.pointer">
-<span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GdkPixbuf.Pixbuf</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7fdf15206840</span> <span class="pre">(GdkPixbuf</span> <span class="pre">at</span> <span class="pre">0x55e90def0240)&gt;</span></em><a class="headerlink" href="#pympress.pointer.Pointer.pointer" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GdkPixbuf.Pixbuf</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f7e90910880</span> <span class="pre">(GdkPixbuf</span> <span class="pre">at</span> <span class="pre">0x56021e8ea240)&gt;</span></em><a class="headerlink" href="#pympress.pointer.Pointer.pointer" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://lazka.github.io/pgi-docs/GdkPixbuf-2.0/classes/Pixbuf.html#GdkPixbuf.Pixbuf" title="(in GdkPixbuf 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pixbuf</span></code></a> to read XML descriptions of GUIs and load them.</p>
 </dd></dl>
 
@@ -5568,7 +5575,7 @@ of all the resizeable items (if and only if resizeable).</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.config.Config.widget_reqs">
-<span class="sig-name descname"><span class="pre">widget_reqs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'highlight':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'notes',</span> <span class="pre">'current',</span> <span class="pre">'annotations',</span> <span class="pre">'next'}),</span> <span class="pre">'highlight_notes':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'notes',</span> <span class="pre">'current',</span> <span class="pre">'annotations',</span> <span class="pre">'next'}),</span> <span class="pre">'note_pages':</span> <span class="pre">({'notes',</span> <span class="pre">'annotations',</span> <span class="pre">'next'},),</span> <span class="pre">'notes':</span> <span class="pre">({'notes',</span> <span class="pre">'current',</span> <span class="pre">'next'},</span> <span class="pre">{'annotations'}),</span> <span class="pre">'plain':</span> <span class="pre">({'current',</span> <span class="pre">'annotations',</span> <span class="pre">'next'},)}</span></em><a class="headerlink" href="#pympress.config.Config.widget_reqs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">widget_reqs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'highlight':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'notes',</span> <span class="pre">'next',</span> <span class="pre">'annotations',</span> <span class="pre">'current'}),</span> <span class="pre">'highlight_notes':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'notes',</span> <span class="pre">'next',</span> <span class="pre">'annotations',</span> <span class="pre">'current'}),</span> <span class="pre">'note_pages':</span> <span class="pre">({'notes',</span> <span class="pre">'next',</span> <span class="pre">'annotations'},),</span> <span class="pre">'notes':</span> <span class="pre">({'notes',</span> <span class="pre">'next',</span> <span class="pre">'current'},</span> <span class="pre">{'annotations'}),</span> <span class="pre">'plain':</span> <span class="pre">({'current',</span> <span class="pre">'next',</span> <span class="pre">'annotations'},)}</span></em><a class="headerlink" href="#pympress.config.Config.widget_reqs" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> mapping layout ids to tuples of their expected and optional widgets</p>
 </dd></dl>
 
