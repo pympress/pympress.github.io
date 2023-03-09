@@ -491,14 +491,26 @@
         <span class="n">window</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_da</span><span class="o">.</span><span class="n">get_window</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">window</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Cannot initialize scribble acche without drawing area window&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Cannot initialize scribble cache without drawing area window&#39;</span><span class="p">)</span>
 
         <span class="n">scale</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">get_scale_factor</span><span class="p">()</span>
         <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_da</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">()</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_da</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">()</span> <span class="o">*</span> <span class="n">scale</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">create_similar_image_surface</span><span class="p">(</span><span class="n">cairo</span><span class="o">.</span><span class="n">Format</span><span class="o">.</span><span class="n">ARGB32</span><span class="p">,</span> <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error creating highlight cache&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">args</span> <span class="o">==</span> <span class="p">(</span><span class="s1">&#39;invalid enum value: 5&#39;</span><span class="p">,):</span>
+                <span class="c1"># Just try again as this error seems to always happen at the first call but not later on</span>
+                <span class="c1"># This is the gi introspection of cairo not accepting the value Format.RGB30 (???)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">create_similar_image_surface</span><span class="p">(</span><span class="n">cairo</span><span class="o">.</span><span class="n">Format</span><span class="o">.</span><span class="n">ARGB32</span><span class="p">,</span> <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">return</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error creating highlight cache&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">cairo</span><span class="o">.</span><span class="n">Error</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Failed creating an ARGB32 surface sized </span><span class="si">{}</span><span class="s1">x</span><span class="si">{}</span><span class="s1"> scale </span><span class="si">{}</span><span class="s1"> for highlight cache&#39;</span>
+                           <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ww</span><span class="p">,</span> <span class="n">wh</span><span class="p">,</span> <span class="n">scale</span><span class="p">),</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">next_render</span> <span class="o">=</span> <span class="mi">0</span></div>
 
 
