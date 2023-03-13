@@ -210,11 +210,13 @@
 
 <div class="viewcode-block" id="VlcOverlay.handle_end"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.vlc_backend.VlcOverlay.handle_end">[docs]</a>    <span class="k">def</span> <span class="nf">handle_end</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; End of the stream reached: restart if looping, otherwise hide overlay</span>
+
+<span class="sd">        Overrided because vlc plugin needs to be told to start on stream end, not to seek</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">action_map</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">action_map</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;set_time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_double</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">action_map</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;play&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action_map</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;play&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action_map</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="VlcOverlay.mute"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.vlc_backend.VlcOverlay.mute">[docs]</a>    <span class="k">def</span> <span class="nf">mute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
@@ -235,7 +237,16 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: `True` iff this function should be run again (:func:`~GLib.idle_add` convention)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">play_from_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">play_from_state</span> <span class="o">==</span> <span class="n">vlc</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">Ended</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="n">play_from_state</span> <span class="o">=</span> <span class="n">vlc</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">Stopped</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">play_from_state</span> <span class="ow">in</span> <span class="p">{</span><span class="n">vlc</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">NothingSpecial</span><span class="p">,</span> <span class="n">vlc</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">Stopped</span><span class="p">}:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">do_set_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_pos</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">movie_zone</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 

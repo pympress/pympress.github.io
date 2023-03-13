@@ -110,8 +110,8 @@
 <span class="c1">#       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.</span>
 <span class="c1">#</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">:mod:`pympress.media_overlays.base` -- widget to play videos with a backend like VLC</span>
-<span class="sd">------------------------------------------------------------------------------------</span>
+<span class="sd">:mod:`pympress.media_overlays.base` -- base widget to play videos with an unspecified backend</span>
+<span class="sd">---------------------------------------------------------------------------------------------</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
@@ -351,7 +351,7 @@
 <div class="viewcode-block" id="VideoOverlay.do_play"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.base.VideoOverlay.do_play">[docs]</a>    <span class="k">def</span> <span class="nf">do_play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Start playing the media file.</span>
 
-<span class="sd">        Should run on the main thread to ensure we avoid vlc plugins&#39; reentrency problems.</span>
+<span class="sd">        Should run on the main thread to ensure we avoid reentrency problems.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: `True` iff this function should be run again (:meth:`~GLib.idle_add` convention)</span>
@@ -362,7 +362,7 @@
 <div class="viewcode-block" id="VideoOverlay.do_play_pause"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.base.VideoOverlay.do_play_pause">[docs]</a>    <span class="k">def</span> <span class="nf">do_play_pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Toggle pause mode of the media.</span>
 
-<span class="sd">        Should run on the main thread to ensure we avoid vlc plugins&#39; reentrency problems.</span>
+<span class="sd">        Should run on the main thread to ensure we avoid reentrency problems.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: `True` iff this function should be run again (:meth:`~GLib.idle_add` convention)</span>
