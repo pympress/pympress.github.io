@@ -746,6 +746,22 @@
 <li class="toctree-l4"><a class="reference internal" href="#pympress.media_overlays.gst_backend.GstOverlay.sink"><code class="docutils literal notranslate"><span class="pre">GstOverlay.sink</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#pympress-media-overlays-vlc-widget-to-play-videos-using-vlc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pympress.media_overlays.vlc</span></code> – widget to play videos using VLC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.VlcOverlay"><code class="docutils literal notranslate"><span class="pre">VlcOverlay</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.VlcOverlay.do_play"><code class="docutils literal notranslate"><span class="pre">VlcOverlay.do_play()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.VlcOverlay.do_play_pause"><code class="docutils literal notranslate"><span class="pre">VlcOverlay.do_play_pause()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.VlcOverlay.do_set_time"><code class="docutils literal notranslate"><span class="pre">VlcOverlay.do_set_time()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.VlcOverlay.do_stop"><code class="docutils literal notranslate"><span class="pre">VlcOverlay.do_stop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.VlcOverlay.handle_embed"><code class="docutils literal notranslate"><span class="pre">VlcOverlay.handle_embed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.VlcOverlay.handle_end"><code class="docutils literal notranslate"><span class="pre">VlcOverlay.handle_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.VlcOverlay.is_playing"><code class="docutils literal notranslate"><span class="pre">VlcOverlay.is_playing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.VlcOverlay.mute"><code class="docutils literal notranslate"><span class="pre">VlcOverlay.mute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.VlcOverlay.paint_backdrop"><code class="docutils literal notranslate"><span class="pre">VlcOverlay.paint_backdrop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.VlcOverlay.setup_backend"><code class="docutils literal notranslate"><span class="pre">VlcOverlay.setup_backend()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.VlcOverlay.show"><code class="docutils literal notranslate"><span class="pre">VlcOverlay.show()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pympress.media_overlays.vlc_backend.get_window_handle"><code class="docutils literal notranslate"><span class="pre">get_window_handle()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -844,7 +860,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.app.Pympress.do_activate">
-<span class="sig-name descname"><span class="pre">do_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1678480191.0446799</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/app.html#Pympress.do_activate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.app.Pympress.do_activate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">do_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1678717720.683183</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/app.html#Pympress.do_activate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.app.Pympress.do_activate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activate: show UI windows.</p>
 <p>Build them if they do not exist, otherwise bring to front.</p>
 </dd></dl>
@@ -4528,7 +4544,7 @@ clicking while ctrl pressed.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.pointer.Pointer.pointer">
-<span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GdkPixbuf.Pixbuf</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f964200f240</span> <span class="pre">(GdkPixbuf</span> <span class="pre">at</span> <span class="pre">0x563772c08240)&gt;</span></em><a class="headerlink" href="#pympress.pointer.Pointer.pointer" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GdkPixbuf.Pixbuf</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f974e7b33c0</span> <span class="pre">(GdkPixbuf</span> <span class="pre">at</span> <span class="pre">0x56190854aa40)&gt;</span></em><a class="headerlink" href="#pympress.pointer.Pointer.pointer" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://lazka.github.io/pgi-docs/GdkPixbuf-2.0/classes/Pixbuf.html#GdkPixbuf.Pixbuf" title="(in GdkPixbuf 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pixbuf</span></code></a> to read XML descriptions of GUIs and load them.</p>
 </dd></dl>
 
@@ -5575,7 +5591,7 @@ of all the resizeable items (if and only if resizeable).</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.config.Config.widget_reqs">
-<span class="sig-name descname"><span class="pre">widget_reqs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'highlight':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'notes',</span> <span class="pre">'next',</span> <span class="pre">'current',</span> <span class="pre">'annotations'}),</span> <span class="pre">'highlight_notes':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'notes',</span> <span class="pre">'next',</span> <span class="pre">'current',</span> <span class="pre">'annotations'}),</span> <span class="pre">'note_pages':</span> <span class="pre">({'notes',</span> <span class="pre">'next',</span> <span class="pre">'annotations'},),</span> <span class="pre">'notes':</span> <span class="pre">({'notes',</span> <span class="pre">'next',</span> <span class="pre">'current'},</span> <span class="pre">{'annotations'}),</span> <span class="pre">'plain':</span> <span class="pre">({'current',</span> <span class="pre">'next',</span> <span class="pre">'annotations'},)}</span></em><a class="headerlink" href="#pympress.config.Config.widget_reqs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">widget_reqs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'highlight':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'notes',</span> <span class="pre">'next',</span> <span class="pre">'current',</span> <span class="pre">'annotations'}),</span> <span class="pre">'highlight_notes':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'notes',</span> <span class="pre">'next',</span> <span class="pre">'current',</span> <span class="pre">'annotations'}),</span> <span class="pre">'note_pages':</span> <span class="pre">({'notes',</span> <span class="pre">'next',</span> <span class="pre">'annotations'},),</span> <span class="pre">'notes':</span> <span class="pre">({'notes',</span> <span class="pre">'next',</span> <span class="pre">'current'},</span> <span class="pre">{'annotations'}),</span> <span class="pre">'plain':</span> <span class="pre">({'next',</span> <span class="pre">'current',</span> <span class="pre">'annotations'},)}</span></em><a class="headerlink" href="#pympress.config.Config.widget_reqs" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> mapping layout ids to tuples of their expected and optional widgets</p>
 </dd></dl>
 
@@ -6920,6 +6936,160 @@ for thread-safety in the handling of video backends.</p>
 <dd><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">Sink</span></code> to display video content</p>
 </dd></dl>
 
+</dd></dl>
+
+<span class="target" id="module-pympress.media_overlays.vlc_backend"></span><section id="pympress-media-overlays-vlc-widget-to-play-videos-using-vlc">
+<h3><code class="xref py py-mod docutils literal notranslate"><span class="pre">pympress.media_overlays.vlc</span></code> – widget to play videos using VLC<a class="headerlink" href="#pympress-media-overlays-vlc-widget-to-play-videos-using-vlc" title="Permalink to this heading">¶</a></h3>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.VlcOverlay">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pympress.media_overlays.vlc_backend.</span></span><span class="sig-name descname"><span class="pre">VlcOverlay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#VlcOverlay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.VlcOverlay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pympress.media_overlays.base.VideoOverlay" title="pympress.media_overlays.base.VideoOverlay"><code class="xref py py-class docutils literal notranslate"><span class="pre">VideoOverlay</span></code></a></p>
+<p>Simple VLC widget.</p>
+<p>Its player can be controlled through the ‘player’ attribute, which is a <a class="reference external" href="https://www.olivieraubert.net/vlc/python-ctypes/doc/vlc.MediaPlayer-class.html" title="(in python-vlc 2.2 v2.2.0-git-14816-gda488a7751100)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MediaPlayer</span></code></a> instance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.VlcOverlay.do_play">
+<span class="sig-name descname"><span class="pre">do_play</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#VlcOverlay.do_play"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.VlcOverlay.do_play" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start playing the media file.</p>
+<p>Should run on the main thread to ensure we avoid vlc plugins’ reentrency problems.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.11/library/constants.html#True" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> iff this function should be run again (<a class="reference external" href="https://lazka.github.io/pgi-docs/GLib-2.0/functions.html#GLib.idle_add" title="(in GLib 2.0 v2.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">idle_add()</span></code></a> convention)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.VlcOverlay.do_play_pause">
+<span class="sig-name descname"><span class="pre">do_play_pause</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#VlcOverlay.do_play_pause"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.VlcOverlay.do_play_pause" title="Permalink to this definition">¶</a></dt>
+<dd><p>Toggle pause mode of the media.</p>
+<p>Should run on the main thread to ensure we avoid vlc plugins’ reentrency problems.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.11/library/constants.html#True" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> iff this function should be run again (<a class="reference external" href="https://lazka.github.io/pgi-docs/GLib-2.0/functions.html#GLib.idle_add" title="(in GLib 2.0 v2.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">idle_add()</span></code></a> convention)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.VlcOverlay.do_set_time">
+<span class="sig-name descname"><span class="pre">do_set_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#VlcOverlay.do_set_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.VlcOverlay.do_set_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the player at time t.</p>
+<p>Should run on the main thread to ensure we avoid vlc plugins’ reentrency problems.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a>) – the timestamp, in s</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.11/library/constants.html#True" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> iff this function should be run again (<a class="reference external" href="https://lazka.github.io/pgi-docs/GLib-2.0/functions.html#GLib.idle_add" title="(in GLib 2.0 v2.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">idle_add()</span></code></a> convention)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.VlcOverlay.do_stop">
+<span class="sig-name descname"><span class="pre">do_stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#VlcOverlay.do_stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.VlcOverlay.do_stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops playing in the backend player.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.VlcOverlay.handle_embed">
+<span class="sig-name descname"><span class="pre">handle_embed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapped_widget</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#VlcOverlay.handle_embed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.VlcOverlay.handle_embed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handler to embed the VLC player in the window, connected to the <code class="xref py py-attr docutils literal notranslate"><span class="pre">map</span></code> signal.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.VlcOverlay.handle_end">
+<span class="sig-name descname"><span class="pre">handle_end</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#VlcOverlay.handle_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.VlcOverlay.handle_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>End of the stream reached: restart if looping, otherwise hide overlay</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.VlcOverlay.is_playing">
+<span class="sig-name descname"><span class="pre">is_playing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#VlcOverlay.is_playing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.VlcOverlay.is_playing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the media is currently playing (and not paused).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.11/library/constants.html#True" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> iff the media is playing.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.VlcOverlay.mute">
+<span class="sig-name descname"><span class="pre">mute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#VlcOverlay.mute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.VlcOverlay.mute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutes the player.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – <a class="reference external" href="https://docs.python.org/3.11/library/constants.html#True" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> iff this player should be muted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.VlcOverlay.paint_backdrop">
+<span class="sig-name descname"><span class="pre">paint_backdrop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#VlcOverlay.paint_backdrop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.VlcOverlay.paint_backdrop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw behind/around the video, aka the black bars</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>widget</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Widget.html#Gtk.Widget" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Widget</span></code></a>) – the widget to update</p></li>
+<li><p><strong>context</strong> (<a class="reference external" href="https://www.cairographics.org/documentation/pycairo/3/reference/context.html#cairo.Context" title="(in Pycairo v1.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>) – the Cairo context (or <a class="reference external" href="https://docs.python.org/3.11/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> if called directly)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.VlcOverlay.setup_backend">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setup_backend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vlc_opts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['--no-video-title-show']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#VlcOverlay.setup_backend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.VlcOverlay.setup_backend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare/check the VLC backend.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vlc_opts</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>) – the arguments for starting vlc</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the version of VLC used by the backend</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.VlcOverlay.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#VlcOverlay.show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.VlcOverlay.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bring the widget to the top of the overlays if necessary − also force redraw of movie zone</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pympress.media_overlays.vlc_backend.get_window_handle">
+<span class="sig-prename descclassname"><span class="pre">pympress.media_overlays.vlc_backend.</span></span><span class="sig-name descname"><span class="pre">get_window_handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/media_overlays/vlc_backend.html#get_window_handle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.media_overlays.vlc_backend.get_window_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses ctypes to call gdk_win32_window_get_handle which is not available in python gobject introspection porting.</p>
+<p>Solution from <a class="reference external" href="http://stackoverflow.com/a/27236258/1387346">http://stackoverflow.com/a/27236258/1387346</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>window</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gdk-3.0/classes/Window.html#Gdk.Window" title="(in Gdk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Window</span></code></a>) – The window for which we want to get the handle</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The handle to the win32 window</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

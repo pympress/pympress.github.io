@@ -365,6 +365,7 @@ Tejas,
 Timo Zhang,
 Tkoyama010,
 Toton95,
+Vojta Netrh,
 Watanabe,
 and <!-- last translator --> Cimbali.
 
