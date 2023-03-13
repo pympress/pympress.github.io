@@ -156,6 +156,8 @@
     <span class="n">repeat</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="c1">#: `str` representing the mime type of the media file</span>
     <span class="n">media_type</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="c1">#: `float` giving the initial starting position for playback</span>
+    <span class="n">start_pos</span> <span class="o">=</span> <span class="mf">0.</span>
 
     <span class="c1">#: `bool` that tracks whether the user is dragging the position</span>
     <span class="n">dragging_position</span> <span class="o">=</span> <span class="kc">False</span>
@@ -189,6 +191,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">content_type</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">content_type_guess</span><span class="p">(</span><span class="n">media</span><span class="o">.</span><span class="n">filename</span><span class="o">.</span><span class="n">as_uri</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">media_type</span> <span class="o">=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">content_type_get_mime_type</span><span class="p">(</span><span class="n">content_type</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_pos</span> <span class="o">=</span> <span class="n">media</span><span class="o">.</span><span class="n">start_pos</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_file</span><span class="p">(</span><span class="n">media</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">autoplay</span> <span class="o">=</span> <span class="n">media</span><span class="o">.</span><span class="n">autoplay</span>
@@ -257,7 +260,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">action_map</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">action_map</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;set_time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_double</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action_map</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;set_time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_double</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_pos</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="VideoOverlay.update_margins_for_page"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.base.VideoOverlay.update_margins_for_page">[docs]</a>    <span class="k">def</span> <span class="nf">update_margins_for_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_type</span><span class="p">):</span>

@@ -151,7 +151,7 @@
         <span class="n">bus</span><span class="o">.</span><span class="n">enable_sync_message_emission</span><span class="p">()</span>
         <span class="n">bus</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;message::eos&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_end</span><span class="p">))</span>
         <span class="n">bus</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;message::error&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">msg</span><span class="o">.</span><span class="n">parse_error</span><span class="p">())))</span>
-        <span class="n">bus</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;message::async-done&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_play</span><span class="p">)</span>
+        <span class="n">bus</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;message::state-changed&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_state_changed</span><span class="p">)</span>
         <span class="n">bus</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;message::duration-changed&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">do_update_duration</span><span class="p">))</span>
 
 
@@ -184,11 +184,31 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="GstOverlay.on_play"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.on_play">[docs]</a>    <span class="k">def</span> <span class="nf">on_play</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Start the scroll bar updating process.</span>
+<div class="viewcode-block" id="GstOverlay.on_state_changed"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.on_state_changed">[docs]</a>    <span class="k">def</span> <span class="nf">on_state_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bus</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback triggered by playbin state changes.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            bus (`Gst.Bus`): the bus that we are connected to</span>
+<span class="sd">            msg (`Gst.Message`): the &quot;state-changed&quot; message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">src</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="p">:</span>
+            <span class="c1"># ignore the playbin&#39;s children</span>
+            <span class="k">return</span>
+        <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">pending</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">parse_state_changed</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">old</span> <span class="o">==</span> <span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">READY</span> <span class="ow">and</span> <span class="n">new</span> <span class="o">==</span> <span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">PAUSED</span><span class="p">:</span>
+            <span class="c1"># the playbin goes from READY (= stopped) to PLAYING (via PAUSED)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_initial_play</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="GstOverlay.on_initial_play"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.on_initial_play">[docs]</a>    <span class="k">def</span> <span class="nf">on_initial_play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set starting position, start scrollbar updates, unhide overlay. &quot;&quot;&quot;</span>
+        <span class="c1"># set starting position, if needed</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_pos</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">do_set_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_pos</span><span class="p">)</span>
+        <span class="c1"># ensure the scroll bar is updated</span>
         <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">do_update_duration</span><span class="p">)</span>
         <span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_update_time</span><span class="p">)</span>
+        <span class="c1"># ensure the overlay is visible (if needed)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">media_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;audio&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
@@ -204,11 +224,12 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Update the current position in the progress bar.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            `bool`: `True` iff this function should be run again (:func:`~GLib.idle_add` convention)</span>
+<span class="sd">            `bool`: `True` iff this function should be run again (:func:`~GLib.timeout_add` convention)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">changed</span><span class="p">,</span> <span class="n">time_ns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">query_position</span><span class="p">(</span><span class="n">Gst</span><span class="o">.</span><span class="n">Format</span><span class="o">.</span><span class="n">TIME</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_progress</span><span class="p">(</span><span class="n">time_ns</span> <span class="o">/</span> <span class="mf">1e9</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">True</span></div>
+        <span class="n">run_again</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">state</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">,</span> <span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">PAUSED</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">run_again</span></div>
 
 
 <div class="viewcode-block" id="GstOverlay.do_play"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_play">[docs]</a>    <span class="k">def</span> <span class="nf">do_play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
