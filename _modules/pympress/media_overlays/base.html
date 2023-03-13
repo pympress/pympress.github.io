@@ -158,6 +158,10 @@
     <span class="n">media_type</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="c1">#: `float` giving the initial starting position for playback</span>
     <span class="n">start_pos</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="c1">#: `float` giving the end position for playback, if any</span>
+    <span class="n">end_pos</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: `float` representing the last know timestamp at which the progress bar updated</span>
+    <span class="n">last_timestamp</span> <span class="o">=</span> <span class="mf">0.</span>
 
     <span class="c1">#: `bool` that tracks whether the user is dragging the position</span>
     <span class="n">dragging_position</span> <span class="o">=</span> <span class="kc">False</span>
@@ -192,6 +196,7 @@
             <span class="n">content_type</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">content_type_guess</span><span class="p">(</span><span class="n">media</span><span class="o">.</span><span class="n">filename</span><span class="o">.</span><span class="n">as_uri</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">media_type</span> <span class="o">=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">content_type_get_mime_type</span><span class="p">(</span><span class="n">content_type</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">start_pos</span> <span class="o">=</span> <span class="n">media</span><span class="o">.</span><span class="n">start_pos</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end_pos</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">media</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">media</span><span class="o">.</span><span class="n">start_pos</span> <span class="o">+</span> <span class="n">media</span><span class="o">.</span><span class="n">duration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_file</span><span class="p">(</span><span class="n">media</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">autoplay</span> <span class="o">=</span> <span class="n">media</span><span class="o">.</span><span class="n">autoplay</span>

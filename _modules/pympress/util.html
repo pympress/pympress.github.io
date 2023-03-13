@@ -319,6 +319,29 @@
         <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s1">&#39;xdg-open&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">)])</span></div>
 
 
+<div class="viewcode-block" id="introspect_flag_value"><a class="viewcode-back" href="../../pympress.html#pympress.util.introspect_flag_value">[docs]</a><span class="k">def</span> <span class="nf">introspect_flag_value</span><span class="p">(</span><span class="n">flags_class</span><span class="p">,</span> <span class="n">nick</span><span class="p">,</span> <span class="n">fallback</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Get the value of a flag from its class, given a value’s name (or nick)</span>
+
+<span class="sd">    Introspection technique (in particular __flags_values__ dict) inspired from pygtkcompat.</span>
+<span class="sd">    This is needed because there typelib shipped with libgstplayback.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        flags_class (a `~type` inheriting from :class:`~Gobject.GFlags`): the flags class to introspect</span>
+<span class="sd">        nick (`str`): a name or nick of the flag value that should be returned</span>
+<span class="sd">        fallback (`int`): the documented flag value, if lookup fails</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">flag_values</span> <span class="o">=</span> <span class="n">flags_class</span><span class="o">.</span><span class="n">__flags_values__</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fallback</span>
+
+    <span class="k">for</span> <span class="n">value</span><span class="p">,</span> <span class="n">flag</span> <span class="ow">in</span> <span class="n">flag_values</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">nick</span> <span class="ow">in</span> <span class="n">flag</span><span class="o">.</span><span class="n">value_nicks</span> <span class="ow">or</span> <span class="n">nick</span> <span class="ow">in</span> <span class="n">flag</span><span class="o">.</span><span class="n">value_names</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fallback</span></div>
+
+
 <div class="viewcode-block" id="hard_set_screensaver"><a class="viewcode-back" href="../../pympress.html#pympress.util.hard_set_screensaver">[docs]</a><span class="k">def</span> <span class="nf">hard_set_screensaver</span><span class="p">(</span><span class="n">disabled</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Enable or disable the screensaver.</span>
 

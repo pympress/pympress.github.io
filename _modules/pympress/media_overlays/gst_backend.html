@@ -119,6 +119,7 @@
 <span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">GLib</span><span class="p">,</span> <span class="n">Gst</span>
 
 
+<span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">util</span>
 <span class="kn">from</span> <span class="nn">pympress.media_overlays</span> <span class="kn">import</span> <span class="n">base</span>
 
 
@@ -132,6 +133,9 @@
     <span class="n">playbin</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#: A :class:`~Gst.Base.Sink` to display video content</span>
     <span class="n">sink</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: `int` number of milliseconds between updates</span>
+    <span class="n">update_freq</span> <span class="o">=</span> <span class="mi">200</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># Create GStreamer playbin</span>
@@ -181,7 +185,15 @@
 <span class="sd">        Args:</span>
 <span class="sd">            value (`bool`): `True` iff this player should be muted</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s1">&#39;mute&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s1">&#39;flags&#39;</span><span class="p">)</span>
+        <span class="c1"># Fall back to the documented value if introspection fails,</span>
+        <span class="c1"># see https://gstreamer.freedesktop.org/documentation/playback/playsink.html?gi-language=python#GstPlayFlags</span>
+        <span class="n">audio_flag</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">introspect_flag_value</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">flags</span><span class="p">),</span> <span class="s1">&#39;audio&#39;</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+            <span class="n">flags</span> <span class="o">=</span> <span class="n">flags</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">audio_flag</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">flags</span> <span class="o">=</span> <span class="n">flags</span> <span class="o">|</span> <span class="n">audio_flag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s1">&#39;flags&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
@@ -189,8 +201,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback triggered by playbin state changes.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            bus (`Gst.Bus`): the bus that we are connected to</span>
-<span class="sd">            msg (`Gst.Message`): the &quot;state-changed&quot; message</span>
+<span class="sd">            bus (:class:`~Gst.Bus`): the bus that we are connected to</span>
+<span class="sd">            msg (:class:`~Gst.Message`): the &quot;state-changed&quot; message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">src</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="p">:</span>
             <span class="c1"># ignore the playbin&#39;s children</span>
@@ -208,7 +220,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">do_set_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_pos</span><span class="p">)</span>
         <span class="c1"># ensure the scroll bar is updated</span>
         <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">do_update_duration</span><span class="p">)</span>
-        <span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_update_time</span><span class="p">)</span>
+        <span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_freq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_update_time</span><span class="p">)</span>
         <span class="c1"># ensure the overlay is visible (if needed)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">media_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;audio&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
@@ -228,9 +240,12 @@
 <span class="sd">            `bool`: `True` iff this function should be run again (:func:`~GLib.timeout_add` convention)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">changed</span><span class="p">,</span> <span class="n">time_ns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">query_position</span><span class="p">(</span><span class="n">Gst</span><span class="o">.</span><span class="n">Format</span><span class="o">.</span><span class="n">TIME</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update_progress</span><span class="p">(</span><span class="n">time_ns</span> <span class="o">/</span> <span class="mf">1e9</span><span class="p">)</span>
-        <span class="n">run_again</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">state</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">,</span> <span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">PAUSED</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">run_again</span></div>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">time_ns</span> <span class="o">/</span> <span class="mf">1e9</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_progress</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_timestamp</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_pos</span> <span class="o">&lt;=</span> <span class="n">time</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handle_end</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_timestamp</span> <span class="o">=</span> <span class="n">time</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">state</span> <span class="ow">in</span> <span class="p">{</span><span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">,</span> <span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">PAUSED</span><span class="p">}</span></div>
 
 
 <div class="viewcode-block" id="GstOverlay.do_play"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_play">[docs]</a>    <span class="k">def</span> <span class="nf">do_play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -267,18 +282,19 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="GstOverlay.do_set_time"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_set_time">[docs]</a>    <span class="k">def</span> <span class="nf">do_set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set the player at time t.</span>
+<div class="viewcode-block" id="GstOverlay.do_set_time"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_set_time">[docs]</a>    <span class="k">def</span> <span class="nf">do_set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set the player at time `~time`.</span>
 
 <span class="sd">        Should run on the main thread to ensure we avoid reentrency problems.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            t (`float`): the timestamp, in s</span>
+<span class="sd">            time (`float`): the timestamp, in s</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: `True` iff this function should be run again (:func:`~GLib.idle_add` convention)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">seek_simple</span><span class="p">(</span><span class="n">Gst</span><span class="o">.</span><span class="n">Format</span><span class="o">.</span><span class="n">TIME</span><span class="p">,</span> <span class="n">Gst</span><span class="o">.</span><span class="n">SeekFlags</span><span class="o">.</span><span class="n">FLUSH</span><span class="p">,</span> <span class="n">t</span> <span class="o">*</span> <span class="n">Gst</span><span class="o">.</span><span class="n">SECOND</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_timestamp</span> <span class="o">=</span> <span class="n">time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">seek_simple</span><span class="p">(</span><span class="n">Gst</span><span class="o">.</span><span class="n">Format</span><span class="o">.</span><span class="n">TIME</span><span class="p">,</span> <span class="n">Gst</span><span class="o">.</span><span class="n">SeekFlags</span><span class="o">.</span><span class="n">FLUSH</span><span class="p">,</span> <span class="n">time</span> <span class="o">*</span> <span class="n">Gst</span><span class="o">.</span><span class="n">SECOND</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
