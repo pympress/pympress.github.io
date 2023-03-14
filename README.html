@@ -225,18 +225,27 @@ Use the following snippet that prefixes the page labels with <code class="docuti
 </pre></div>
 </div>
 </li>
-<li><p><strong>Media support</strong>: supports playing video, audio, and gif files embedded in (or linked from) the PDF file.</p></li>
+<li><p><strong>Media support</strong>: supports playing video, audio, and gif files embedded in (or linked from) the PDF file, with optional start/end times and looping.</p></li>
 <li><p><strong>Highlight mode</strong>: Allows one to draw freehand on the slide currently on screen.</p></li>
 <li><p><strong>Go To Slide</strong>: To jump to a selected slide without flashing through the whole presentation on the projector, press <code class="docutils literal notranslate"><span class="pre">G</span></code> or click the “current  slide” box.
 Using <code class="docutils literal notranslate"><span class="pre">J</span></code> or clicking the slide label will allow you to navigate slide labels instead of page numbers, useful e.g. for multi-page slides from beamer <code class="docutils literal notranslate"><span class="pre">\pause</span></code>.</p>
 <p>A spin box will appear, and you will be able to navigate through your slides in the presenter window only by scrolling your mouse, with the <code class="docutils literal notranslate"><span class="pre">Home</span></code>/<code class="docutils literal notranslate"><span class="pre">Up</span></code>/<code class="docutils literal notranslate"><span class="pre">Down</span></code>/<code class="docutils literal notranslate"><span class="pre">End</span></code> keys,
 with the + and - buttons of the spin box, or simply by typing in the number of the slide. Press <code class="docutils literal notranslate"><span class="pre">Enter</span></code> to validate going to the new slide or <code class="docutils literal notranslate"><span class="pre">Esc</span></code> to cancel.</p>
 </li>
+<li><p><strong>Deck Overview</strong>: Pressing <code class="docutils literal notranslate"><span class="pre">D</span></code> will open an overview of your whole slide deck, and any slide can be opened from can simply clicking it.</p></li>
 <li><p><strong>Software pointer</strong>: Clicking on the slide (in either window) while holding <code class="docutils literal notranslate"><span class="pre">ctrl</span></code> down will display a software laser pointer on the slide. Or press <code class="docutils literal notranslate"><span class="pre">L</span></code> to permanently switch on the laser pointer.</p></li>
 <li><p><strong>Talk time breakdown</strong>: The <code class="docutils literal notranslate"><span class="pre">Presentation</span> <span class="pre">&gt;</span> <span class="pre">Timing</span> <span class="pre">Breakdown</span></code> menu item displays a breakdown of how much time was spent on each slide, with a hierarchical breakdown per chapters/sections/etc. if available in the PDF.</p></li>
 <li><p><strong>Automatic file reloading</strong>: If the file is modified, pympress will reload it (and preserve the current slide, current time, etc.)</p></li>
 <li><p><strong>Big button mode</strong>: Add big buttons (duh) for touch displays.</p></li>
 <li><p><strong>Swap screens</strong>: If Pympress mixed up which screen is the projector and which is not, press <code class="docutils literal notranslate"><span class="pre">S</span></code></p></li>
+<li><p><strong>Automatic full screen</strong>: pympress will automatically put the content window fullscreen on your non-primay screen when:</p>
+<ul class="simple">
+<li><p>connecting a second screen,</p></li>
+<li><p>extending your desktop to a second screen that was mirroring your main screen,</p></li>
+<li><p>when starting pympress on a two-screen display.
+To disable this behaviour, untick “Content fullscreen” under the “Starting configuration” menu.</p></li>
+</ul>
+</li>
 <li><p><strong>Estimated talk time</strong>: Click the <code class="docutils literal notranslate"><span class="pre">Time</span> <span class="pre">estimation</span></code> box and set your planned talk duration. The color will allow you to see at a glance how much time you have left.</p></li>
 <li><p><strong>Adjust screen centering</strong>: If your slides’ form factor doesn’t fit the projectors’ and you don’t want the slide centered in the window, use the “Screen Center” option in the “Presentation” menu.</p></li>
 <li><p><strong>Resize Current/Next slide</strong>: You can drag the bar between both slides on the Presenter window to adjust their relative sizes to your liking.</p></li>
@@ -388,18 +397,11 @@ Abusive behaviour will not be tolerated, and can be reported by email at me&#64;
 <img alt="Italian" src="https://img.shields.io/poeditor/progress/301055/it?token=7a666b44c0985d16a7b59748f488275c&amp;label=%F0%9F%87%AE%F0%9F%87%B9%20Italian" />
 <img alt="Japanese" src="https://img.shields.io/poeditor/progress/301055/ja?token=7a666b44c0985d16a7b59748f488275c&amp;label=%F0%9F%87%AF%F0%9F%87%B5%20Japanese" />
 <img alt="Polish" src="https://img.shields.io/poeditor/progress/301055/pl?token=7a666b44c0985d16a7b59748f488275c&amp;label=%F0%9F%87%B5%F0%9F%87%B1%20Polish" />
-<img alt="Portuguese (BR)" src="https://img.shields.io/poeditor/progress/301055/pt-br?token=7a666b44c0985d16a7b59748f488275c&amp;label=%F0%9F%87%A7%F0%9F%87%B7%20Portuguese%20%28BR%29" />
 <img alt="French" src="https://img.shields.io/poeditor/progress/301055/fr?token=7a666b44c0985d16a7b59748f488275c&amp;label=%F0%9F%87%AB%F0%9F%87%B7%20French" />
 <img alt="German" src="https://img.shields.io/poeditor/progress/301055/de?token=7a666b44c0985d16a7b59748f488275c&amp;label=%F0%9F%87%A9%F0%9F%87%AA%20German" />
 <img alt="Spanish" src="https://img.shields.io/poeditor/progress/301055/es?token=7a666b44c0985d16a7b59748f488275c&amp;label=%F0%9F%87%AA%F0%9F%87%B8%20Spanish" /></p>
 <!--　https://poeditor.com/docs/languages -->
-<p>If you want to add or contribute to a translation, check <a class="reference external" href="https://poeditor.com/join/project/nKfRxeN8pS">pympress’ page on POEditor</a> and add your efforts to make pympress available in your own language to those of
-<a class="reference external" href="https://github.com/Vulpeculus">&#64;Vulpeculus</a>,
-<a class="reference external" href="https://github.com/polaksta">&#64;polaksta</a>,
-<a class="reference external" href="https://github.com/susobaco">&#64;susobaco</a>,
-<a class="reference external" href="https://github.com/Morfit">&#64;Morfit</a>,
-MrIbuprofeno,
-<a class="reference external" href="https://github.com/atsuyaw">&#64;atsuyaw</a>,
+<p>We thank the many contributors of translations: <!-- translator list -->
 Agnieszka,
 Cherrywoods,
 Dongwang,
@@ -407,9 +409,9 @@ Estel-f,
 Fabio Pagnotta,
 Ferdinand Fichtner,
 Frederik. blome,
-<a class="reference external" href="https://github.com/FriedrichFroebel">FriedrichFröbel</a>,
+FriedrichFröbel,
 He. yifan. xs,
-<a class="reference external" href="https://github.com/multiflexi">Jaroslav Svoboda</a>,
+Jaroslav Svoboda,
 Jeertmans,
 Karen Zhang,
 Kristýna,
@@ -418,7 +420,7 @@ LogCreative,
 Lorenzo. pacchiardi,
 Luis Sibaja,
 Marcin Dohnalik,
-marquitul,
+Morfit,
 Mzn,
 Nico,
 Ogawa,
@@ -432,8 +434,15 @@ Timo Zhang,
 Tkoyama010,
 Toton95,
 Vojta Netrh,
-Watanabe,
+Vulpeculus,
+atsuyaw,
+marquitul,
+polaksta,
+susobaco,
 and <!-- last translator --> Cimbali.</p>
+<p>If you also want to add or contribute to a translation, check <a class="reference external" href="https://poeditor.com/join/project/nKfRxeN8pS">pympress’ page on POEditor</a>.
+Note that old strings are kept and tagged <code class="docutils literal notranslate"><span class="pre">removed</span></code>, to give context and keep continuity between translations of succcessive versions.
+This means <code class="docutils literal notranslate"><span class="pre">removed</span></code> strings are unused and do not need translating.</p>
 </section>
 <section id="packages">
 <h2>Packages<a class="headerlink" href="#packages" title="Permalink to this heading">¶</a></h2>

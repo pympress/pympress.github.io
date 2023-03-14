@@ -160,7 +160,7 @@ A few of the fancier functionalities are listed here:
   ```latex
   \addtobeamertemplate{note page}{}{\thispdfpagelabel{notes:\insertframenumber}}
   ```
-- **Media support**: supports playing video, audio, and gif files embedded in (or linked from) the PDF file.
+- **Media support**: supports playing video, audio, and gif files embedded in (or linked from) the PDF file, with optional start/end times and looping.
 - **Highlight mode**: Allows one to draw freehand on the slide currently on screen.
 - **Go To Slide**: To jump to a selected slide without flashing through the whole presentation on the projector, press `G` or click the "current  slide" box.
   Using `J` or clicking the slide label will allow you to navigate slide labels instead of page numbers, useful e.g. for multi-page slides from beamer `\pause`.
@@ -168,11 +168,17 @@ A few of the fancier functionalities are listed here:
   A spin box will appear, and you will be able to navigate through your slides in the presenter window only by scrolling your mouse, with the `Home`/`Up`/`Down`/`End` keys,
   with the + and - buttons of the spin box, or simply by typing in the number of the slide. Press `Enter` to validate going to the new slide or `Esc` to cancel.
 
+- **Deck Overview**: Pressing `D` will open an overview of your whole slide deck, and any slide can be opened from can simply clicking it.
 - **Software pointer**: Clicking on the slide (in either window) while holding `ctrl` down will display a software laser pointer on the slide. Or press `L` to permanently switch on the laser pointer.
 - **Talk time breakdown**: The `Presentation > Timing Breakdown` menu item displays a breakdown of how much time was spent on each slide, with a hierarchical breakdown per chapters/sections/etc. if available in the PDF.
 - **Automatic file reloading**: If the file is modified, pympress will reload it (and preserve the current slide, current time, etc.)
 - **Big button mode**: Add big buttons (duh) for touch displays.
 - **Swap screens**: If Pympress mixed up which screen is the projector and which is not, press `S`
+- **Automatic full screen**: pympress will automatically put the content window fullscreen on your non-primay screen when:
+  - connecting a second screen,
+  - extending your desktop to a second screen that was mirroring your main screen,
+  - when starting pympress on a two-screen display.
+  To disable this behaviour, untick “Content fullscreen” under the “Starting configuration” menu.
 - **Estimated talk time**: Click the `Time estimation` box and set your planned talk duration. The color will allow you to see at a glance how much time you have left.
 - **Adjust screen centering**: If your slides' form factor doesn't fit the projectors' and you don't want the slide centered in the window, use the "Screen Center" option in the "Presentation" menu.
 - **Resize Current/Next slide**: You can drag the bar between both slides on the Presenter window to adjust their relative sizes to your liking.
@@ -325,19 +331,12 @@ Pympress has inline sphinx documentation ([Google style](http://www.sphinx-doc.o
 ![Italian](https://img.shields.io/poeditor/progress/301055/it?token=7a666b44c0985d16a7b59748f488275c&label=%F0%9F%87%AE%F0%9F%87%B9%20Italian)
 ![Japanese](https://img.shields.io/poeditor/progress/301055/ja?token=7a666b44c0985d16a7b59748f488275c&label=%F0%9F%87%AF%F0%9F%87%B5%20Japanese)
 ![Polish](https://img.shields.io/poeditor/progress/301055/pl?token=7a666b44c0985d16a7b59748f488275c&label=%F0%9F%87%B5%F0%9F%87%B1%20Polish)
-![Portuguese (BR)](https://img.shields.io/poeditor/progress/301055/pt-br?token=7a666b44c0985d16a7b59748f488275c&label=%F0%9F%87%A7%F0%9F%87%B7%20Portuguese%20%28BR%29)
 ![French](https://img.shields.io/poeditor/progress/301055/fr?token=7a666b44c0985d16a7b59748f488275c&label=%F0%9F%87%AB%F0%9F%87%B7%20French)
 ![German](https://img.shields.io/poeditor/progress/301055/de?token=7a666b44c0985d16a7b59748f488275c&label=%F0%9F%87%A9%F0%9F%87%AA%20German)
 ![Spanish](https://img.shields.io/poeditor/progress/301055/es?token=7a666b44c0985d16a7b59748f488275c&label=%F0%9F%87%AA%F0%9F%87%B8%20Spanish)
 <!--　https://poeditor.com/docs/languages -->
 
-If you want to add or contribute to a translation, check [pympress’ page on POEditor](https://poeditor.com/join/project/nKfRxeN8pS) and add your efforts to make pympress available in your own language to those of
-[@Vulpeculus](https://github.com/Vulpeculus),
-[@polaksta](https://github.com/polaksta),
-[@susobaco](https://github.com/susobaco),
-[@Morfit](https://github.com/Morfit),
-MrIbuprofeno,
-[@atsuyaw](https://github.com/atsuyaw),
+We thank the many contributors of translations: <!-- translator list -->
 Agnieszka,
 Cherrywoods,
 Dongwang,
@@ -345,9 +344,9 @@ Estel-f,
 Fabio Pagnotta,
 Ferdinand Fichtner,
 Frederik. blome,
-[FriedrichFröbel](https://github.com/FriedrichFroebel),
+FriedrichFröbel,
 He. yifan. xs,
-[Jaroslav Svoboda](https://github.com/multiflexi),
+Jaroslav Svoboda,
 Jeertmans,
 Karen Zhang,
 Kristýna,
@@ -356,7 +355,7 @@ LogCreative,
 Lorenzo. pacchiardi,
 Luis Sibaja,
 Marcin Dohnalik,
-marquitul,
+Morfit,
 Mzn,
 Nico,
 Ogawa,
@@ -370,8 +369,16 @@ Timo Zhang,
 Tkoyama010,
 Toton95,
 Vojta Netrh,
-Watanabe,
+Vulpeculus,
+atsuyaw,
+marquitul,
+polaksta,
+susobaco,
 and <!-- last translator --> Cimbali.
+
+If you also want to add or contribute to a translation, check [pympress’ page on POEditor](https://poeditor.com/join/project/nKfRxeN8pS).
+Note that old strings are kept and tagged `removed`, to give context and keep continuity between translations of succcessive versions.
+This means `removed` strings are unused and do not need translating.
 
 ## Packages
 
