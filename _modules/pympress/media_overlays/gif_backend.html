@@ -56,9 +56,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../pympress.html">Pympress package</a></li>
 </ul>
 
+	
 	<hr style="border: 0; height: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.3); width:80%; margin: 10px auto;" />
 	<a href="../../../genindex.html">Index</a>
 	<a href="../../../py-modindex.html">Module index</a>
+	
 
         </div>
       </div>
@@ -128,7 +130,7 @@
     <span class="c1">#: A :class:`~GdkPixbuf.PixbufAnimation` containing all the frames and their timing for the displayed gif</span>
     <span class="n">anim</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#: A :class:`~GdkPixbuf.PixbufAnimationIter` which will provide the timely access to the frames in `~anim`</span>
-    <span class="nb">iter</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">anim_iter</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#: A `tuple` of (`int`, `int`) indicating the size of the bounding box of the gif</span>
     <span class="n">base_size</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#: The :class:`~cairo.Matrix` defining the zoom &amp; shift to scale the gif</span>
@@ -154,7 +156,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">anim</span> <span class="o">=</span> <span class="n">GdkPixbuf</span><span class="o">.</span><span class="n">PixbufAnimation</span><span class="o">.</span><span class="n">new_from_file</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">base_size</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">get_width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">get_height</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">anim_iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">set_transform</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">advance_gif</span><span class="p">()</span>
@@ -174,12 +176,12 @@
 <div class="viewcode-block" id="GifOverlay.draw"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gif_backend.GifOverlay.draw">[docs]</a>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Simple resized drawing: get the pixbuf, set the transform, draw the image.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">anim_iter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">ctx</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
-            <span class="n">Gdk</span><span class="o">.</span><span class="n">cairo_set_source_pixbuf</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">get_pixbuf</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">Gdk</span><span class="o">.</span><span class="n">cairo_set_source_pixbuf</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">anim_iter</span><span class="o">.</span><span class="n">get_pixbuf</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
             <span class="n">ctx</span><span class="o">.</span><span class="n">paint</span><span class="p">()</span>
         <span class="k">except</span> <span class="n">cairo</span><span class="o">.</span><span class="n">Error</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Cairo can not draw gif&#39;</span><span class="p">),</span> <span class="n">exc_info</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div>
@@ -188,10 +190,10 @@
 <div class="viewcode-block" id="GifOverlay.advance_gif"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gif_backend.GifOverlay.advance_gif">[docs]</a>    <span class="k">def</span> <span class="nf">advance_gif</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Advance the gif, queue redrawing if the frame changed, and schedule the next frame.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">advance</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">anim_iter</span><span class="o">.</span><span class="n">advance</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">movie_zone</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
 
-        <span class="n">delay</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">get_delay_time</span><span class="p">()</span>
+        <span class="n">delay</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">anim_iter</span><span class="o">.</span><span class="n">get_delay_time</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">delay</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">advance_gif</span><span class="p">)</span></div>
 
@@ -210,7 +212,7 @@
         <span class="n">start</span> <span class="o">=</span> <span class="n">GLib</span><span class="o">.</span><span class="n">TimeVal</span><span class="p">()</span>
         <span class="n">GLib</span><span class="o">.</span><span class="n">DateTime</span><span class="o">.</span><span class="n">new_now_local</span><span class="p">()</span><span class="o">.</span><span class="n">to_timeval</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
         <span class="n">start</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">anim_iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">advance_gif</span><span class="p">()</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
@@ -236,7 +238,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2022 Cimbali.</p>
+    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2023 Cimbali.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

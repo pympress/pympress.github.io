@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pympress.deck &mdash; Pympress developer documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/pympress.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+	<a href="https://github.com/Cimbali/pympress/" class="fa fa-github"> Pympress on GitHub</a>
+	<br />
+	<a href="../../index.html" class="icon icon-home"> Docs home</a>
+	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
+	<div class="version">
+		v1.8.0
+	</div>
+
+	
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+	
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html"> What is Pympress?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html#installing">Installing </a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html#usage">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html#dependencies">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html#contributing">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../options.html">Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pympress.html">Pympress package</a></li>
+</ul>
+
+	
+	<hr style="border: 0; height: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.3); width:80%; margin: 10px auto;" />
+	<a href="../../genindex.html">Index</a>
+	<a href="../../py-modindex.html">Module index</a>
+	
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pympress</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pympress.deck</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pympress.deck</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1">#</span>
+<span class="c1">#       deck.py</span>
+<span class="c1">#</span>
+<span class="c1">#       Copyright 2023 Cimbali &lt;me@cimba.li&gt;</span>
+<span class="c1">#</span>
+<span class="c1">#       This program is free software; you can redistribute it and/or modify</span>
+<span class="c1">#       it under the terms of the GNU General Public License as published by</span>
+<span class="c1">#       the Free Software Foundation; either version 2 of the License, or</span>
+<span class="c1">#       (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1">#       This program is distributed in the hope that it will be useful,</span>
+<span class="c1">#       but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1">#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1">#       GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1">#       You should have received a copy of the GNU General Public License</span>
+<span class="c1">#       along with this program; if not, write to the Free Software</span>
+<span class="c1">#       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,</span>
+<span class="c1">#       MA 02110-1301, USA.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">:mod:`pympress.deck` -- Manage user drawings on the current slide</span>
+<span class="sd">---------------------------------------------------------------------</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">gi</span>
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s1">&#39;Gtk&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gtk</span><span class="p">,</span> <span class="n">Gdk</span><span class="p">,</span> <span class="n">GLib</span>
+
+<span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">builder</span>
+
+
+<div class="viewcode-block" id="Overview"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview">[docs]</a><span class="k">class</span> <span class="nc">Overview</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; UI that allows to draw free-hand on top of the current slide.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config (:class:`~pympress.config.Config`): A config object containing preferences</span>
+<span class="sd">        builder (:class:`~pympress.builder.Builder`): A builder from which to load widgets</span>
+<span class="sd">        notes_mode (`bool`): The current notes mode, i.e. whether we display the notes on second slide</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#: Whether we are displaying the deck overview on screen</span>
+    <span class="n">deck_mode</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1">#: :class:`~Gtk.Viewport` that replaces normal panes when deck is shown</span>
+    <span class="n">deck_viewport</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: :class:`~Gtk.Grid` that displays all the slides of the overview</span>
+    <span class="n">deck_grid</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: The :class:`~Gtk.DrawingArea` for the first slide</span>
+    <span class="n">deck0</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: A :class:`~Gtk.OffscreenWindow` where we render the deck interface when it&#39;s not shown</span>
+    <span class="n">deck_off_render</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: :class:`~Gtk.Box` in the Presenter window, where we insert deck.</span>
+    <span class="n">p_central</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: callback, to be connected to :func:`~pympress.ui.UI.compute_frame_grid`</span>
+    <span class="n">compute_frame_grid</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span>
+
+    <span class="c1">#: callback, to be connected to :func:`~pympress.ui.UI.load_layout`</span>
+    <span class="n">load_layout</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span>
+
+    <span class="c1">#: callback, to be connected to :func:`~pympress.surfacecache.SurfaceCache.resize_widget`</span>
+    <span class="n">resize_cache</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span>
+    <span class="c1">#: callback, to be connected to :func:`~pympress.ui.UI.goto_page`</span>
+    <span class="n">goto_page</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span>
+    <span class="c1">#: :class:`~pympress.surfacecache.SurfaceCache` instance.</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: `tuple` of rows/columns in the grid</span>
+    <span class="n">grid_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1">#: `bool` whether we show all pages or remove consecutive identically labeled pages, keeping only the last</span>
+    <span class="n">all_pages</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1">#: `int` How large (at most) to make rows</span>
+    <span class="n">max_row_size</span> <span class="o">=</span> <span class="mi">6</span>
+
+    <span class="c1">#: The :class:`~Gtk.DrawingArea` in the content window</span>
+    <span class="n">c_da</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">builder</span><span class="p">,</span> <span class="n">notes_mode</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Overview</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">cache</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_ui</span><span class="p">(</span><span class="s1">&#39;deck&#39;</span><span class="p">)</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">load_widgets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck_da_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">deck0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_application</span><span class="p">()</span><span class="o">.</span><span class="n">add_window</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deck_off_render</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_layout</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">get_callback_handler</span><span class="p">(</span><span class="s1">&#39;load_layout&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">goto_page</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">get_callback_handler</span><span class="p">(</span><span class="s1">&#39;goto_page&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compute_frame_grid</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">get_callback_handler</span><span class="p">(</span><span class="s1">&#39;compute_frame_grid&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_doc_callbacks</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">doc</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_row_size</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;deck-overview&#39;</span><span class="p">,</span> <span class="s1">&#39;max-slides-per-row&#39;</span><span class="p">)</span>
+        <span class="c1"># Whether to show all pages or only distinctly labeled pages (useful for latex)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_pages</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;deck-overview&#39;</span><span class="p">,</span> <span class="s1">&#39;distinct-labels-only&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_actions</span><span class="p">({</span>
+            <span class="s1">&#39;deck-overview&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">activate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">switch_deck_overview</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="p">})</span>
+
+
+<div class="viewcode-block" id="Overview.on_deck_hover"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.on_deck_hover">[docs]</a>    <span class="k">def</span> <span class="nf">on_deck_hover</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Track when each deck in the slide is hovered</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ctx</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">StateFlags</span><span class="o">.</span><span class="n">PRELIGHT</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">EventType</span><span class="o">.</span><span class="n">ENTER_NOTIFY</span> <span class="k">else</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">StateFlags</span><span class="o">.</span><span class="n">NORMAL</span><span class="p">)</span>
+        <span class="n">widget</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Overview.setup_doc_callbacks"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.setup_doc_callbacks">[docs]</a>    <span class="k">def</span> <span class="nf">setup_doc_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Callbacks that need to be setup again at every new document</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            doc (:class:`~pympress.document.Document`): The new document that got loaded</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pages_number</span>         <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">pages_number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_labels</span>           <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">has_labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_last_label_pages</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">get_last_label_pages</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_drawing_areas</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Overview.try_cancel"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.try_cancel">[docs]</a>    <span class="k">def</span> <span class="nf">try_cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Cancel deck, if it is enabled.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `bool`: `True` if deck got cancelled, `False` if it was already disabled.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_mode</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">disable_deck_overview</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Overview.create_drawing_areas"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.create_drawing_areas">[docs]</a>    <span class="k">def</span> <span class="nf">create_drawing_areas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Build DrawingArea and AspectFrame elements to display later on</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_label_pages</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_labels</span><span class="p">()</span> <span class="k">else</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pages_number</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pages</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Always keep the first drawing area as it is used to provide surfaces in the cache</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">remove_row</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">remove_row</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+
+        <span class="c1"># Set drawing areas</span>
+        <span class="k">for</span> <span class="n">num</span><span class="p">,</span> <span class="n">da</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deck_da_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">da</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deck_da_list</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">pages</span><span class="p">)):</span>
+            <span class="n">da</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DrawingArea</span><span class="p">()</span>
+            <span class="n">da</span><span class="o">.</span><span class="n">add_events</span><span class="p">(</span><span class="n">Gdk</span><span class="o">.</span><span class="n">EventMask</span><span class="o">.</span><span class="n">TOUCH_MASK</span> <span class="o">|</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">EventMask</span><span class="o">.</span><span class="n">ENTER_NOTIFY_MASK</span> <span class="o">|</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">EventMask</span><span class="o">.</span><span class="n">LEAVE_NOTIFY_MASK</span> <span class="o">|</span>
+                          <span class="n">Gdk</span><span class="o">.</span><span class="n">EventMask</span><span class="o">.</span><span class="n">BUTTON_PRESS_MASK</span> <span class="o">|</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">EventMask</span><span class="o">.</span><span class="n">BUTTON_RELEASE_MASK</span><span class="p">)</span>
+            <span class="n">da</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;draw&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_deck_draw</span><span class="p">)</span>
+            <span class="n">da</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;button-release-event&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_deck_click</span><span class="p">)</span>
+            <span class="n">da</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;touch-event&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_deck_click</span><span class="p">)</span>
+            <span class="n">da</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;enter-notify-event&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_deck_hover</span><span class="p">)</span>
+            <span class="n">da</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;leave-notify-event&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_deck_hover</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deck_da_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
+
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">AspectFrame</span><span class="p">()</span>
+            <span class="n">frame</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s1">&#39;grid-frame&#39;</span><span class="p">)</span>
+            <span class="n">frame</span><span class="o">.</span><span class="n">set_shadow_type</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ShadowType</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span>
+            <span class="n">frame</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">ratio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_da</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_da</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">page</span><span class="p">,</span> <span class="n">da</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pages</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_da_list</span><span class="p">):</span>
+            <span class="n">da</span><span class="o">.</span><span class="n">get_parent</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="n">da</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s1">&#39;deck</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Overview.reset_grid"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.reset_grid">[docs]</a>    <span class="k">def</span> <span class="nf">reset_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set the slides configuration and size in the grid</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Gather info about slides to display</span>
+        <span class="n">num_pages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages_number</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_pages</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_labels</span><span class="p">()</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_last_label_pages</span><span class="p">())</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_da</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_da</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">()</span>
+
+        <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">()</span>
+        <span class="n">sw</span><span class="p">,</span> <span class="n">sh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">get_row_spacing</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">get_column_spacing</span><span class="p">()</span>
+        <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_frame_grid</span><span class="p">(</span><span class="n">ww</span> <span class="o">/</span> <span class="n">wh</span><span class="p">,</span> <span class="n">num_pages</span><span class="p">)</span>
+        <span class="n">window</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_viewport</span><span class="o">.</span><span class="n">get_window</span><span class="p">()</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">get_scale_factor</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rows</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">cols</span><span class="p">:</span>
+            <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+
+        <span class="n">dw</span><span class="p">,</span> <span class="n">dh</span> <span class="o">=</span> <span class="p">(</span><span class="n">ww</span> <span class="o">+</span> <span class="n">sw</span><span class="p">)</span> <span class="o">/</span> <span class="n">cols</span> <span class="o">-</span> <span class="n">sw</span><span class="p">,</span> <span class="p">(</span><span class="n">wh</span> <span class="o">+</span> <span class="n">sh</span><span class="p">)</span> <span class="o">/</span> <span class="n">rows</span> <span class="o">-</span> <span class="n">sh</span>
+        <span class="n">dw</span><span class="p">,</span> <span class="n">dh</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dw</span><span class="p">,</span> <span class="n">dh</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">dw</span> <span class="o">/</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">dh</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cols</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_row_size</span><span class="p">:</span>
+            <span class="n">cols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_row_size</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_pages</span> <span class="o">+</span> <span class="n">cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">cols</span>
+
+            <span class="n">dw</span> <span class="o">=</span> <span class="p">(</span><span class="n">ww</span> <span class="o">+</span> <span class="n">sw</span><span class="p">)</span> <span class="o">/</span> <span class="n">cols</span> <span class="o">-</span> <span class="n">sw</span>
+            <span class="n">dh</span> <span class="o">=</span> <span class="n">dw</span> <span class="o">/</span> <span class="n">ratio</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">resize_widget</span><span class="p">(</span><span class="s1">&#39;deck&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">dw</span> <span class="o">*</span> <span class="n">scale</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">dh</span> <span class="o">*</span> <span class="n">scale</span><span class="p">))</span>
+
+        <span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">da</span><span class="o">.</span><span class="n">get_parent</span><span class="p">()</span> <span class="k">for</span> <span class="n">da</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_da_list</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">:</span>
+            <span class="n">frame</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="n">frame</span><span class="o">.</span><span class="n">set_size_request</span><span class="p">(</span><span class="n">dw</span> <span class="o">/</span> <span class="n">scale</span><span class="p">,</span> <span class="n">dh</span> <span class="o">/</span> <span class="n">scale</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span> <span class="o">!=</span> <span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+
+            <span class="c1"># Always keep the first drawing area as it is used to provide surfaces in the cache</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">remove_row</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">remove_row</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">num</span><span class="p">,</span> <span class="n">frame</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">frames</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">num</span> <span class="o">%</span> <span class="n">cols</span><span class="p">,</span> <span class="n">num</span> <span class="o">//</span> <span class="n">cols</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># resize grid and cache</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span> <span class="o">=</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span>
+
+        <span class="k">for</span> <span class="n">da</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_da_list</span><span class="p">:</span>
+            <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prerender</span><span class="p">,</span> <span class="n">da</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Overview.prerender"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.prerender">[docs]</a>    <span class="k">def</span> <span class="nf">prerender</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">da</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Perform in-cache rendering</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            da (:class:`~Gtk.DrawingArea`):  the widget for which we’re rendering</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">renderer</span><span class="p">(</span><span class="s1">&#39;deck&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">da</span><span class="o">.</span><span class="n">get_name</span><span class="p">()[</span><span class="mi">4</span><span class="p">:]))</span>
+        <span class="n">da</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">GLib</span><span class="o">.</span><span class="n">SOURCE_REMOVE</span></div>
+
+
+<div class="viewcode-block" id="Overview.on_deck_draw"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.on_deck_draw">[docs]</a>    <span class="k">def</span> <span class="nf">on_deck_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Actually draw the deck slide -- only do this from cache, to limit overhead</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            widget (:class:`~Gtk.Widget`):  the widget to update</span>
+<span class="sd">            cairo_context (:class:`~cairo.Context`):  the Cairo context (or `None` if called directly)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">page_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">get_name</span><span class="p">()[</span><span class="mi">4</span><span class="p">:])</span>
+        <span class="n">pb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;deck&#39;</span><span class="p">,</span> <span class="n">page_num</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pb</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># We’ll redraw later</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
+            <span class="k">return</span>
+
+        <span class="n">window</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_window</span><span class="p">()</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">get_scale_factor</span><span class="p">()</span>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">scale</span><span class="p">,</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">scale</span><span class="p">)</span>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">set_source_surface</span><span class="p">(</span><span class="n">pb</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">paint</span><span class="p">()</span>
+
+        <span class="n">ctx</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="o">!=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">StateFlags</span><span class="o">.</span><span class="n">PRELIGHT</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Draw a hover border manually</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s1">&#39;border-color&#39;</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">StateFlags</span><span class="o">.</span><span class="n">PRELIGHT</span><span class="p">)</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">set_source_rgba</span><span class="p">(</span><span class="o">*</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">set_line_width</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+
+        <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">(),</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">()</span>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">wh</span> <span class="o">-</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">ww</span> <span class="o">-</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">wh</span> <span class="o">-</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">ww</span> <span class="o">-</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">close_path</span><span class="p">()</span>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Overview.on_deck_click"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.on_deck_click">[docs]</a>    <span class="k">def</span> <span class="nf">on_deck_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; A slide has been clicked, go to it</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            widget (:class:`~Gtk.Widget`):  the widget which has received the key stroke</span>
+<span class="sd">            event (:class:`~Gdk.Event`):  the GTK event, which contains the key stroke details</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">page_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">get_name</span><span class="p">()[</span><span class="mi">4</span><span class="p">:])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">goto_page</span><span class="p">(</span><span class="n">page_num</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disable_deck_overview</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Overview.switch_deck_overview"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.switch_deck_overview">[docs]</a>    <span class="k">def</span> <span class="nf">switch_deck_overview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Starts the mode where one can read on top of the screen.</span>
+
+<span class="sd">        Args:</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `bool`: whether the event was consumed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">target</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">target</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_mode</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># Perform the state toggle</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_mode</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">disable_deck_overview</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_deck_overview</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Overview.enable_deck_overview"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.enable_deck_overview">[docs]</a>    <span class="k">def</span> <span class="nf">enable_deck_overview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Enable the deck view.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `bool`: whether it was possible to enable (thus if it was not enabled already)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_mode</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck_off_render</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deck_viewport</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_layout</span><span class="p">(</span><span class="s1">&#39;deck-overview&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">p_central</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck_viewport</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
+
+        <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reset_grid</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck_mode</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_application</span><span class="p">()</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;deck-overview&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">change_state</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_boolean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deck_mode</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">p_central</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Overview.disable_deck_overview"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.disable_deck_overview">[docs]</a>    <span class="k">def</span> <span class="nf">disable_deck_overview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Disable the deck view.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `bool`: whether it was possible to disable (thus if it was not disabled already)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck_mode</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck_mode</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_layout</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck_off_render</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deck_viewport</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_application</span><span class="p">()</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;deck-overview&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">change_state</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_boolean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deck_mode</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">p_central</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">True</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2023 Cimbali.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -56,9 +56,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../pympress.html">Pympress package</a></li>
 </ul>
 
+	
 	<hr style="border: 0; height: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.3); width:80%; margin: 10px auto;" />
 	<a href="../../genindex.html">Index</a>
 	<a href="../../py-modindex.html">Module index</a>
+	
 
         </div>
       </div>
@@ -222,12 +224,12 @@
         <span class="k">return</span> <span class="n">target</span></div>
 
 
-<div class="viewcode-block" id="Builder.signal_connector"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.signal_connector">[docs]</a>    <span class="k">def</span> <span class="nf">signal_connector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">builder</span><span class="p">,</span> <span class="nb">object</span><span class="p">,</span> <span class="n">signal_name</span><span class="p">,</span> <span class="n">handler_name</span><span class="p">,</span> <span class="n">connect_object</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="o">*</span><span class="n">user_data</span><span class="p">):</span>
+<div class="viewcode-block" id="Builder.signal_connector"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.signal_connector">[docs]</a>    <span class="k">def</span> <span class="nf">signal_connector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">builder</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">signal_name</span><span class="p">,</span> <span class="n">handler_name</span><span class="p">,</span> <span class="n">connect_object</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="o">*</span><span class="n">user_data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for signal connection. Implements the `~Gtk.BuilderConnectFunc` function interface.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            builder (:class:`~pympress.builder.Builder`): The builder, unused</span>
-<span class="sd">            object (:class:`~GObject.Object`): The object (usually a wiget) that has a signal to be connected</span>
+<span class="sd">            obj (:class:`~GObject.Object`): The object (usually a wiget) that has a signal to be connected</span>
 <span class="sd">            signal_name (`str`): The name of the signal</span>
 <span class="sd">            handler_name (`str`): The name of the function to be connected to the signal</span>
 <span class="sd">            connect_object (:class:`~GObject.Object`): unused</span>
@@ -236,11 +238,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_callback_handler</span><span class="p">(</span><span class="n">handler_name</span><span class="p">)</span>
-            <span class="nb">object</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">signal_name</span><span class="p">,</span> <span class="n">handler</span><span class="p">,</span> <span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">signal_name</span><span class="p">,</span> <span class="n">handler</span><span class="p">,</span> <span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;Impossible to connect signal </span><span class="si">{}</span><span class="s1"> from object </span><span class="si">{}</span><span class="s1"> to handler </span><span class="si">{}</span><span class="s1">&#39;</span>
-                            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">signal_name</span><span class="p">,</span> <span class="nb">object</span><span class="p">,</span> <span class="n">handler_name</span><span class="p">),</span> <span class="n">exc_info</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div>
+                            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">signal_name</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">handler_name</span><span class="p">),</span> <span class="n">exc_info</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Builder.connect_signals"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.connect_signals">[docs]</a>    <span class="k">def</span> <span class="nf">connect_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_target</span><span class="p">):</span>
@@ -486,7 +488,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2022 Cimbali.</p>
+    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2023 Cimbali.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -56,9 +56,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../pympress.html">Pympress package</a></li>
 </ul>
 
+	
 	<hr style="border: 0; height: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.3); width:80%; margin: 10px auto;" />
 	<a href="../../../genindex.html">Index</a>
 	<a href="../../../py-modindex.html">Module index</a>
+	
 
         </div>
       </div>
@@ -127,7 +129,7 @@
 <div class="viewcode-block" id="VideoOverlay"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.base.VideoOverlay">[docs]</a><span class="k">class</span> <span class="nc">VideoOverlay</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Simple Video widget.</span>
 
-<span class="sd">    All do_X() functions are meant to be called from the main thread, through e.g. :function:`~GLib.idle_add`,</span>
+<span class="sd">    All do_X() functions are meant to be called from the main thread, through e.g. :func:`~GLib.idle_add`,</span>
 <span class="sd">    for thread-safety in the handling of video backends.</span>
 
 <span class="sd">    Args:</span>
@@ -193,7 +195,7 @@
         <span class="k">if</span> <span class="n">media</span><span class="o">.</span><span class="n">type</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">media_type</span> <span class="o">=</span> <span class="n">media</span><span class="o">.</span><span class="n">type</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">content_type</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">content_type_guess</span><span class="p">(</span><span class="n">media</span><span class="o">.</span><span class="n">filename</span><span class="o">.</span><span class="n">as_uri</span><span class="p">())</span>
+            <span class="n">content_type</span><span class="p">,</span> <span class="n">uncertain</span> <span class="o">=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">content_type_guess</span><span class="p">(</span><span class="n">media</span><span class="o">.</span><span class="n">filename</span><span class="o">.</span><span class="n">as_uri</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">media_type</span> <span class="o">=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">content_type_get_mime_type</span><span class="p">(</span><span class="n">content_type</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">start_pos</span> <span class="o">=</span> <span class="n">media</span><span class="o">.</span><span class="n">start_pos</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">end_pos</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">media</span><span class="o">.</span><span class="n">duration</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">media</span><span class="o">.</span><span class="n">start_pos</span> <span class="o">+</span> <span class="n">media</span><span class="o">.</span><span class="n">duration</span>
@@ -396,7 +398,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2022 Cimbali.</p>
+    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2023 Cimbali.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

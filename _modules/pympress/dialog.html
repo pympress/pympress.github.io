@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pympress.dialog &mdash; Pympress developer documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/pympress.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+	<a href="https://github.com/Cimbali/pympress/" class="fa fa-github"> Pympress on GitHub</a>
+	<br />
+	<a href="../../index.html" class="icon icon-home"> Docs home</a>
+	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
+	<div class="version">
+		v1.8.0
+	</div>
+
+	
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+	
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html"> What is Pympress?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html#installing">Installing </a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html#usage">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html#dependencies">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html#contributing">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../options.html">Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pympress.html">Pympress package</a></li>
+</ul>
+
+	
+	<hr style="border: 0; height: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.3); width:80%; margin: 10px auto;" />
+	<a href="../../genindex.html">Index</a>
+	<a href="../../py-modindex.html">Module index</a>
+	
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pympress</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pympress.dialog</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pympress.dialog</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1">#</span>
+<span class="c1">#       extras.py</span>
+<span class="c1">#</span>
+<span class="c1">#       Copyright 2021 Cimbali &lt;me@cimba.li&gt;</span>
+<span class="c1">#</span>
+<span class="c1">#       This program is free software; you can redistribute it and/or modify</span>
+<span class="c1">#       it under the terms of the GNU General Public License as published by</span>
+<span class="c1">#       the Free Software Foundation; either version 2 of the License, or</span>
+<span class="c1">#       (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1">#       This program is distributed in the hope that it will be useful,</span>
+<span class="c1">#       but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1">#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1">#       GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1">#       You should have received a copy of the GNU General Public License</span>
+<span class="c1">#       along with this program; if not, write to the Free Software</span>
+<span class="c1">#       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,</span>
+<span class="c1">#       MA 02110-1301, USA.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">:mod:`pympress.extras` -- Manages the display of fancy extras such as annotations, videos and cursors</span>
+<span class="sd">-----------------------------------------------------------------------------------------------------</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="kn">import</span> <span class="nn">gi</span>
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s1">&#39;Gtk&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gtk</span><span class="p">,</span> <span class="n">GLib</span>
+
+<span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">builder</span>
+
+
+<div class="viewcode-block" id="TimingReport"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport">[docs]</a><span class="k">class</span> <span class="nc">TimingReport</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Widget tracking and displaying hierachically how much time was spent in each page/section of the presentation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#: `list` of time at which each page was reached</span>
+    <span class="n">page_time</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1">#: `int` the time at which the clock was reset</span>
+    <span class="n">end_time</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="c1">#: The :class:`~Gtk.TreeView` containing the timing data to display in the dialog</span>
+    <span class="n">timing_treeview</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: A :class:`~Gtk.Dialog` to contain the timing to show</span>
+    <span class="n">time_report_dialog</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: `bool` marking whether next page transition should reset the history of page timings</span>
+    <span class="n">clear_on_next_transition</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1">#: A `dict` containing the structure of the current document</span>
+    <span class="n">doc_structure</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1">#: A `list` with the page label of each page of the current document</span>
+    <span class="n">page_labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1">#: `bool` tracking whether a document is opened</span>
+    <span class="n">document_open</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TimingReport</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_ui</span><span class="p">(</span><span class="s1">&#39;time_report_dialog&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_report_dialog</span><span class="o">.</span><span class="n">set_transient_for</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">p_win</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_report_dialog</span><span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_CLOSE</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CLOSE</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">parent</span><span class="o">.</span><span class="n">setup_actions</span><span class="p">({</span>
+            <span class="s1">&#39;timing-report&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">activate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">show_report</span><span class="p">),</span>
+        <span class="p">})</span>
+
+
+<div class="viewcode-block" id="TimingReport.transition"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.transition">[docs]</a>    <span class="k">def</span> <span class="nf">transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Record a transition time between slides.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            page (`int`): the page number of the current slide</span>
+<span class="sd">            time (`int`): the number of seconds elapsed since the beginning of the presentation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">document_open</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">clear_on_next_transition</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clear_on_next_transition</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_time</span><span class="p">[:]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_time</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">page</span><span class="p">,</span> <span class="n">time</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="TimingReport.reset"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reset_time</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; A timer reset. Clear the history as soon as we start changing pages again.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end_time</span> <span class="o">=</span> <span class="n">reset_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_on_next_transition</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="TimingReport.format_time"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.format_time">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">format_time</span><span class="p">(</span><span class="n">secs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Formats a number of seconds as `minutes:seconds`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `str`: The formatted time, with 2+ digits for minutes and 2 digits for seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{:02}</span><span class="s1">:</span><span class="si">{:02}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="nb">divmod</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">secs</span><span class="p">),</span> <span class="mi">60</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="TimingReport.set_document_metadata"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.set_document_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">set_document_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc_structure</span><span class="p">,</span> <span class="n">page_labels</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Show the popup with the timing infortmation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            doc_structure (`dict`): the structure of the document</span>
+<span class="sd">            page_labels (`list`): the page labels for each of the pages</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">document_open</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">page_labels</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
+
+        <span class="c1"># Do not update if we only close the document.</span>
+        <span class="c1"># That way, the report is still accessible when the document is closed.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">document_open</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">doc_structure</span> <span class="o">=</span> <span class="n">doc_structure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span> <span class="o">=</span> <span class="n">page_labels</span>
+
+        <span class="c1"># Clear the report when there is a new document opened.</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_time</span><span class="p">[:]</span></div>
+
+
+<div class="viewcode-block" id="TimingReport.show_report"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.show_report">[docs]</a>    <span class="k">def</span> <span class="nf">show_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Show the popup with the timing infortmation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            gaction (:class:`~Gio.Action`): the action triggering the call</span>
+<span class="sd">            param (:class:`~GLib.Variant`): the parameter as a variant, or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="n">time</span> <span class="k">for</span> <span class="n">page</span><span class="p">,</span> <span class="n">time</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_time</span><span class="p">]</span>
+        <span class="n">durations</span> <span class="o">=</span> <span class="p">(</span><span class="n">e</span> <span class="o">-</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">times</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">end_time</span><span class="p">]))</span>
+
+        <span class="n">min_time</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">time</span> <span class="k">for</span> <span class="n">page</span><span class="p">,</span> <span class="n">time</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_time</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_time</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">infos</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">min_time</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;page&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+        <span class="n">infos</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Full presentation&#39;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">start_time</span><span class="p">),</span> <span class="n">duration</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page_time</span><span class="p">,</span> <span class="n">durations</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">duration</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">infos</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">duration</span>
+
+            <span class="c1"># lookup the position of the page in the document structure (section etc)</span>
+            <span class="n">lookup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc_structure</span>
+            <span class="n">cur_info_pos</span> <span class="o">=</span> <span class="n">infos</span>
+            <span class="k">while</span> <span class="n">lookup</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">pos</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">lookup</span> <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="n">page</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+                <span class="n">lookup</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">cur_info_pos</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">cur_info_pos</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;page&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">pos</span><span class="p">:</span>
+                    <span class="n">cur_info_pos</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">duration</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cur_info_pos</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;page&#39;</span><span class="p">:</span> <span class="n">pos</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span> <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[],</span>
+                                                     <span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="n">duration</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">})</span>
+                <span class="n">cur_info_pos</span> <span class="o">=</span> <span class="n">cur_info_pos</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># add the actual page as a leaf node</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span><span class="p">[</span><span class="n">page</span><span class="p">]</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">page</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;None&#39;</span>
+            <span class="n">cur_info_pos</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;page&#39;</span><span class="p">:</span> <span class="n">page</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;slide #&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">label</span><span class="p">,</span>
+                                             <span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="n">duration</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">})</span>
+
+
+        <span class="n">treemodel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timing_treeview</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">treemodel</span><span class="p">:</span>
+            <span class="n">treemodel</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+        <span class="n">treemodel</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">TreeStore</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+
+        <span class="n">npages</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span><span class="p">)</span>
+        <span class="n">maxlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">npages</span><span class="p">))</span>
+
+        <span class="n">dfs_info</span> <span class="o">=</span> <span class="p">[(</span><span class="kc">None</span><span class="p">,</span> <span class="n">infos</span><span class="p">)]</span>
+        <span class="k">while</span> <span class="n">dfs_info</span><span class="p">:</span>
+            <span class="n">first_it</span><span class="p">,</span> <span class="n">first</span> <span class="o">=</span> <span class="n">dfs_info</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="n">first</span><span class="p">[</span><span class="s1">&#39;page&#39;</span><span class="p">]</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span><span class="p">[</span><span class="n">page</span><span class="p">]</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">page</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page_labels</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;None&#39;</span>
+            <span class="n">label</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\u2007</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">maxlen</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">)))</span>
+
+            <span class="n">last_col</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> (</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">npages</span><span class="p">)</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">first</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_time</span><span class="p">(</span><span class="n">first</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_time</span><span class="p">(</span><span class="n">first</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">]),</span> <span class="n">last_col</span><span class="p">]</span>
+            <span class="n">it</span> <span class="o">=</span> <span class="n">treemodel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">first_it</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;children&#39;</span> <span class="ow">in</span> <span class="n">first</span><span class="p">:</span>
+                <span class="n">dfs_info</span><span class="o">.</span><span class="n">extend</span><span class="p">((</span><span class="n">it</span><span class="p">,</span> <span class="n">child</span><span class="p">)</span> <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">first</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">timing_treeview</span><span class="o">.</span><span class="n">set_model</span><span class="p">(</span><span class="n">treemodel</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timing_treeview</span><span class="o">.</span><span class="n">expand_row</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">TreePath</span><span class="o">.</span><span class="n">new_first</span><span class="p">(),</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_report_dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_report_dialog</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="LayoutEditor"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor">[docs]</a><span class="k">class</span> <span class="nc">LayoutEditor</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Widget tracking and displaying hierachically how much time was spent in each page/section of the presentation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#: The :class:`~Gtk.TreeView` displaying the hierarchical layouts</span>
+    <span class="n">layout_treeview</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: The :class:`~Gtk.TreeModel` containing the model of the layouts to view in the treeview</span>
+    <span class="n">layout_treemodel</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: The :class:`~Gtk.ListModel` containing the possible orientations</span>
+    <span class="n">orientations_model</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: A :class:`~Gtk.Dialog` to contain the layout edition dialog</span>
+    <span class="n">layout_dialog</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: A :class:`~Gtk.Label` to contain the description of the layout</span>
+    <span class="n">layout_description</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: A :class:`~Gtk.ComboBoxText` to select the layout to edit</span>
+    <span class="n">layout_selector</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: :class:`~pympress.config.Config` to remember preferences</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: :class:`~Gio.Action` containing the number of next frames</span>
+    <span class="n">next_frames_action</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: :class:`~Gio.Action` containing the orientation</span>
+    <span class="n">hltools_orientation_action</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: `str` containing the layout currently edited</span>
+    <span class="n">current_layout</span> <span class="o">=</span> <span class="s1">&#39;plain&#39;</span>
+    <span class="c1">#: callback, to be connected to :func:`~pympress.ui.UI.load_layout`</span>
+    <span class="n">ui_load_layout</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span>
+
+    <span class="n">layout_descriptions</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;notes&#39;</span><span class="p">:</span>      <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Layout for beamer notes on second screen (no current slide preview in notes)&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;plain&#39;</span><span class="p">:</span>      <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Plain layout, without note slides&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;note_pages&#39;</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Layout for libreoffice notes on separate pages (with current slide preview in notes)&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;highlight&#39;</span><span class="p">:</span>  <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Layout to draw on the current slide&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;highlight_notes&#39;</span><span class="p">:</span>  <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Layout to draw on the current slide with notes displayed&#39;</span><span class="p">),</span>
+    <span class="p">}</span>
+
+    <span class="n">_model_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;widget&#39;</span><span class="p">,</span> <span class="s1">&#39;has_resizeable&#39;</span><span class="p">,</span> <span class="s1">&#39;resizeable&#39;</span><span class="p">,</span> <span class="s1">&#39;has_orientation&#39;</span><span class="p">,</span> <span class="s1">&#39;orientation&#39;</span><span class="p">,</span> <span class="s1">&#39;next_slide_count&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;widget_name&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LayoutEditor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_ui</span><span class="p">(</span><span class="s1">&#39;layout_dialog&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_dialog</span><span class="o">.</span><span class="n">set_transient_for</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">p_win</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_dialog</span><span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_APPLY</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">APPLY</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_dialog</span><span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_CANCEL</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_selector</span><span class="o">.</span><span class="n">get_child</span><span class="p">()</span><span class="o">.</span><span class="n">set_editable</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui_load_layout</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">get_callback_handler</span><span class="p">(</span><span class="s1">&#39;load_layout&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">parent</span><span class="o">.</span><span class="n">setup_actions</span><span class="p">({</span>
+            <span class="s1">&#39;edit-layout&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">activate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">show_editor</span><span class="p">),</span>
+        <span class="p">})</span>
+
+
+<div class="viewcode-block" id="LayoutEditor.load_layout"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.load_layout">[docs]</a>    <span class="k">def</span> <span class="nf">load_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Load the given layout in the treemodel for display and manipulation in the treeview</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_description</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout_descriptions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_layout</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_treemodel</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+        <span class="c1"># Display names for the widget ids</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;box&#39;</span><span class="p">:</span>         <span class="n">_</span><span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;notes&#39;</span><span class="p">:</span>       <span class="n">_</span><span class="p">(</span><span class="s1">&#39;notes&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;current&#39;</span><span class="p">:</span>     <span class="n">_</span><span class="p">(</span><span class="s1">&#39;current slide&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;next&#39;</span><span class="p">:</span>        <span class="n">_</span><span class="p">(</span><span class="s1">&#39;next slide(s)&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;highlight&#39;</span><span class="p">:</span>   <span class="n">_</span><span class="p">(</span><span class="s1">&#39;highlighting&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;annotations&#39;</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;annotations (hideable)&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;vertical&#39;</span><span class="p">:</span>    <span class="n">_</span><span class="p">(</span><span class="s1">&#39;vertical&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;horizontal&#39;</span><span class="p">:</span>  <span class="n">_</span><span class="p">(</span><span class="s1">&#39;horizontal&#39;</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="n">next_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_frames_action</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span><span class="o">.</span><span class="n">get_int64</span><span class="p">()</span>
+        <span class="n">hltools_orientation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hltools_orientation_action</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span><span class="o">.</span><span class="n">get_string</span><span class="p">()</span>
+        <span class="n">dfs_info</span> <span class="o">=</span> <span class="p">[(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get_layout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_layout</span><span class="p">))]</span>
+
+        <span class="k">while</span> <span class="n">dfs_info</span><span class="p">:</span>
+            <span class="n">it</span><span class="p">,</span> <span class="n">node</span> <span class="o">=</span> <span class="n">dfs_info</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="n">orientation</span> <span class="o">=</span> <span class="n">names</span><span class="p">[</span><span class="n">hltools_orientation</span><span class="p">]</span> <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="s1">&#39;highlight&#39;</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+                <span class="n">next_slides</span> <span class="o">=</span> <span class="n">next_count</span> <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="s1">&#39;next&#39;</span> <span class="k">else</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">layout_treemodel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="p">[</span><span class="n">node</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">orientation</span><span class="p">),</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">next_slides</span><span class="p">,</span>
+                                                  <span class="n">names</span><span class="p">[</span><span class="n">node</span><span class="p">]])</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">next_it</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_treemodel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;box&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;resizeable&#39;</span><span class="p">],</span>
+                                                            <span class="kc">True</span><span class="p">,</span> <span class="n">names</span><span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;orientation&#39;</span><span class="p">]],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">names</span><span class="p">[</span><span class="s1">&#39;box&#39;</span><span class="p">]])</span>
+                <span class="n">dfs_info</span><span class="o">.</span><span class="n">extend</span><span class="p">((</span><span class="n">next_it</span><span class="p">,</span> <span class="n">child</span><span class="p">)</span> <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_treeview</span><span class="o">.</span><span class="n">expand_all</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="LayoutEditor.set_current_layout"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.set_current_layout">[docs]</a>    <span class="k">def</span> <span class="nf">set_current_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Update which is the layout currently used by the UI</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            layout (`str`): the layout id</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_layout</span> <span class="o">=</span> <span class="n">layout</span></div>
+
+
+<div class="viewcode-block" id="LayoutEditor.layout_selected"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.layout_selected">[docs]</a>    <span class="k">def</span> <span class="nf">layout_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Manage events for the layout selector drop-down menu</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            widget (:class:`~Gtk.ComboBox`):  the widget which has been modified</span>
+<span class="sd">            event (:class:`~Gdk.Event`):  the GTK event</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_layout</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_active_id</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_layout</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="LayoutEditor.get_info"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.get_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Given a path string, look up the appropriate item in both the actual and GtkStore models</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path (`str`):  A string representing a path in the treemodel</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `dict`, :class:`~Gtk.TreeIter`: the node and iterator representing the position in the layout and model</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">TreePath</span><span class="o">.</span><span class="n">new_from_string</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">tree_it</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_treemodel</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get_layout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_layout</span><span class="p">)]}</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">pos</span><span class="o">.</span><span class="n">get_indices</span><span class="p">():</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">node</span><span class="p">,</span> <span class="n">tree_it</span></div>
+
+
+<div class="viewcode-block" id="LayoutEditor.resizeable_toggled"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.resizeable_toggled">[docs]</a>    <span class="k">def</span> <span class="nf">resizeable_toggled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle when box’ resizeable value is toggled</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            widget (:class:`~Gtk.ComboBox`):  the widget which has been modified</span>
+<span class="sd">            path (`str`):  A string representing the path to the modfied item</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">tree_it</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_info</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;resizeable&#39;</span><span class="p">]</span>
+        <span class="n">node</span><span class="p">[</span><span class="s1">&#39;resizeable&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_treemodel</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">tree_it</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_columns</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;resizeable&#39;</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalize_layout</span><span class="p">(</span><span class="n">reload</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LayoutEditor.orientation_changed"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.orientation_changed">[docs]</a>    <span class="k">def</span> <span class="nf">orientation_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">orient_it</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle when the orientation of a box is changed</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            widget (:class:`~Gtk.ComboBox`):  the widget which has been modified</span>
+<span class="sd">            path (`str`):  A string representing the path to the modfied item</span>
+<span class="sd">            orient_it (:class:`~Gtk.TreeIter`): the row of the newly selected value in the orientations liststore model</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">orientations_model</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">orient_it</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">tree_it</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_info</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="s1">&#39;highlight&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hltools_orientation_action</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_string</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">node</span><span class="p">[</span><span class="s1">&#39;orientation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_treemodel</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">tree_it</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_columns</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;orientation&#39;</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalize_layout</span><span class="p">(</span><span class="n">reload</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LayoutEditor.next_slide_count_edited"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.next_slide_count_edited">[docs]</a>    <span class="k">def</span> <span class="nf">next_slide_count_edited</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle when the next slide count is modified</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            widget (:class:`~Gtk.ComboBox`):  the widget which has been modified</span>
+<span class="sd">            path (`str`):  A string representing the path to the modfied item</span>
+<span class="sd">            value (`int`): the new number of next slides</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">tree_it</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_info</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_treemodel</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">tree_it</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_columns</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;next_slide_count&#39;</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next_frames_action</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_int64</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="LayoutEditor.treemodel_to_tree"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.treemodel_to_tree">[docs]</a>    <span class="k">def</span> <span class="nf">treemodel_to_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterator</span><span class="p">,</span> <span class="n">parent_horizontal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">parent_resizeable</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Recursive function to transform the treemodel back into our dict-based representation of the layout</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            iterator (:class:`~Gtk.TreeIter`): the position in the treemodel</span>
+<span class="sd">            parent_horizontal (`bool`): whether the parent node is horizontal</span>
+<span class="sd">            parent_resieable (`bool`): whether the parent node is resizeable</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `list`: the list of `dict` or `str` representing the widgets at this level</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="n">iterator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_treemodel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model_columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])))</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model_columns</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
+
+            <span class="c1"># Make the node conform to either a string or a dictionary with &#39;children&#39; key</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;has_resizeable&#39;</span><span class="p">):</span>
+                <span class="n">node</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">del</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;widget&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;widget&#39;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_treemodel</span><span class="o">.</span><span class="n">iter_has_child</span><span class="p">(</span><span class="n">iterator</span><span class="p">):</span>
+                <span class="n">children</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">treemodel_to_tree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout_treemodel</span><span class="o">.</span><span class="n">iter_children</span><span class="p">(</span><span class="n">iterator</span><span class="p">),</span> <span class="o">*</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">parent_horizontal</span><span class="p">,</span> <span class="n">parent_resizeable</span><span class="p">]</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span> <span class="k">else</span>
+                    <span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;orientation&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;resizeable&#39;</span><span class="p">]]</span>
+                <span class="p">))</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">children</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">str</span><span class="p">:</span>
+                    <span class="c1"># Only assign children if there are any, allows to prune empty boxes</span>
+                    <span class="n">node</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">children</span>
+                <span class="k">elif</span> <span class="n">children</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">str</span><span class="p">:</span>
+                    <span class="c1"># Single-child box replaced by its children</span>
+                    <span class="n">node</span> <span class="o">=</span> <span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">children</span><span class="p">:</span>
+                    <span class="c1"># Non-box node with children: create a new box and set the non-box as first child</span>
+                    <span class="n">node</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+</span> <span class="n">children</span><span class="p">,</span> <span class="s1">&#39;resizeable&#39;</span><span class="p">:</span> <span class="ow">not</span> <span class="n">parent_resizeable</span><span class="p">,</span>
+                            <span class="s1">&#39;orientation&#39;</span><span class="p">:</span> <span class="s1">&#39;vertical&#39;</span> <span class="k">if</span> <span class="n">parent_horizontal</span> <span class="k">else</span> <span class="s1">&#39;horizontal&#39;</span><span class="p">}</span>
+
+            <span class="c1"># Only append widgets, and box nodes that have children</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span> <span class="ow">or</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]:</span>
+                <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+            <span class="n">iterator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_treemodel</span><span class="o">.</span><span class="n">iter_next</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">nodes</span></div>
+
+
+<div class="viewcode-block" id="LayoutEditor.normalize_layout"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.normalize_layout">[docs]</a>    <span class="k">def</span> <span class="nf">normalize_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">drag_context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reload</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Handler at the end of a drag-and-drop in the treeview</span>
+
+<span class="sd">        Here we transform the listmodel modified by drag-and-drop back to a valid `dict` and `str` hierarchy, and then</span>
+<span class="sd">        trigger the loading of the layout again to display the corrected layout.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            widget (:class:`~Gtk.Widget`): The object which received the signal</span>
+<span class="sd">            drag_context (:class:`~Gdk.DragContext`): the drag context</span>
+<span class="sd">            reload (`bool`): whether to reload the layout into the treemodel</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">treemodel_to_tree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout_treemodel</span><span class="o">.</span><span class="n">get_iter_first</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">layout</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="n">layout</span><span class="p">,</span> <span class="s1">&#39;orientation&#39;</span><span class="p">:</span> <span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="s1">&#39;resizeable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">layout</span> <span class="o">=</span> <span class="n">layout</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># This validates</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update_layout_tree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_layout</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui_load_layout</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">reload</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load_layout</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="LayoutEditor.show_editor"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.show_editor">[docs]</a>    <span class="k">def</span> <span class="nf">show_editor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Show the popup to edit the layout. Gather info to populate it, and handle apply/cancel at the end.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            gaction (:class:`~Gio.Action`): the action triggering the call</span>
+<span class="sd">            param (:class:`~GLib.Variant`): the parameter as a variant, or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">restore_layouts</span> <span class="o">=</span> <span class="p">{</span><span class="n">layout</span><span class="p">:</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get_layout</span><span class="p">(</span><span class="n">layout</span><span class="p">))</span> <span class="k">for</span> <span class="n">layout</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_descriptions</span><span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">next_frames_action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_application</span><span class="p">()</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;next-frames&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hltools_orientation_action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_application</span><span class="p">()</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;highlight-tools-orientation&#39;</span><span class="p">)</span>
+        <span class="n">restore_next_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_frames_action</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span><span class="o">.</span><span class="n">get_int64</span><span class="p">()</span>
+        <span class="n">restore_hltools_orientation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hltools_orientation_action</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span><span class="o">.</span><span class="n">get_string</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_selector</span><span class="o">.</span><span class="n">set_active_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_layout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_layout</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="o">!=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">APPLY</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">layout_name</span><span class="p">,</span> <span class="n">layout</span> <span class="ow">in</span> <span class="n">restore_layouts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update_layout_tree</span><span class="p">(</span><span class="n">layout_name</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next_frames_action</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_int64</span><span class="p">(</span><span class="n">restore_next_count</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hltools_orientation_action</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_string</span><span class="p">(</span><span class="n">restore_hltools_orientation</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ui_load_layout</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_dialog</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div></div>
+
+
+
+<div class="viewcode-block" id="AutoPlay"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay">[docs]</a><span class="k">class</span> <span class="nc">AutoPlay</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Widget and machinery to setup and play slides automatically, optionally in a loop</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#: A :class:`~Gtk.Dialog` to contain the layout edition dialog</span>
+    <span class="n">autoplay_dialog</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: The :class:`~Gtk.SpinButton` for the lower page</span>
+    <span class="n">autoplay_spin_lower</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: The :class:`~Gtk.SpinButton` for the upper page</span>
+    <span class="n">autoplay_spin_upper</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: The :class:`~Gtk.SpinButton` for the transition between slides</span>
+    <span class="n">autoplay_spin_time</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: The :class:`~Gtk.CheckButton` to loop</span>
+    <span class="n">autoplay_button_loop</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: :class:`~Glib.Source` which is the source id of the periodic slide transition, or `None` if there is no autoplay</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: if the timeout has been paused, `int` which represents the number of milliseconds until the next page slide</span>
+    <span class="n">remain</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: callback, to be connected to :func:`~pympress.ui.UI.goto_page`</span>
+    <span class="n">goto_page</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AutoPlay</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_ui</span><span class="p">(</span><span class="s1">&#39;autoplay&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_dialog</span><span class="o">.</span><span class="n">set_transient_for</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">p_win</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_dialog</span><span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_APPLY</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">APPLY</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_dialog</span><span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_CANCEL</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_dialog</span><span class="o">.</span><span class="n">set_default_response</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">APPLY</span><span class="p">)</span>
+
+        <span class="n">parent</span><span class="o">.</span><span class="n">setup_actions</span><span class="p">({</span>
+            <span class="s1">&#39;autoplay&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">activate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">),</span>
+        <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">goto_page</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">get_callback_handler</span><span class="p">(</span><span class="s1">&#39;goto_page&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="AutoPlay.set_doc_pages"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.set_doc_pages">[docs]</a>    <span class="k">def</span> <span class="nf">set_doc_pages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_pages</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for when a document number of pages changes</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n_pages (`int`): the number of pages of the loaded document</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_lower</span><span class="o">.</span><span class="n">set_range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_pages</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_lower</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_upper</span><span class="o">.</span><span class="n">set_range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_pages</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_upper</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">n_pages</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AutoPlay.page_changed"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.page_changed">[docs]</a>    <span class="k">def</span> <span class="nf">page_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spin_button</span><span class="p">,</span> <span class="n">scroll_direction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for when a page spin button is modified, maintains a delta of at least 2 pages between first and</span>
+<span class="sd">        last page of the intended loop. (No loops needed to loop a single slide.)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            spin_button (:class:`~Gtk.SpinButton`): The button whose value was changed</span>
+<span class="sd">            scroll_direction (:class:`~Gtk.ScrollType`): The speed and amount of change</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">spin_button</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_lower</span><span class="p">:</span>
+            <span class="n">minval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_lower</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_upper</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">minval</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_upper</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">minval</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">spin_button</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_upper</span><span class="p">:</span>
+            <span class="n">maxval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_upper</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_lower</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">maxval</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_lower</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">maxval</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AutoPlay.pause"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.pause">[docs]</a>    <span class="k">def</span> <span class="nf">pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Pause the looping if it’s running</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">remain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">get_ready_time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">set_ready_time</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AutoPlay.unpause"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.unpause">[docs]</a>    <span class="k">def</span> <span class="nf">unpause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Unpause the looping if it’s paused</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">remain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">set_ready_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">remain</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remain</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="AutoPlay.is_looping"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.is_looping">[docs]</a>    <span class="k">def</span> <span class="nf">is_looping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return whether an auto-playing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="AutoPlay.stop_looping"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.stop_looping">[docs]</a>    <span class="k">def</span> <span class="nf">stop_looping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Stop the auto-playing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remain</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="AutoPlay.start_looping"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.start_looping">[docs]</a>    <span class="k">def</span> <span class="nf">start_looping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Start the auto-playing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_looping</span><span class="p">()</span>
+
+        <span class="n">it</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">pages</span><span class="p">[:</span><span class="mi">2</span><span class="p">]))</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">else</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">pages</span><span class="p">[:</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next_page</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">GLib</span><span class="o">.</span><span class="n">timeout_source_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pages</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">MainContext</span><span class="o">.</span><span class="n">default</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">set_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">next_page</span><span class="p">,</span> <span class="n">it</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AutoPlay.next_page"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.next_page">[docs]</a>    <span class="k">def</span> <span class="nf">next_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">it</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback to turn the page to the next slide</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            it (`iterator`): An iterator that contains the next pages to load. Stop when there are no more pages.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `bool`: `True` if he callback needs to be called again, otherwise `False`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">goto_page</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">),</span> <span class="n">autoplay</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop_looping</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="AutoPlay.get_page_range"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.get_page_range">[docs]</a>    <span class="k">def</span> <span class="nf">get_page_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return the autoplay info</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `tuple`: (first page, stop page, looping, delay i ms)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages</span></div>
+
+
+<div class="viewcode-block" id="AutoPlay.run"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Show the dialog to setup auto-play, and start the autoplay if « apply » is selected</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            gaction (:class:`~Gio.Action`): the action triggering the call</span>
+<span class="sd">            param (:class:`~GLib.Variant`): the parameter as a variant, or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reply</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_dialog</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">reply</span> <span class="o">!=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">APPLY</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pages</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_lower</span><span class="o">.</span><span class="n">get_value_as_int</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_upper</span><span class="o">.</span><span class="n">get_value_as_int</span><span class="p">(),</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_button_loop</span><span class="o">.</span><span class="n">get_active</span><span class="p">(),</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_time</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_looping</span><span class="p">()</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2009-2011, Thomas Jost; 2015-2023 Cimbali.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
