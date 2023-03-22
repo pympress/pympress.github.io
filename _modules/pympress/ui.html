@@ -2108,7 +2108,12 @@
             <span class="n">rect</span> <span class="o">=</span> <span class="n">ScreenArea</span><span class="p">(</span><span class="n">win</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span> <span class="o">+</span> <span class="n">win</span><span class="o">.</span><span class="n">get_size</span><span class="p">())</span>
             <span class="n">pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">most_intersection</span><span class="p">(</span><span class="n">all_geom</span><span class="p">))</span>
 
-        <span class="n">prim</span> <span class="o">=</span> <span class="n">ScreenArea</span><span class="p">(</span><span class="n">display</span><span class="o">.</span><span class="n">get_primary_monitor</span><span class="p">()</span><span class="o">.</span><span class="n">get_geometry</span><span class="p">())</span>
+        <span class="n">prim_monitor</span> <span class="o">=</span> <span class="n">display</span><span class="o">.</span><span class="n">get_primary_monitor</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">prim_monitor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">prim</span> <span class="o">=</span> <span class="n">all_geom</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prim</span> <span class="o">=</span> <span class="n">ScreenArea</span><span class="p">(</span><span class="n">prim_monitor</span><span class="o">.</span><span class="n">get_geometry</span><span class="p">())</span>
+
         <span class="k">return</span> <span class="p">(</span><span class="o">*</span><span class="n">pos</span><span class="p">,</span> <span class="n">prim</span><span class="o">.</span><span class="n">most_intersection</span><span class="p">(</span><span class="n">all_geom</span><span class="p">),</span> <span class="n">prim</span><span class="o">.</span><span class="n">least_intersection</span><span class="p">(</span><span class="n">all_geom</span><span class="p">))</span></div></div>
 
 
