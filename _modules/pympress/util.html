@@ -116,6 +116,7 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
+<span class="kn">import</span> <span class="nn">contextlib</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -129,6 +130,7 @@
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">importlib_resources</span>
 
+
 <span class="n">IS_POSIX</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span>
 <span class="n">IS_MAC_OS</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;darwin&#39;</span>
 <span class="n">IS_WINDOWS</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span>
@@ -140,6 +142,9 @@
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">_winreg</span> <span class="k">as</span> <span class="nn">winreg</span>
 
+
+<span class="c1">#: A :class:`~contextlib.ExitStack` containing all entered importlib context managers for used resources</span>
+<span class="n">_opened_resources</span> <span class="o">=</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">ExitStack</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="get_pympress_meta"><a class="viewcode-back" href="../../pympress.html#pympress.util.get_pympress_meta">[docs]</a><span class="k">def</span> <span class="nf">get_pympress_meta</span><span class="p">():</span>
@@ -193,7 +198,13 @@
         <span class="n">root</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
         <span class="k">return</span> <span class="n">root</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="o">*</span><span class="n">path_parts</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;pympress&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">path_parts</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])),</span> <span class="n">path_parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">resource</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;pympress&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">path_parts</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])),</span> <span class="n">path_parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">_opened_resources</span><span class="o">.</span><span class="n">enter_context</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="close_opened_resources"><a class="viewcode-back" href="../../pympress.html#pympress.util.close_opened_resources">[docs]</a><span class="k">def</span> <span class="nf">close_opened_resources</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Close all importlib context managers for resources that we needed over the program lifetime. &quot;&quot;&quot;</span>
+    <span class="n">_opened_resources</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="get_locale_dir"><a class="viewcode-back" href="../../pympress.html#pympress.util.get_locale_dir">[docs]</a><span class="k">def</span> <span class="nf">get_locale_dir</span><span class="p">():</span>
@@ -285,7 +296,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        `list` of `str`: The paths to the icons in the pixmaps directory</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">__get_resource_path</span><span class="p">(</span><span class="s1">&#39;share&#39;</span><span class="p">,</span> <span class="s1">&#39;pixmaps&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;pympress-*.png&#39;</span><span class="p">)))</span></div>
+    <span class="k">return</span> <span class="p">[</span><span class="n">get_icon_path</span><span class="p">(</span><span class="s1">&#39;pympress-</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">))</span> <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">64</span><span class="p">)]</span></div>
 
 
 <div class="viewcode-block" id="get_log_path"><a class="viewcode-back" href="../../pympress.html#pympress.util.get_log_path">[docs]</a><span class="k">def</span> <span class="nf">get_log_path</span><span class="p">():</span>
