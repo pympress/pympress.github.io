@@ -399,6 +399,196 @@
 <span class="c1">#: A :class:`~subprocess.Popen` object to track the child caffeinate process</span>
 <span class="n">hard_set_screensaver</span><span class="o">.</span><span class="n">caffeinate_process</span> <span class="o">=</span> <span class="kc">None</span>
 
+
+<div class="viewcode-block" id="NoMonitorPositions"><a class="viewcode-back" href="../../pympress.html#pympress.util.NoMonitorPositions">[docs]</a><span class="k">class</span> <span class="nc">NoMonitorPositions</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; The Exception we raise when there is no way of figuring out the monitor position of windows &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="ScreenArea"><a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea">[docs]</a><span class="k">class</span> <span class="nc">ScreenArea</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Convenience class to represent monitors or windows in terms of the area (position and size) they use on screen</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ScreenArea.most_intersection"><a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.most_intersection">[docs]</a>    <span class="k">def</span> <span class="nf">most_intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Find the rectangle that intersects most with `~rect` in `~candidates`</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            candidates (iterable of `ScreenArea`s): The monitor areas to check for intersection</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `ScreenArea`: The best candidate screen area, i.e. that has the largest intersection</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">areas</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">geom</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+            <span class="n">intersection</span> <span class="o">=</span> <span class="n">geom</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">intersection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Not even 0 for a common bound</span>
+            <span class="k">elif</span> <span class="n">intersection</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">geom</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intersection</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">intersection</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">candidates</span><span class="p">[</span><span class="n">areas</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">areas</span><span class="p">))]</span></div>
+
+
+<div class="viewcode-block" id="ScreenArea.least_intersection"><a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.least_intersection">[docs]</a>    <span class="k">def</span> <span class="nf">least_intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Find the rectangle that intersects least with `~rect` in `~candidates`</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            candidates (iterable of `ScreenArea`s): The monitor areas to check for intersection</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `ScreenArea`: The best candidate screen area, i.e. that has the smallest intersection</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">areas</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">geom</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+            <span class="n">intersection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">intersection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">geom</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intersection</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">intersection</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">candidates</span><span class="p">[</span><span class="n">areas</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">areas</span><span class="p">))]</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">height</span>
+
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return a complete representation of the object &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;ScreenArea(at </span><span class="si">{}</span><span class="s1"> size </span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="ScreenArea.intersection"><a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.intersection">[docs]</a>    <span class="k">def</span> <span class="nf">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Compute the intersection of 2 screen areas</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (`ScreenArea`): The screen area to compare with</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `ScreenArea` or `None`: An area representing the intersection, or `None` if there is no intersection</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">width</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">height</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">height</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span>
+        <span class="k">return</span> <span class="n">ScreenArea</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ScreenArea.equal"><a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.equal">[docs]</a>    <span class="k">def</span> <span class="nf">equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Check whether 2 areas cover the exact same space</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (`ScreenArea`): The screen area to compare with</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `bool`: `True` iff the areas are identical</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">height</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ScreenArea.contains"><a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Check whether this area contains `~other`</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (`ScreenArea`): The screen area to compare with</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `bool`: `True` iff the area is contained</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">intersection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">intersection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">intersection</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ScreenArea.intersects"><a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.intersects">[docs]</a>    <span class="k">def</span> <span class="nf">intersects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Check whether this area intersects `~other`</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (`ScreenArea`): The screen area to compare with</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `bool`: `True` iff the areas have an intersection</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span></div></div>
+
+
+<div class="viewcode-block" id="Monitor"><a class="viewcode-back" href="../../pympress.html#pympress.util.Monitor">[docs]</a><span class="k">class</span> <span class="nc">Monitor</span><span class="p">(</span><span class="n">ScreenArea</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A specialised `~ScreenArea` representing a monitor, with an descriptive string and a monitor number &quot;&quot;&quot;</span>
+    <span class="c1">#: A `str` to represent a user-friendly name for the monitor</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="c1">#: An `int` that identifies the monitor in :class:`~Gdk.Display`</span>
+    <span class="n">monitor_number</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">id_</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Monitor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">id_</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitor_number</span> <span class="o">=</span> <span class="n">num</span>
+
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return a complete representation of the object &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;Monitor(</span><span class="si">{}</span><span class="s1"> at </span><span class="si">{}</span><span class="s1"> size </span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="Monitor.lookup_monitors"><a class="viewcode-back" href="../../pympress.html#pympress.util.Monitor.lookup_monitors">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">lookup_monitors</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="o">*</span><span class="n">windows</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the info on the monitors</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            display (:class:`~Gdk.Display`):  the current screen</span>
+<span class="sd">            *windows (`tuple` of :class:`~Gtk.Window`):  windows for wich to look up the monitor position</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `tuple` of `Monitor`: The monitors for each window, followed by the best monitors for presenter and content</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Helpful for debugging</span>
+        <span class="n">monitors</span> <span class="o">=</span> <span class="p">[</span><span class="n">display</span><span class="o">.</span><span class="n">get_monitor</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">display</span><span class="o">.</span><span class="n">get_n_monitors</span><span class="p">())]</span>
+        <span class="n">mon_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mon</span><span class="o">.</span><span class="n">get_manufacturer</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;Unknown manufacturer&#39;</span><span class="p">,</span>
+                                    <span class="n">mon</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;Unknown model&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">mon</span> <span class="ow">in</span> <span class="n">monitors</span><span class="p">]</span>
+
+        <span class="n">all_geom</span> <span class="o">=</span> <span class="p">[</span><span class="n">Monitor</span><span class="p">(</span><span class="n">mon</span><span class="o">.</span><span class="n">get_geometry</span><span class="p">(),</span> <span class="n">name</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">mon</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">monitors</span><span class="p">,</span> <span class="n">mon_names</span><span class="p">))]</span>
+
+        <span class="c1"># Remove duplicate monitors (“mirrored”)</span>
+        <span class="n">all_geom</span> <span class="o">=</span> <span class="p">[</span><span class="n">rect</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">rect</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_geom</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">all_geom</span><span class="p">[:</span><span class="n">n</span><span class="p">])]</span>
+        <span class="c1"># Remove monitors whose area is entirely contained in that of another monitor. NB: union() computes intersection</span>
+        <span class="n">all_geom</span> <span class="o">=</span> <span class="p">[</span><span class="n">rect</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">rect</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_geom</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span> <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">all_geom</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="n">all_geom</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])]</span>
+
+        <span class="c1"># We have a global positioning system</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">win</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">win</span> <span class="ow">in</span> <span class="n">windows</span><span class="p">):</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">ScreenArea</span><span class="p">(</span><span class="n">win</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span> <span class="o">+</span> <span class="n">win</span><span class="o">.</span><span class="n">get_size</span><span class="p">())</span><span class="o">.</span><span class="n">most_intersection</span><span class="p">(</span><span class="n">all_geom</span><span class="p">)</span> <span class="k">for</span> <span class="n">win</span> <span class="ow">in</span> <span class="n">windows</span><span class="p">]</span>
+        <span class="c1"># We have access to Gdk Windows</span>
+        <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="n">win</span><span class="o">.</span><span class="n">get_window</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">win</span> <span class="ow">in</span> <span class="n">windows</span><span class="p">):</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">ScreenArea</span><span class="p">(</span><span class="n">mon</span><span class="o">.</span><span class="n">get_geometry</span><span class="p">())</span><span class="o">.</span><span class="n">most_intersection</span><span class="p">(</span><span class="n">all_geom</span><span class="p">)</span> <span class="k">for</span> <span class="n">mon</span> <span class="ow">in</span> <span class="p">(</span>
+                <span class="n">display</span><span class="o">.</span><span class="n">get_monitor_at_window</span><span class="p">(</span><span class="n">win</span><span class="o">.</span><span class="n">get_window</span><span class="p">())</span> <span class="k">for</span> <span class="n">win</span> <span class="ow">in</span> <span class="n">windows</span>
+            <span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoMonitorPositions</span><span class="p">()</span>
+
+        <span class="c1"># Figure out which monitor is best for presenter view: embedded panel on laptops, primary, or just first in list</span>
+        <span class="n">prim_area</span> <span class="o">=</span> <span class="n">all_geom</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">mon</span> <span class="ow">in</span> <span class="n">monitors</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mon</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">mon</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">embedded</span><span class="p">)</span> <span class="k">for</span> <span class="n">embedded</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;LVDS&#39;</span><span class="p">,</span> <span class="s1">&#39;IDP&#39;</span><span class="p">,</span> <span class="s1">&#39;EDP&#39;</span><span class="p">,</span> <span class="s1">&#39;LCD&#39;</span><span class="p">,</span> <span class="s1">&#39;DSI&#39;</span><span class="p">}):</span>
+                <span class="n">prim_area</span> <span class="o">=</span> <span class="n">ScreenArea</span><span class="p">(</span><span class="n">mon</span><span class="o">.</span><span class="n">get_geometry</span><span class="p">())</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">mon</span><span class="o">.</span><span class="n">is_primary</span><span class="p">():</span>
+                <span class="c1"># NB. there may be 0 primaries. Don’t break as we prefer to identify an embedded screen.</span>
+                <span class="n">prim_area</span> <span class="o">=</span> <span class="n">ScreenArea</span><span class="p">(</span><span class="n">mon</span><span class="o">.</span><span class="n">get_geometry</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="o">*</span><span class="n">pos</span><span class="p">,</span> <span class="n">prim_area</span><span class="o">.</span><span class="n">most_intersection</span><span class="p">(</span><span class="n">all_geom</span><span class="p">),</span> <span class="n">prim_area</span><span class="o">.</span><span class="n">least_intersection</span><span class="p">(</span><span class="n">all_geom</span><span class="p">))</span></div></div>
+
 <span class="c1">##</span>
 <span class="c1"># Local Variables:</span>
 <span class="c1"># mode: python</span>

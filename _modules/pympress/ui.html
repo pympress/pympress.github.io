@@ -403,7 +403,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">c_win</span><span class="o">.</span><span class="n">parse_geometry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">))</span>
 
         <span class="n">screen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_win</span><span class="o">.</span><span class="n">get_screen</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setup_screens</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="s1">&#39;at startup&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">!=</span> <span class="s1">&#39;GdkWaylandScreen&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup_screens</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="s1">&#39;at startup&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;swap-screens&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set_enabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
         <span class="n">screen</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;monitors-changed&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">screens_changed</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">c_win</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
@@ -413,6 +417,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">c_da</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">redraw_panes</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">do_page_change</span><span class="p">(</span><span class="n">unpause</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;GdkWaylandScreen&#39;</span><span class="p">:</span>
+            <span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup_screens</span><span class="p">,</span> <span class="n">screen</span><span class="p">,</span> <span class="s1">&#39;delayed startup&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="UI.load_icons"><a class="viewcode-back" href="../../pympress.html#pympress.ui.UI.load_icons">[docs]</a>    <span class="k">def</span> <span class="nf">load_icons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -570,21 +577,25 @@
 <span class="sd">            event_name (`str`):  a description of what caused the screen setup event, for debugging</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">display</span> <span class="o">=</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">Display</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
-        <span class="n">c_monitor</span><span class="p">,</span> <span class="n">p_monitor</span><span class="p">,</span> <span class="n">primary</span><span class="p">,</span> <span class="n">non_primary</span> <span class="o">=</span> <span class="n">ScreenArea</span><span class="o">.</span><span class="n">lookup_monitors</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_win</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_win</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">c_monitor</span><span class="p">,</span> <span class="n">p_monitor</span><span class="p">,</span> <span class="n">primary</span><span class="p">,</span> <span class="n">non_primary</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">Monitor</span><span class="o">.</span><span class="n">lookup_monitors</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_win</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_win</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">util</span><span class="o">.</span><span class="n">NoMonitorPositions</span><span class="p">:</span>
+            <span class="k">return</span>
 
         <span class="c1"># Noisy, but just for debug level</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Detecting monitor layout &#39;</span> <span class="o">+</span> <span class="n">event_name</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-            <span class="s1">&#39;Content window is at monitor &#39;</span> <span class="o">+</span> <span class="n">c_monitor</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
-            <span class="s1">&#39;Presenter window is at monitor &#39;</span> <span class="o">+</span> <span class="n">p_monitor</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
-            <span class="s1">&#39;Primary monitor is (or overlapped with) &#39;</span> <span class="o">+</span> <span class="n">primary</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s1">&#39;Content window is at monitor &#39;</span> <span class="o">+</span> <span class="n">c_monitor</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s1">&#39;Presenter window is at monitor &#39;</span> <span class="o">+</span> <span class="n">p_monitor</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s1">&#39;Primary monitor is (or overlapped with) &#39;</span> <span class="o">+</span> <span class="n">primary</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
             <span class="s1">&#39;No non-primary monitor available&#39;</span> <span class="k">if</span> <span class="n">primary</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">non_primary</span><span class="p">)</span>
-            <span class="k">else</span> <span class="s1">&#39;A non-primary monitor is (or overlapped with) &#39;</span> <span class="o">+</span> <span class="n">non_primary</span><span class="o">.</span><span class="n">id</span>
+            <span class="k">else</span> <span class="s1">&#39;A non-primary monitor is (or overlapped with) &#39;</span> <span class="o">+</span> <span class="n">non_primary</span><span class="o">.</span><span class="n">name</span>
         <span class="p">]))</span>
 
         <span class="n">c_full</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getboolean</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;start_fullscreen&#39;</span><span class="p">)</span>
         <span class="n">p_full</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getboolean</span><span class="p">(</span><span class="s1">&#39;presenter&#39;</span><span class="p">,</span> <span class="s1">&#39;start_fullscreen&#39;</span><span class="p">)</span>
+        <span class="n">wayland</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">display</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;GdkWaylandDisplay&#39;</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">c_full</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_full</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">c_full</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">p_full</span> <span class="ow">or</span> <span class="n">c_monitor</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">p_monitor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="k">if</span> <span class="n">primary</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">non_primary</span><span class="p">):</span>
@@ -597,21 +608,33 @@
             <span class="c1"># To start fullscreen, we need to ensure windows are on individual monitors</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">c_monitor</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">p_monitor</span><span class="p">):</span>
                 <span class="k">pass</span>
+            <span class="k">elif</span> <span class="n">wayland</span><span class="p">:</span>
+                <span class="c1"># On Wayland, we can’t move windows, and they happen to be on the same monitor.</span>
+                <span class="c1"># So if we are to fullscreen one, just do it on another monitor</span>
+                <span class="k">if</span> <span class="n">c_full</span><span class="p">:</span>
+                    <span class="n">c_monitor</span> <span class="o">=</span> <span class="n">p_monitor</span><span class="o">.</span><span class="n">least_intersection</span><span class="p">([</span><span class="n">primary</span><span class="p">,</span> <span class="n">non_primary</span><span class="p">])</span>
+                <span class="k">elif</span> <span class="n">p_full</span><span class="p">:</span>
+                    <span class="n">p_monitor</span> <span class="o">=</span> <span class="n">c_monitor</span><span class="o">.</span><span class="n">least_intersection</span><span class="p">([</span><span class="n">primary</span><span class="p">,</span> <span class="n">non_primary</span><span class="p">])</span>
             <span class="k">elif</span> <span class="n">c_monitor</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">primary</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">move_window</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c_win</span><span class="p">,</span> <span class="n">c_monitor</span><span class="p">,</span> <span class="n">non_primary</span><span class="p">)</span>
+                <span class="n">c_monitor</span> <span class="o">=</span> <span class="n">non_primary</span>
             <span class="k">else</span><span class="p">:</span>  <span class="c1"># not p_monitor.equal(primary)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">move_window</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_win</span><span class="p">,</span> <span class="n">p_monitor</span><span class="p">,</span> <span class="n">primary</span><span class="p">)</span>
+                <span class="n">p_monitor</span> <span class="o">=</span> <span class="n">primary</span>
 
         <span class="k">if</span> <span class="n">p_full</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">p_win</span><span class="o">.</span><span class="n">fullscreen</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">p_win</span><span class="o">.</span><span class="n">fullscreen_on_monitor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_win</span><span class="o">.</span><span class="n">get_screen</span><span class="p">(),</span> <span class="n">p_monitor</span><span class="o">.</span><span class="n">monitor_number</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">wayland</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">p_win</span><span class="o">.</span><span class="n">unfullscreen</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">c_full</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">c_win</span><span class="o">.</span><span class="n">fullscreen</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">c_win</span><span class="o">.</span><span class="n">fullscreen_on_monitor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c_win</span><span class="o">.</span><span class="n">get_screen</span><span class="p">(),</span> <span class="n">c_monitor</span><span class="o">.</span><span class="n">monitor_number</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_screensaver</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">c_win</span><span class="o">.</span><span class="n">unfullscreen</span><span class="p">()</span>
+            <span class="c1"># Let Wayland do its own un-fullscreening as we can’t move the windows afterwards and messing with it</span>
+            <span class="c1"># results in a non-fullscreen window that is out of bounds of the remaining monitors.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">wayland</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">c_win</span><span class="o">.</span><span class="n">unfullscreen</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_screensaver</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">set_action_state</span><span class="p">(</span><span class="s1">&#39;content-fullscreen&#39;</span><span class="p">,</span> <span class="n">c_full</span><span class="p">)</span>
@@ -1750,7 +1773,10 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Swap the monitors on which each window is displayed (if there are 2 monitors at least).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">display</span> <span class="o">=</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">Display</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
-        <span class="n">c_monitor</span><span class="p">,</span> <span class="n">p_monitor</span><span class="p">,</span> <span class="n">primary</span><span class="p">,</span> <span class="n">non_primary</span> <span class="o">=</span> <span class="n">ScreenArea</span><span class="o">.</span><span class="n">lookup_monitors</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_win</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_win</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">c_monitor</span><span class="p">,</span> <span class="n">p_monitor</span><span class="p">,</span> <span class="n">primary</span><span class="p">,</span> <span class="n">non_primary</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">Monitor</span><span class="o">.</span><span class="n">lookup_monitors</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_win</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_win</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">util</span><span class="o">.</span><span class="n">NoMonitorPositions</span><span class="p">:</span>
+            <span class="k">return</span>
 
         <span class="k">if</span> <span class="n">primary</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">non_primary</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">p_monitor</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">c_monitor</span><span class="p">):</span>
             <span class="k">return</span>
@@ -1960,161 +1986,6 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;presenter&#39;</span><span class="p">,</span> <span class="s1">&#39;show_bigbuttons&#39;</span><span class="p">,</span> <span class="s1">&#39;on&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_bigbuttons</span> <span class="k">else</span> <span class="s1">&#39;off&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">set_action_state</span><span class="p">(</span><span class="s1">&#39;big-buttons&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_bigbuttons</span><span class="p">)</span></div></div>
-
-
-<div class="viewcode-block" id="ScreenArea"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea">[docs]</a><span class="k">class</span> <span class="nc">ScreenArea</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Convenience class to represent monitors or windows in terms of the area (position and size) they use on screen</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ScreenArea.most_intersection"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.most_intersection">[docs]</a>    <span class="k">def</span> <span class="nf">most_intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Find the rectangle that intersects most with `~rect` in `~candidates`</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            candidates (iterable of `ScreenArea`s): The monitor areas to check for intersection</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            `ScreenArea`: The best candidate screen area, i.e. that has the largest intersection</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">areas</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">geom</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
-            <span class="n">intersection</span> <span class="o">=</span> <span class="n">geom</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">intersection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Not even 0 for a common bound</span>
-            <span class="k">elif</span> <span class="n">intersection</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">geom</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intersection</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">intersection</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">candidates</span><span class="p">[</span><span class="n">areas</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">areas</span><span class="p">))]</span></div>
-
-
-<div class="viewcode-block" id="ScreenArea.least_intersection"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.least_intersection">[docs]</a>    <span class="k">def</span> <span class="nf">least_intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Find the rectangle that intersects least with `~rect` in `~candidates`</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            candidates (iterable of `ScreenArea`s): The monitor areas to check for intersection</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            `ScreenArea`: The best candidate screen area, i.e. that has the smallest intersection</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">areas</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">geom</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
-            <span class="n">intersection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">intersection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">geom</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intersection</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">intersection</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">candidates</span><span class="p">[</span><span class="n">areas</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">areas</span><span class="p">))]</span></div>
-
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">id_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">obj</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">height</span>
-        <span class="k">if</span> <span class="n">id_</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">id_</span>
-
-
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return a complete representation of the object &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s1">&#39;ScreenArea(</span><span class="si">{}</span><span class="s1">at </span><span class="si">{}</span><span class="s1"> size </span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-                                                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
-
-
-<div class="viewcode-block" id="ScreenArea.intersection"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.intersection">[docs]</a>    <span class="k">def</span> <span class="nf">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Compute the intersection of 2 screen areas</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            other (`ScreenArea`): The screen area to compare with</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            `ScreenArea` or `None`: An area representing the intersection, or `None` if there is no intersection</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">width</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">height</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-
-        <span class="n">x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">w</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">height</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span>
-        <span class="k">return</span> <span class="n">ScreenArea</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span></div>
-
-
-<div class="viewcode-block" id="ScreenArea.equal"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.equal">[docs]</a>    <span class="k">def</span> <span class="nf">equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Check whether 2 areas cover the exact same space</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            other (`ScreenArea`): The screen area to compare with</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            `bool`: `True` iff the areas are identical</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">height</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="ScreenArea.contains"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Check whether this area contains `~other`</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            other (`ScreenArea`): The screen area to compare with</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            `bool`: `True` iff the area is contained</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">intersection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">intersection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">intersection</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="ScreenArea.intersects"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.intersects">[docs]</a>    <span class="k">def</span> <span class="nf">intersects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Check whether this area intersects `~other`</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            other (`ScreenArea`): The screen area to compare with</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            `bool`: `True` iff the areas have an intersection</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span></div>
-
-
-<div class="viewcode-block" id="ScreenArea.lookup_monitors"><a class="viewcode-back" href="../../pympress.html#pympress.ui.ScreenArea.lookup_monitors">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">lookup_monitors</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="o">*</span><span class="n">windows</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the info on the monitors</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            display (:class:`~Gdk.Display`):  the current screen</span>
-<span class="sd">            *windows (`tuple` of :class:`~Gtk.Window`):  windows for wich to look up the monitor position</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            `tuple` of `ScreenArea`: The monitor areas for each window, followed by</span>
-<span class="sd">                                     the best monitor areas for primary and non-primary monitors</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Helpful for debugging</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mon</span><span class="o">.</span><span class="n">get_manufacturer</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;Unknown manufacturer&#39;</span><span class="p">,</span> <span class="n">mon</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;Unknown model&#39;</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">mon</span> <span class="ow">in</span> <span class="p">(</span><span class="n">display</span><span class="o">.</span><span class="n">get_monitor</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">display</span><span class="o">.</span><span class="n">get_n_monitors</span><span class="p">()))]</span>
-
-        <span class="n">all_geom</span> <span class="o">=</span> <span class="p">[</span><span class="n">ScreenArea</span><span class="p">(</span><span class="n">display</span><span class="o">.</span><span class="n">get_monitor</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">get_geometry</span><span class="p">(),</span> <span class="n">name</span><span class="p">[</span><span class="n">n</span><span class="p">])</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">display</span><span class="o">.</span><span class="n">get_n_monitors</span><span class="p">())]</span>
-        <span class="c1"># Remove duplicate monitors (“mirrored”)</span>
-        <span class="n">all_geom</span> <span class="o">=</span> <span class="p">[</span><span class="n">rect</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">rect</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_geom</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">all_geom</span><span class="p">[:</span><span class="n">n</span><span class="p">])]</span>
-        <span class="c1"># Remove monitors whose area is entirely contained in that of another monitor. NB: union() computes intersection</span>
-        <span class="n">all_geom</span> <span class="o">=</span> <span class="p">[</span><span class="n">rect</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">rect</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_geom</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span> <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">all_geom</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="n">all_geom</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])]</span>
-
-        <span class="n">pos</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">win</span> <span class="ow">in</span> <span class="n">windows</span><span class="p">:</span>
-            <span class="n">rect</span> <span class="o">=</span> <span class="n">ScreenArea</span><span class="p">(</span><span class="n">win</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span> <span class="o">+</span> <span class="n">win</span><span class="o">.</span><span class="n">get_size</span><span class="p">())</span>
-            <span class="n">pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">most_intersection</span><span class="p">(</span><span class="n">all_geom</span><span class="p">))</span>
-
-        <span class="n">prim_monitor</span> <span class="o">=</span> <span class="n">display</span><span class="o">.</span><span class="n">get_primary_monitor</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">prim_monitor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">prim</span> <span class="o">=</span> <span class="n">all_geom</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">prim</span> <span class="o">=</span> <span class="n">ScreenArea</span><span class="p">(</span><span class="n">prim_monitor</span><span class="o">.</span><span class="n">get_geometry</span><span class="p">())</span>
-
-        <span class="k">return</span> <span class="p">(</span><span class="o">*</span><span class="n">pos</span><span class="p">,</span> <span class="n">prim</span><span class="o">.</span><span class="n">most_intersection</span><span class="p">(</span><span class="n">all_geom</span><span class="p">),</span> <span class="n">prim</span><span class="o">.</span><span class="n">least_intersection</span><span class="p">(</span><span class="n">all_geom</span><span class="p">))</span></div></div>
 
 
 <span class="c1">##</span>
