@@ -115,6 +115,7 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pathlib</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">configparser</span>
@@ -219,6 +220,11 @@
         <span class="c1"># populate values first from the default config file, then from the proper one</span>
         <span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">get_default_config</span><span class="p">())</span>
         <span class="n">config</span><span class="o">.</span><span class="n">load_window_layouts</span><span class="p">()</span>
+
+        <span class="c1"># modify defaults</span>
+        <span class="k">if</span> <span class="s1">&#39;I3SOCK&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Detected i3 window manager, disabled content window starting fullscreen by default&#39;</span><span class="p">)</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;start_fullscreen&#39;</span><span class="p">,</span> <span class="s1">&#39;off&#39;</span><span class="p">)</span>
 
         <span class="n">all_commands</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="s1">&#39;shortcuts&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
