@@ -32,7 +32,7 @@
 	<a href="../../index.html" class="icon icon-home"> Docs home</a>
 	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
 	<div class="version">
-		v1.8.0
+		v1.8.1
 	</div>
 
 	
@@ -331,7 +331,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">save_config</span><span class="p">()</span>
-        <span class="n">Gtk</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">do_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+        <span class="n">Gtk</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">do_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">close_opened_resources</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="Pympress.set_log_level"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.set_log_level">[docs]</a>    <span class="k">def</span> <span class="nf">set_log_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>

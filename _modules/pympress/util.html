@@ -123,12 +123,12 @@
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">pathlib</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;frozen&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-    <span class="c1"># doesn’t play too well with cx_Freeze</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">importlib.resources</span> <span class="k">as</span> <span class="nn">importlib_resources</span>
-    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">importlib_resources</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Introduced in 3.7</span>
+    <span class="kn">import</span> <span class="nn">importlib.resources</span> <span class="k">as</span> <span class="nn">importlib_resources</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># Backport dependency</span>
+    <span class="kn">import</span> <span class="nn">importlib_resources</span>
 
 
 <span class="n">IS_POSIX</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span>
@@ -156,10 +156,10 @@
     <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;pympress.__init__&#39;</span><span class="p">)</span>
     <span class="n">info</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="n">module</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="s1">&#39;contributors&#39;</span><span class="p">:</span> <span class="n">module</span><span class="o">.</span><span class="n">__author__</span><span class="p">}</span>
 
-    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;frozen&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;frozen&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">info</span>
 
-    <span class="n">git_dir</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s1">&#39;pympress&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;.git&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="n">git_dir</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="s1">&#39;.git&#39;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">git_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">info</span>
 
@@ -183,9 +183,7 @@
 
 
 <span class="k">def</span> <span class="nf">__get_resource_path</span><span class="p">(</span><span class="o">*</span><span class="n">path_parts</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return the resource path based on whether its frozen or not.</span>
-
-<span class="sd">    Paths parts given should be relative to the pympress package dir.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return the path to a resource, ensuring it was made available as a file for the duration of the program.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        name (`tuple` of `str`): The directories and filename that constitute the path</span>
@@ -194,12 +192,13 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        :class:`~pathlib.Path`: The path to the resource</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;frozen&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-        <span class="n">root</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
-        <span class="k">return</span> <span class="n">root</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="o">*</span><span class="n">path_parts</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Introduced in 3.9</span>
+        <span class="n">resource</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">asfile</span><span class="p">(</span><span class="n">importlib_resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;pympress&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="o">*</span><span class="n">path_parts</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="c1"># Deprecated in 3.11</span>
         <span class="n">resource</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;pympress&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">path_parts</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])),</span> <span class="n">path_parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">_opened_resources</span><span class="o">.</span><span class="n">enter_context</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_opened_resources</span><span class="o">.</span><span class="n">enter_context</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="close_opened_resources"><a class="viewcode-back" href="../../pympress.html#pympress.util.close_opened_resources">[docs]</a><span class="k">def</span> <span class="nf">close_opened_resources</span><span class="p">():</span>
@@ -407,6 +406,9 @@
 
 <div class="viewcode-block" id="ScreenArea"><a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea">[docs]</a><span class="k">class</span> <span class="nc">ScreenArea</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Convenience class to represent monitors or windows in terms of the area (position and size) they use on screen</span>
+
+<span class="sd">    This is similar to :class:`~Gdk.Monitor`, but necessary as we want to handle “mirrored” monitors as if they were a</span>
+<span class="sd">    single monitor, and only use “extended” monitors as target for content window position and/or fullscreening.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="ScreenArea.most_intersection"><a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.most_intersection">[docs]</a>    <span class="k">def</span> <span class="nf">most_intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Find the rectangle that intersects most with `~rect` in `~candidates`</span>
