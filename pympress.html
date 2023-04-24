@@ -766,10 +766,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#pympress.util.fileopen"><code class="docutils literal notranslate"><span class="pre">fileopen()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pympress.util.get_default_config"><code class="docutils literal notranslate"><span class="pre">get_default_config()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pympress.util.get_icon_path"><code class="docutils literal notranslate"><span class="pre">get_icon_path()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pympress.util.get_locale_dir"><code class="docutils literal notranslate"><span class="pre">get_locale_dir()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pympress.util.get_log_path"><code class="docutils literal notranslate"><span class="pre">get_log_path()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pympress.util.get_portable_config"><code class="docutils literal notranslate"><span class="pre">get_portable_config()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pympress.util.get_pympress_meta"><code class="docutils literal notranslate"><span class="pre">get_pympress_meta()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pympress.util.get_translation"><code class="docutils literal notranslate"><span class="pre">get_translation()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pympress.util.get_ui_resource_file"><code class="docutils literal notranslate"><span class="pre">get_ui_resource_file()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pympress.util.get_user_config"><code class="docutils literal notranslate"><span class="pre">get_user_config()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pympress.util.hard_set_screensaver"><code class="docutils literal notranslate"><span class="pre">hard_set_screensaver()</span></code></a></li>
@@ -916,7 +916,7 @@
 </section>
 <dl class="py function">
 <dt class="sig sig-object py" id="pympress.__main__.main">
-<span class="sig-prename descclassname"><span class="pre">pympress.__main__.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['/opt/hostedtoolcache/Python/3.11.2/x64/lib/python3.11/site-packages/sphinx/__main__.py',</span> <span class="pre">'-bhtml',</span> <span class="pre">'docs/',</span> <span class="pre">'build/sphinx/html']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/__main__.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.__main__.main" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pympress.__main__.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/sphinx/__main__.py',</span> <span class="pre">'-bhtml',</span> <span class="pre">'docs/',</span> <span class="pre">'build/sphinx/html']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/__main__.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.__main__.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Entry point of pympress. Parse command line arguments, instantiate the UI, and start the main loop.</p>
 </dd></dl>
 
@@ -968,7 +968,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pympress.app.Pympress.do_activate">
-<span class="sig-name descname"><span class="pre">do_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1680609922.1046848</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/app.html#Pympress.do_activate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.app.Pympress.do_activate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">do_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1682336383.8407829</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/app.html#Pympress.do_activate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.app.Pympress.do_activate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activate: show UI windows.</p>
 <p>Build them if they do not exist, otherwise bring to front.</p>
 </dd></dl>
@@ -1098,7 +1098,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.app.Pympress.version_string">
-<span class="sig-name descname"><span class="pre">version_string</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pympress:</span> <span class="pre">1.8.2</span> <span class="pre">;</span> <span class="pre">Python:</span> <span class="pre">3.11.2</span> <span class="pre">;</span> <span class="pre">OS:</span> <span class="pre">Linux</span> <span class="pre">5.15.0-1034-azure</span> <span class="pre">#41-Ubuntu</span> <span class="pre">SMP</span> <span class="pre">Fri</span> <span class="pre">Feb</span> <span class="pre">10</span> <span class="pre">19:59:45</span> <span class="pre">UTC</span> <span class="pre">2023</span> <span class="pre">;</span> <span class="pre">Gtk</span> <span class="pre">3.24.33</span> <span class="pre">;</span> <span class="pre">GLib</span> <span class="pre">2.71.3</span> <span class="pre">;</span> <span class="pre">Poppler</span> <span class="pre">22.02.0</span> <span class="pre">cairo</span> <span class="pre">;</span> <span class="pre">Cairo</span> <span class="pre">1.16.0</span> <span class="pre">,</span> <span class="pre">pycairo</span> <span class="pre">1.23.0'</span></em><a class="headerlink" href="#pympress.app.Pympress.version_string" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">version_string</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pympress:</span> <span class="pre">1.8.2</span> <span class="pre">;</span> <span class="pre">Python:</span> <span class="pre">3.11.3</span> <span class="pre">;</span> <span class="pre">OS:</span> <span class="pre">Linux</span> <span class="pre">5.15.0-1035-azure</span> <span class="pre">#42-Ubuntu</span> <span class="pre">SMP</span> <span class="pre">Tue</span> <span class="pre">Feb</span> <span class="pre">28</span> <span class="pre">19:41:23</span> <span class="pre">UTC</span> <span class="pre">2023</span> <span class="pre">;</span> <span class="pre">Gtk</span> <span class="pre">3.24.33</span> <span class="pre">;</span> <span class="pre">GLib</span> <span class="pre">2.71.3</span> <span class="pre">;</span> <span class="pre">Poppler</span> <span class="pre">22.02.0</span> <span class="pre">cairo</span> <span class="pre">;</span> <span class="pre">Cairo</span> <span class="pre">1.16.0</span> <span class="pre">,</span> <span class="pre">pycairo</span> <span class="pre">1.23.0'</span></em><a class="headerlink" href="#pympress.app.Pympress.version_string" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -4531,7 +4531,7 @@ clicking while ctrl pressed.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.pointer.Pointer.pointer">
-<span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GdkPixbuf.Pixbuf</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f03a2864bc0</span> <span class="pre">(GdkPixbuf</span> <span class="pre">at</span> <span class="pre">0x55ff93fa1a40)&gt;</span></em><a class="headerlink" href="#pympress.pointer.Pointer.pointer" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GdkPixbuf.Pixbuf</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f5e867a4840</span> <span class="pre">(GdkPixbuf</span> <span class="pre">at</span> <span class="pre">0x56071d50a240)&gt;</span></em><a class="headerlink" href="#pympress.pointer.Pointer.pointer" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Pixbuf</span></code> to read XML descriptions of GUIs and load them.</p>
 </dd></dl>
 
@@ -5578,7 +5578,7 @@ of all the resizeable items (if and only if resizeable).</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pympress.config.Config.widget_reqs">
-<span class="sig-name descname"><span class="pre">widget_reqs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'highlight':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'next',</span> <span class="pre">'annotations',</span> <span class="pre">'current',</span> <span class="pre">'notes'}),</span> <span class="pre">'highlight_notes':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'next',</span> <span class="pre">'annotations',</span> <span class="pre">'current',</span> <span class="pre">'notes'}),</span> <span class="pre">'note_pages':</span> <span class="pre">({'next',</span> <span class="pre">'annotations',</span> <span class="pre">'notes'},),</span> <span class="pre">'notes':</span> <span class="pre">({'next',</span> <span class="pre">'current',</span> <span class="pre">'notes'},</span> <span class="pre">{'annotations'}),</span> <span class="pre">'plain':</span> <span class="pre">({'next',</span> <span class="pre">'annotations',</span> <span class="pre">'current'},)}</span></em><a class="headerlink" href="#pympress.config.Config.widget_reqs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">widget_reqs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'highlight':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'annotations',</span> <span class="pre">'current',</span> <span class="pre">'next',</span> <span class="pre">'notes'}),</span> <span class="pre">'highlight_notes':</span> <span class="pre">({'highlight'},</span> <span class="pre">{'annotations',</span> <span class="pre">'current',</span> <span class="pre">'next',</span> <span class="pre">'notes'}),</span> <span class="pre">'note_pages':</span> <span class="pre">({'annotations',</span> <span class="pre">'next',</span> <span class="pre">'notes'},),</span> <span class="pre">'notes':</span> <span class="pre">({'current',</span> <span class="pre">'next',</span> <span class="pre">'notes'},</span> <span class="pre">{'annotations'}),</span> <span class="pre">'plain':</span> <span class="pre">({'annotations',</span> <span class="pre">'current',</span> <span class="pre">'next'},)}</span></em><a class="headerlink" href="#pympress.config.Config.widget_reqs" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> mapping layout ids to tuples of their expected and optional widgets</p>
 </dd></dl>
 
@@ -7109,20 +7109,6 @@ single monitor, and only use “extended” monitors as target for content windo
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pympress.util.get_locale_dir">
-<span class="sig-prename descclassname"><span class="pre">pympress.util.</span></span><span class="sig-name descname"><span class="pre">get_locale_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/util.html#get_locale_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.util.get_locale_dir" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the path to the locale directory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The path to the locale directory</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="pympress.util.get_log_path">
 <span class="sig-prename descclassname"><span class="pre">pympress.util.</span></span><span class="sig-name descname"><span class="pre">get_log_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/util.html#get_log_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.util.get_log_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the appropriate path to the log file in the user app dirs.</p>
@@ -7140,12 +7126,13 @@ single monitor, and only use “extended” monitors as target for content windo
 <dt class="sig sig-object py" id="pympress.util.get_portable_config">
 <span class="sig-prename descclassname"><span class="pre">pympress.util.</span></span><span class="sig-name descname"><span class="pre">get_portable_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/util.html#get_portable_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.util.get_portable_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the path to the configuration file for a portable install (i.e. in the install root).</p>
+<p>May return None if the install root is not a real directory (e.g. in a zip file).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The path to the portable configuration file.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -7160,6 +7147,21 @@ single monitor, and only use “extended” monitors as target for content windo
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pympress.util.get_translation">
+<span class="sig-prename descclassname"><span class="pre">pympress.util.</span></span><span class="sig-name descname"><span class="pre">get_translation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pympress/util.html#get_translation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pympress.util.get_translation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a gettext translation object.</p>
+<p>This re-implements gettext’s translation() and find() to allow using a python 3.9 Traversable as localedir</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A gettext translation object with the strings for the domain loaded</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NullTranslations</span></code></p>
 </dd>
 </dl>
 </dd></dl>

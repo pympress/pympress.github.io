@@ -162,9 +162,8 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            :class:`~pathlib.Path`: The path to the config file to use</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">portable_config</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_portable_config</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">portable_config</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-            <span class="k">return</span> <span class="n">portable_config</span>
+        <span class="k">if</span> <span class="n">Config</span><span class="o">.</span><span class="n">using_portable_config</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">get_portable_config</span><span class="p">()</span>
 
         <span class="n">user_config</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_user_config</span><span class="p">()</span>
 
@@ -192,6 +191,8 @@
 <span class="sd">            param (:class:`~GLib.Variant`): the parameter as a variant, or None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">portable_config</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_portable_config</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">portable_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
         <span class="k">if</span> <span class="n">Config</span><span class="o">.</span><span class="n">using_portable_config</span><span class="p">():</span>
             <span class="n">portable_config</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
@@ -207,7 +208,8 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: `True` iff we are using the portable (i.e. in install dir) location</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">get_portable_config</span><span class="p">()</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span></div>
+        <span class="n">portable_config</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_portable_config</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">portable_config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">portable_config</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span></div>
 
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
@@ -256,12 +258,13 @@
         <span class="n">c_full</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getboolean</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;start_fullscreen&#39;</span><span class="p">)</span>
         <span class="n">blank</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getboolean</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;start_blanked&#39;</span><span class="p">)</span>
         <span class="n">portable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">using_portable_config</span><span class="p">()</span>
+        <span class="n">can_port</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_portable_config</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 
         <span class="n">builder</span><span class="o">.</span><span class="n">setup_actions</span><span class="p">({</span>
             <span class="s1">&#39;start-content-fullscreen&#39;</span><span class="p">:</span>   <span class="nb">dict</span><span class="p">(</span><span class="n">activate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_start</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">c_full</span><span class="p">),</span>
             <span class="s1">&#39;start-presenter-fullscreen&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">activate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_start</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">p_full</span><span class="p">),</span>
             <span class="s1">&#39;start-blanked&#39;</span><span class="p">:</span>              <span class="nb">dict</span><span class="p">(</span><span class="n">activate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_start</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">blank</span><span class="p">),</span>
-            <span class="s1">&#39;portable-config&#39;</span><span class="p">:</span>            <span class="nb">dict</span><span class="p">(</span><span class="n">activate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_portable_config</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">portable</span><span class="p">),</span>
+            <span class="s1">&#39;portable-config&#39;</span><span class="p">:</span>            <span class="nb">dict</span><span class="p">(</span><span class="n">activate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_portable_config</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">portable</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="n">can_port</span><span class="p">),</span>
         <span class="p">})</span></div>
 
 

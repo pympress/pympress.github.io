@@ -114,7 +114,6 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">locale</span>
-<span class="kn">import</span> <span class="nn">gettext</span>
 
 <span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">util</span>
 
@@ -146,7 +145,7 @@
     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Failed loading locale: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Failed loading locale: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
 
-<span class="n">gettext</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s1">&#39;pympress&#39;</span><span class="p">,</span> <span class="n">util</span><span class="o">.</span><span class="n">get_locale_dir</span><span class="p">())</span>
+<span class="n">util</span><span class="o">.</span><span class="n">get_translation</span><span class="p">(</span><span class="s1">&#39;pympress&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
 
 
 <span class="k">try</span><span class="p">:</span>
