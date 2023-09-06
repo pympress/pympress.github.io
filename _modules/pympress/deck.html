@@ -11,9 +11,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/documentation_options.js?v=82e6e318"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -119,7 +119,9 @@
 <span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">builder</span>
 
 
-<div class="viewcode-block" id="Overview"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview">[docs]</a><span class="k">class</span> <span class="nc">Overview</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
+<div class="viewcode-block" id="Overview">
+<a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview">[docs]</a>
+<span class="k">class</span> <span class="nc">Overview</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; UI that allows to draw free-hand on top of the current slide.</span>
 
 <span class="sd">    Args:</span>
@@ -190,7 +192,9 @@
         <span class="p">})</span>
 
 
-<div class="viewcode-block" id="Overview.on_deck_hover"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.on_deck_hover">[docs]</a>    <span class="k">def</span> <span class="nf">on_deck_hover</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<div class="viewcode-block" id="Overview.on_deck_hover">
+<a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.on_deck_hover">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_deck_hover</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Track when each deck in the slide is hovered</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ctx</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span>
@@ -198,7 +202,10 @@
         <span class="n">widget</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Overview.setup_doc_callbacks"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.setup_doc_callbacks">[docs]</a>    <span class="k">def</span> <span class="nf">setup_doc_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Overview.setup_doc_callbacks">
+<a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.setup_doc_callbacks">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup_doc_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callbacks that need to be setup again at every new document</span>
 
 <span class="sd">        Args:</span>
@@ -211,7 +218,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">create_drawing_areas</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Overview.try_cancel"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.try_cancel">[docs]</a>    <span class="k">def</span> <span class="nf">try_cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Overview.try_cancel">
+<a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.try_cancel">[docs]</a>
+    <span class="k">def</span> <span class="nf">try_cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Cancel deck, if it is enabled.</span>
 
 <span class="sd">        Returns:</span>
@@ -224,7 +234,10 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="Overview.create_drawing_areas"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.create_drawing_areas">[docs]</a>    <span class="k">def</span> <span class="nf">create_drawing_areas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Overview.create_drawing_areas">
+<a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.create_drawing_areas">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_drawing_areas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Build DrawingArea and AspectFrame elements to display later on</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">pages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_label_pages</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_labels</span><span class="p">()</span> <span class="k">else</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pages_number</span><span class="p">())</span>
@@ -264,7 +277,10 @@
             <span class="n">da</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s1">&#39;deck</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="Overview.reset_grid"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.reset_grid">[docs]</a>    <span class="k">def</span> <span class="nf">reset_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Overview.reset_grid">
+<a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.reset_grid">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Set the slides configuration and size in the grid</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Gather info about slides to display</span>
@@ -319,7 +335,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">deck_grid</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Overview.prerender"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.prerender">[docs]</a>    <span class="k">def</span> <span class="nf">prerender</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">da</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Overview.prerender">
+<a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.prerender">[docs]</a>
+    <span class="k">def</span> <span class="nf">prerender</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">da</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Perform in-cache rendering</span>
 
 <span class="sd">        Args:</span>
@@ -330,7 +349,10 @@
         <span class="k">return</span> <span class="n">GLib</span><span class="o">.</span><span class="n">SOURCE_REMOVE</span></div>
 
 
-<div class="viewcode-block" id="Overview.on_deck_draw"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.on_deck_draw">[docs]</a>    <span class="k">def</span> <span class="nf">on_deck_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Overview.on_deck_draw">
+<a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.on_deck_draw">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_deck_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Actually draw the deck slide -- only do this from cache, to limit overhead</span>
 
 <span class="sd">        Args:</span>
@@ -369,7 +391,10 @@
         <span class="n">cairo_context</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Overview.on_deck_click"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.on_deck_click">[docs]</a>    <span class="k">def</span> <span class="nf">on_deck_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Overview.on_deck_click">
+<a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.on_deck_click">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_deck_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; A slide has been clicked, go to it</span>
 
 <span class="sd">        Args:</span>
@@ -381,7 +406,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">disable_deck_overview</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Overview.switch_deck_overview"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.switch_deck_overview">[docs]</a>    <span class="k">def</span> <span class="nf">switch_deck_overview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Overview.switch_deck_overview">
+<a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.switch_deck_overview">[docs]</a>
+    <span class="k">def</span> <span class="nf">switch_deck_overview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Starts the mode where one can read on top of the screen.</span>
 
 <span class="sd">        Args:</span>
@@ -399,7 +427,10 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_deck_overview</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Overview.enable_deck_overview"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.enable_deck_overview">[docs]</a>    <span class="k">def</span> <span class="nf">enable_deck_overview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Overview.enable_deck_overview">
+<a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.enable_deck_overview">[docs]</a>
+    <span class="k">def</span> <span class="nf">enable_deck_overview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Enable the deck view.</span>
 
 <span class="sd">        Returns:</span>
@@ -423,7 +454,10 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="Overview.disable_deck_overview"><a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.disable_deck_overview">[docs]</a>    <span class="k">def</span> <span class="nf">disable_deck_overview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Overview.disable_deck_overview">
+<a class="viewcode-back" href="../../pympress.html#pympress.deck.Overview.disable_deck_overview">[docs]</a>
+    <span class="k">def</span> <span class="nf">disable_deck_overview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Disable the deck view.</span>
 
 <span class="sd">        Returns:</span>
@@ -440,7 +474,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">get_application</span><span class="p">()</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;deck-overview&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">change_state</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_boolean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deck_mode</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">p_central</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
-        <span class="k">return</span> <span class="kc">True</span></div></div>
+        <span class="k">return</span> <span class="kc">True</span></div>
+</div>
+
 </pre></div>
 
            </div>

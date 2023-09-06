@@ -11,9 +11,9 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/documentation_options.js?v=82e6e318"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -122,7 +122,9 @@
 <span class="kn">from</span> <span class="nn">pympress.media_overlays</span> <span class="kn">import</span> <span class="n">base</span>
 
 
-<div class="viewcode-block" id="GstOverlay"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay">[docs]</a><span class="k">class</span> <span class="nc">GstOverlay</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">VideoOverlay</span><span class="p">):</span>
+<div class="viewcode-block" id="GstOverlay">
+<a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay">[docs]</a>
+<span class="k">class</span> <span class="nc">GstOverlay</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">VideoOverlay</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Simple Gstramer widget.</span>
 
 <span class="sd">    Wraps a simple gstreamer playbin.</span>
@@ -159,13 +161,16 @@
         <span class="n">bus</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;message::duration-changed&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">do_update_duration</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="GstOverlay.is_playing"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.is_playing">[docs]</a>    <span class="k">def</span> <span class="nf">is_playing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="GstOverlay.is_playing">
+<a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.is_playing">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_playing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Returns whether the media is currently playing (and not paused).</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `bool`: `True` iff the media is playing.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">PLAYING</span></div>
+
 
 
     <span class="k">def</span> <span class="nf">_set_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
@@ -178,7 +183,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">READY</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="GstOverlay.mute"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.mute">[docs]</a>    <span class="k">def</span> <span class="nf">mute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<div class="viewcode-block" id="GstOverlay.mute">
+<a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.mute">[docs]</a>
+    <span class="k">def</span> <span class="nf">mute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Mutes or unmutes the player.</span>
 
 <span class="sd">        Args:</span>
@@ -196,7 +203,10 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="GstOverlay.on_state_changed"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.on_state_changed">[docs]</a>    <span class="k">def</span> <span class="nf">on_state_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bus</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+
+<div class="viewcode-block" id="GstOverlay.on_state_changed">
+<a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.on_state_changed">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_state_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bus</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback triggered by playbin state changes.</span>
 
 <span class="sd">        Args:</span>
@@ -212,7 +222,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">on_initial_play</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="GstOverlay.on_initial_play"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.on_initial_play">[docs]</a>    <span class="k">def</span> <span class="nf">on_initial_play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="GstOverlay.on_initial_play">
+<a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.on_initial_play">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_initial_play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Set starting position, start scrollbar updates, unhide overlay. &quot;&quot;&quot;</span>
         <span class="c1"># set starting position, if needed</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_pos</span><span class="p">:</span>
@@ -225,14 +238,20 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="GstOverlay.do_update_duration"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_update_duration">[docs]</a>    <span class="k">def</span> <span class="nf">do_update_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+
+<div class="viewcode-block" id="GstOverlay.do_update_duration">
+<a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_update_duration">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_update_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Transmit the change of file duration to the UI to adjust the scroll bar.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">changed</span><span class="p">,</span> <span class="n">time_ns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">query_duration</span><span class="p">(</span><span class="n">Gst</span><span class="o">.</span><span class="n">Format</span><span class="o">.</span><span class="n">TIME</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">time_ns</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e9</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="GstOverlay.do_update_time"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_update_time">[docs]</a>    <span class="k">def</span> <span class="nf">do_update_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="GstOverlay.do_update_time">
+<a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_update_time">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_update_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Update the current position in the progress bar.</span>
 
 <span class="sd">        Returns:</span>
@@ -247,7 +266,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">state</span> <span class="ow">in</span> <span class="p">{</span><span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">,</span> <span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">PAUSED</span><span class="p">}</span></div>
 
 
-<div class="viewcode-block" id="GstOverlay.do_play"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_play">[docs]</a>    <span class="k">def</span> <span class="nf">do_play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="GstOverlay.do_play">
+<a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_play">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Start playing the media file.</span>
 
 <span class="sd">        Returns:</span>
@@ -258,7 +280,10 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="GstOverlay.do_play_pause"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_play_pause">[docs]</a>    <span class="k">def</span> <span class="nf">do_play_pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="GstOverlay.do_play_pause">
+<a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_play_pause">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_play_pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Toggle pause mode of the media.</span>
 
 <span class="sd">        Should run on the main thread to ensure we avoid reentrency problems.</span>
@@ -271,7 +296,10 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="GstOverlay.do_stop"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_stop">[docs]</a>    <span class="k">def</span> <span class="nf">do_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="GstOverlay.do_stop">
+<a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_stop">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Stops playing in the backend player.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">playbin</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">Gst</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">NULL</span><span class="p">)</span>
@@ -281,7 +309,10 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="GstOverlay.do_set_time"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_set_time">[docs]</a>    <span class="k">def</span> <span class="nf">do_set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+
+<div class="viewcode-block" id="GstOverlay.do_set_time">
+<a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.do_set_time">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Set the player at time `~time`.</span>
 
 <span class="sd">        Should run on the main thread to ensure we avoid reentrency problems.</span>
@@ -297,7 +328,10 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="GstOverlay.setup_backend"><a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.setup_backend">[docs]</a>    <span class="nd">@classmethod</span>
+
+<div class="viewcode-block" id="GstOverlay.setup_backend">
+<a class="viewcode-back" href="../../../pympress.html#pympress.media_overlays.gst_backend.GstOverlay.setup_backend">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">setup_backend</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">gst_opts</span> <span class="o">=</span> <span class="p">[]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Prepare/check the Gst backend.</span>
 
@@ -306,7 +340,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Gst</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">gst_opts</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">Gst</span><span class="o">.</span><span class="n">version_string</span><span class="p">()</span></div></div>
+        <span class="k">return</span> <span class="n">Gst</span><span class="o">.</span><span class="n">version_string</span><span class="p">()</span></div>
+</div>
+
 </pre></div>
 
            </div>

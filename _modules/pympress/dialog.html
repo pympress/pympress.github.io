@@ -11,9 +11,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/documentation_options.js?v=82e6e318"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -123,7 +123,9 @@
 <span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">builder</span>
 
 
-<div class="viewcode-block" id="TimingReport"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport">[docs]</a><span class="k">class</span> <span class="nc">TimingReport</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
+<div class="viewcode-block" id="TimingReport">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport">[docs]</a>
+<span class="k">class</span> <span class="nc">TimingReport</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Widget tracking and displaying hierachically how much time was spent in each page/section of the presentation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: `list` of time at which each page was reached</span>
@@ -156,7 +158,9 @@
         <span class="p">})</span>
 
 
-<div class="viewcode-block" id="TimingReport.transition"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.transition">[docs]</a>    <span class="k">def</span> <span class="nf">transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+<div class="viewcode-block" id="TimingReport.transition">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.transition">[docs]</a>
+    <span class="k">def</span> <span class="nf">transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Record a transition time between slides.</span>
 
 <span class="sd">        Args:</span>
@@ -173,14 +177,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">page_time</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">page</span><span class="p">,</span> <span class="n">time</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="TimingReport.reset"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reset_time</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TimingReport.reset">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reset_time</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; A timer reset. Clear the history as soon as we start changing pages again.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">end_time</span> <span class="o">=</span> <span class="n">reset_time</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clear_on_next_transition</span> <span class="o">=</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="TimingReport.format_time"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.format_time">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="TimingReport.format_time">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.format_time">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">format_time</span><span class="p">(</span><span class="n">secs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Formats a number of seconds as `minutes:seconds`.</span>
 
@@ -190,7 +200,10 @@
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{:02}</span><span class="s1">:</span><span class="si">{:02}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="nb">divmod</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">secs</span><span class="p">),</span> <span class="mi">60</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="TimingReport.set_document_metadata"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.set_document_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">set_document_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc_structure</span><span class="p">,</span> <span class="n">page_labels</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TimingReport.set_document_metadata">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.set_document_metadata">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_document_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc_structure</span><span class="p">,</span> <span class="n">page_labels</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Show the popup with the timing infortmation.</span>
 
 <span class="sd">        Args:</span>
@@ -211,7 +224,10 @@
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_time</span><span class="p">[:]</span></div>
 
 
-<div class="viewcode-block" id="TimingReport.show_report"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.show_report">[docs]</a>    <span class="k">def</span> <span class="nf">show_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TimingReport.show_report">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.TimingReport.show_report">[docs]</a>
+    <span class="k">def</span> <span class="nf">show_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Show the popup with the timing infortmation.</span>
 
 <span class="sd">        Args:</span>
@@ -282,10 +298,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">timing_treeview</span><span class="o">.</span><span class="n">expand_row</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">TreePath</span><span class="o">.</span><span class="n">new_first</span><span class="p">(),</span> <span class="kc">False</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">time_report_dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">time_report_dialog</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_report_dialog</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div>
+</div>
 
 
-<div class="viewcode-block" id="LayoutEditor"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor">[docs]</a><span class="k">class</span> <span class="nc">LayoutEditor</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LayoutEditor">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor">[docs]</a>
+<span class="k">class</span> <span class="nc">LayoutEditor</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Widget tracking and displaying hierachically how much time was spent in each page/section of the presentation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: The :class:`~Gtk.TreeView` displaying the hierarchical layouts</span>
@@ -339,7 +359,9 @@
         <span class="p">})</span>
 
 
-<div class="viewcode-block" id="LayoutEditor.load_layout"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.load_layout">[docs]</a>    <span class="k">def</span> <span class="nf">load_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LayoutEditor.load_layout">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.load_layout">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Load the given layout in the treemodel for display and manipulation in the treeview</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout_description</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout_descriptions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_layout</span><span class="p">])</span>
@@ -378,7 +400,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">layout_treeview</span><span class="o">.</span><span class="n">expand_all</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="LayoutEditor.set_current_layout"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.set_current_layout">[docs]</a>    <span class="k">def</span> <span class="nf">set_current_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LayoutEditor.set_current_layout">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.set_current_layout">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_current_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Update which is the layout currently used by the UI</span>
 
 <span class="sd">        Args:</span>
@@ -387,7 +412,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">current_layout</span> <span class="o">=</span> <span class="n">layout</span></div>
 
 
-<div class="viewcode-block" id="LayoutEditor.layout_selected"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.layout_selected">[docs]</a>    <span class="k">def</span> <span class="nf">layout_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LayoutEditor.layout_selected">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.layout_selected">[docs]</a>
+    <span class="k">def</span> <span class="nf">layout_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Manage events for the layout selector drop-down menu</span>
 
 <span class="sd">        Args:</span>
@@ -398,7 +426,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">load_layout</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="LayoutEditor.get_info"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.get_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LayoutEditor.get_info">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.get_info">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Given a path string, look up the appropriate item in both the actual and GtkStore models</span>
 
 <span class="sd">        Args:</span>
@@ -415,7 +446,10 @@
         <span class="k">return</span> <span class="n">node</span><span class="p">,</span> <span class="n">tree_it</span></div>
 
 
-<div class="viewcode-block" id="LayoutEditor.resizeable_toggled"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.resizeable_toggled">[docs]</a>    <span class="k">def</span> <span class="nf">resizeable_toggled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LayoutEditor.resizeable_toggled">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.resizeable_toggled">[docs]</a>
+    <span class="k">def</span> <span class="nf">resizeable_toggled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle when box’ resizeable value is toggled</span>
 
 <span class="sd">        Args:</span>
@@ -429,7 +463,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">normalize_layout</span><span class="p">(</span><span class="n">reload</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="LayoutEditor.orientation_changed"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.orientation_changed">[docs]</a>    <span class="k">def</span> <span class="nf">orientation_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">orient_it</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LayoutEditor.orientation_changed">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.orientation_changed">[docs]</a>
+    <span class="k">def</span> <span class="nf">orientation_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">orient_it</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle when the orientation of a box is changed</span>
 
 <span class="sd">        Args:</span>
@@ -447,7 +484,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">normalize_layout</span><span class="p">(</span><span class="n">reload</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="LayoutEditor.next_slide_count_edited"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.next_slide_count_edited">[docs]</a>    <span class="k">def</span> <span class="nf">next_slide_count_edited</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LayoutEditor.next_slide_count_edited">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.next_slide_count_edited">[docs]</a>
+    <span class="k">def</span> <span class="nf">next_slide_count_edited</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle when the next slide count is modified</span>
 
 <span class="sd">        Args:</span>
@@ -460,7 +500,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">next_frames_action</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_int64</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span></div>
 
 
-<div class="viewcode-block" id="LayoutEditor.treemodel_to_tree"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.treemodel_to_tree">[docs]</a>    <span class="k">def</span> <span class="nf">treemodel_to_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterator</span><span class="p">,</span> <span class="n">parent_horizontal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">parent_resizeable</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LayoutEditor.treemodel_to_tree">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.treemodel_to_tree">[docs]</a>
+    <span class="k">def</span> <span class="nf">treemodel_to_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterator</span><span class="p">,</span> <span class="n">parent_horizontal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">parent_resizeable</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Recursive function to transform the treemodel back into our dict-based representation of the layout</span>
 
 <span class="sd">        Args:</span>
@@ -508,7 +551,10 @@
         <span class="k">return</span> <span class="n">nodes</span></div>
 
 
-<div class="viewcode-block" id="LayoutEditor.normalize_layout"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.normalize_layout">[docs]</a>    <span class="k">def</span> <span class="nf">normalize_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">drag_context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reload</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LayoutEditor.normalize_layout">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.normalize_layout">[docs]</a>
+    <span class="k">def</span> <span class="nf">normalize_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">drag_context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reload</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Handler at the end of a drag-and-drop in the treeview</span>
 
 <span class="sd">        Here we transform the listmodel modified by drag-and-drop back to a valid `dict` and `str` hierarchy, and then</span>
@@ -531,7 +577,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">load_layout</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="LayoutEditor.show_editor"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.show_editor">[docs]</a>    <span class="k">def</span> <span class="nf">show_editor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LayoutEditor.show_editor">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.LayoutEditor.show_editor">[docs]</a>
+    <span class="k">def</span> <span class="nf">show_editor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Show the popup to edit the layout. Gather info to populate it, and handle apply/cancel at the end.</span>
 
 <span class="sd">        Args:</span>
@@ -555,11 +604,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">hltools_orientation_action</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_string</span><span class="p">(</span><span class="n">restore_hltools_orientation</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ui_load_layout</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">layout_dialog</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_dialog</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div>
+</div>
 
 
 
-<div class="viewcode-block" id="AutoPlay"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay">[docs]</a><span class="k">class</span> <span class="nc">AutoPlay</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AutoPlay">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay">[docs]</a>
+<span class="k">class</span> <span class="nc">AutoPlay</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Widget and machinery to setup and play slides automatically, optionally in a loop</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: A :class:`~Gtk.Dialog` to contain the layout edition dialog</span>
@@ -595,7 +648,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">goto_page</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">get_callback_handler</span><span class="p">(</span><span class="s1">&#39;goto_page&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="AutoPlay.set_doc_pages"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.set_doc_pages">[docs]</a>    <span class="k">def</span> <span class="nf">set_doc_pages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_pages</span><span class="p">):</span>
+<div class="viewcode-block" id="AutoPlay.set_doc_pages">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.set_doc_pages">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_doc_pages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_pages</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for when a document number of pages changes</span>
 
 <span class="sd">        Args:</span>
@@ -607,7 +662,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_upper</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">n_pages</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="AutoPlay.page_changed"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.page_changed">[docs]</a>    <span class="k">def</span> <span class="nf">page_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spin_button</span><span class="p">,</span> <span class="n">scroll_direction</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AutoPlay.page_changed">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.page_changed">[docs]</a>
+    <span class="k">def</span> <span class="nf">page_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spin_button</span><span class="p">,</span> <span class="n">scroll_direction</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for when a page spin button is modified, maintains a delta of at least 2 pages between first and</span>
 <span class="sd">        last page of the intended loop. (No loops needed to loop a single slide.)</span>
 
@@ -625,7 +683,10 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_lower</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">maxval</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="AutoPlay.pause"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.pause">[docs]</a>    <span class="k">def</span> <span class="nf">pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AutoPlay.pause">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.pause">[docs]</a>
+    <span class="k">def</span> <span class="nf">pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Pause the looping if it’s running</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">remain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -634,7 +695,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">set_ready_time</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="AutoPlay.unpause"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.unpause">[docs]</a>    <span class="k">def</span> <span class="nf">unpause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AutoPlay.unpause">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.unpause">[docs]</a>
+    <span class="k">def</span> <span class="nf">unpause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Unpause the looping if it’s paused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">remain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -643,13 +707,19 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">remain</span> <span class="o">=</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="AutoPlay.is_looping"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.is_looping">[docs]</a>    <span class="k">def</span> <span class="nf">is_looping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AutoPlay.is_looping">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.is_looping">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_looping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Return whether an auto-playing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="AutoPlay.stop_looping"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.stop_looping">[docs]</a>    <span class="k">def</span> <span class="nf">stop_looping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AutoPlay.stop_looping">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.stop_looping">[docs]</a>
+    <span class="k">def</span> <span class="nf">stop_looping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Stop the auto-playing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -658,7 +728,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">remain</span> <span class="o">=</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="AutoPlay.start_looping"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.start_looping">[docs]</a>    <span class="k">def</span> <span class="nf">start_looping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AutoPlay.start_looping">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.start_looping">[docs]</a>
+    <span class="k">def</span> <span class="nf">start_looping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Start the auto-playing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stop_looping</span><span class="p">()</span>
@@ -671,7 +744,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">set_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">next_page</span><span class="p">,</span> <span class="n">it</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="AutoPlay.next_page"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.next_page">[docs]</a>    <span class="k">def</span> <span class="nf">next_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">it</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AutoPlay.next_page">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.next_page">[docs]</a>
+    <span class="k">def</span> <span class="nf">next_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">it</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback to turn the page to the next slide</span>
 
 <span class="sd">        Args:</span>
@@ -689,7 +765,10 @@
             <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="AutoPlay.get_page_range"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.get_page_range">[docs]</a>    <span class="k">def</span> <span class="nf">get_page_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AutoPlay.get_page_range">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.get_page_range">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_page_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Return the autoplay info</span>
 
 <span class="sd">        Returns:</span>
@@ -698,7 +777,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages</span></div>
 
 
-<div class="viewcode-block" id="AutoPlay.run"><a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AutoPlay.run">
+<a class="viewcode-back" href="../../pympress.html#pympress.dialog.AutoPlay.run">[docs]</a>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Show the dialog to setup auto-play, and start the autoplay if « apply » is selected</span>
 
 <span class="sd">        Args:</span>
@@ -713,7 +795,9 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">pages</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_lower</span><span class="o">.</span><span class="n">get_value_as_int</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_upper</span><span class="o">.</span><span class="n">get_value_as_int</span><span class="p">(),</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">autoplay_button_loop</span><span class="o">.</span><span class="n">get_active</span><span class="p">(),</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">autoplay_spin_time</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">start_looping</span><span class="p">()</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_looping</span><span class="p">()</span></div>
+</div>
+
 </pre></div>
 
            </div>

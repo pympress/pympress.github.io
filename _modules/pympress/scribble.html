@@ -11,9 +11,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/documentation_options.js?v=82e6e318"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -122,7 +122,9 @@
 <span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">builder</span><span class="p">,</span> <span class="n">extras</span><span class="p">,</span> <span class="n">util</span>
 
 
-<div class="viewcode-block" id="Scribbler"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler">[docs]</a><span class="k">class</span> <span class="nc">Scribbler</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
+<div class="viewcode-block" id="Scribbler">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler">[docs]</a>
+<span class="k">class</span> <span class="nc">Scribbler</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; UI that allows to draw free-hand on top of the current slide.</span>
 
 <span class="sd">    Args:</span>
@@ -309,7 +311,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_string</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;highlight&#39;</span><span class="p">,</span> <span class="s1">&#39;mode&#39;</span><span class="p">)))</span>
 
 
-<div class="viewcode-block" id="Scribbler.page_change_action"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.page_change_action">[docs]</a>    <span class="k">def</span> <span class="nf">page_change_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
+<div class="viewcode-block" id="Scribbler.page_change_action">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.page_change_action">[docs]</a>
+    <span class="k">def</span> <span class="nf">page_change_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Change whether we exit or stay in highlighting mode on page changes</span>
 
 <span class="sd">        Args:</span>
@@ -323,7 +327,10 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.set_mode"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.set_mode">[docs]</a>    <span class="k">def</span> <span class="nf">set_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.set_mode">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.set_mode">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Change the mode of clearing and restoring highlights</span>
 
 <span class="sd">        Args:</span>
@@ -342,7 +349,10 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.try_cancel"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.try_cancel">[docs]</a>    <span class="k">def</span> <span class="nf">try_cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.try_cancel">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.try_cancel">[docs]</a>
+    <span class="k">def</span> <span class="nf">try_cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Cancel scribbling, if it is enabled.</span>
 
 <span class="sd">        Returns:</span>
@@ -355,7 +365,10 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.parse_color"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.parse_color">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="Scribbler.parse_color">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.parse_color">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">parse_color</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Transform a string to a Gdk object in a single function call</span>
 
@@ -370,7 +383,10 @@
         <span class="k">return</span> <span class="n">color</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.points_to_curves"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.points_to_curves">[docs]</a>    <span class="k">def</span> <span class="nf">points_to_curves</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.points_to_curves">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.points_to_curves">[docs]</a>
+    <span class="k">def</span> <span class="nf">points_to_curves</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Transform a list of points from scribbles to bezier curves</span>
 
 <span class="sd">        Returns:</span>
@@ -392,7 +408,10 @@
         <span class="k">return</span> <span class="n">curves</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.track_scribble"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.track_scribble">[docs]</a>    <span class="k">def</span> <span class="nf">track_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.track_scribble">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.track_scribble">[docs]</a>
+    <span class="k">def</span> <span class="nf">track_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Draw the scribble following the mouse&#39;s moves.</span>
 
 <span class="sd">        Args:</span>
@@ -417,7 +436,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_drawing</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.key_event"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.key_event">[docs]</a>    <span class="k">def</span> <span class="nf">key_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.key_event">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.key_event">[docs]</a>
+    <span class="k">def</span> <span class="nf">key_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle key events to activate the eraser while the shortcut is held</span>
 
 <span class="sd">        Args:</span>
@@ -448,7 +470,10 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.toggle_scribble"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.toggle_scribble">[docs]</a>    <span class="k">def</span> <span class="nf">toggle_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.toggle_scribble">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.toggle_scribble">[docs]</a>
+    <span class="k">def</span> <span class="nf">toggle_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Start/stop drawing scribbles.</span>
 
 <span class="sd">        Args:</span>
@@ -487,7 +512,10 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.reset_scribble_cache"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.reset_scribble_cache">[docs]</a>    <span class="k">def</span> <span class="nf">reset_scribble_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.reset_scribble_cache">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.reset_scribble_cache">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset_scribble_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Clear the cached scribbles.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">window</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_da</span><span class="o">.</span><span class="n">get_window</span><span class="p">()</span>
@@ -519,7 +547,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">next_render</span> <span class="o">=</span> <span class="mi">0</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.prerender"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.prerender">[docs]</a>    <span class="k">def</span> <span class="nf">prerender</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.prerender">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.prerender">[docs]</a>
+    <span class="k">def</span> <span class="nf">prerender</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Commit scribbles to cache so they are faster to draw on the slide</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_cache</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -546,7 +577,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">next_render</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_list</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.render_scribble"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.render_scribble">[docs]</a>    <span class="k">def</span> <span class="nf">render_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">pressures</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.render_scribble">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.render_scribble">[docs]</a>
+    <span class="k">def</span> <span class="nf">render_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">pressures</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Draw a single scribble, i.e. a bezier curve, on the cairo context</span>
 
 <span class="sd">        Args:</span>
@@ -588,7 +622,10 @@
             <span class="n">cairo_context</span><span class="o">.</span><span class="n">paint</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.draw_scribble"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.draw_scribble">[docs]</a>    <span class="k">def</span> <span class="nf">draw_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.draw_scribble">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.draw_scribble">[docs]</a>
+    <span class="k">def</span> <span class="nf">draw_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Perform the drawings by user.</span>
 
 <span class="sd">        Args:</span>
@@ -634,7 +671,10 @@
             <span class="n">cairo_context</span><span class="o">.</span><span class="n">fill</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.update_color"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.update_color">[docs]</a>    <span class="k">def</span> <span class="nf">update_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.update_color">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.update_color">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for the color chooser button, to set scribbling color.</span>
 
 <span class="sd">        Args:</span>
@@ -644,7 +684,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update_active_color_width</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.update_width"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.update_width">[docs]</a>    <span class="k">def</span> <span class="nf">update_width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.update_width">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.update_width">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for the width chooser slider, to set scribbling width.</span>
 
 <span class="sd">        Args:</span>
@@ -656,7 +699,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update_active_color_width</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.update_active_color_width"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.update_active_color_width">[docs]</a>    <span class="k">def</span> <span class="nf">update_active_color_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.update_active_color_width">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.update_active_color_width">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_active_color_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Update modifications to the active scribble color and width, on the pen button and config object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color_width</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">active_preset</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_width</span>
@@ -669,7 +715,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;highlight&#39;</span><span class="p">,</span> <span class="s1">&#39;width_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pen</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_width</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.adjust_buttons"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.adjust_buttons">[docs]</a>    <span class="k">def</span> <span class="nf">adjust_buttons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.adjust_buttons">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.adjust_buttons">[docs]</a>
+    <span class="k">def</span> <span class="nf">adjust_buttons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Properly enable and disable buttons based on scribblings lists.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scribble_undo</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_list</span><span class="p">))</span>
@@ -677,7 +726,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">scribble_redo</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_redo_list</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.clear_scribble"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.clear_scribble">[docs]</a>    <span class="k">def</span> <span class="nf">clear_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.clear_scribble">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.clear_scribble">[docs]</a>
+    <span class="k">def</span> <span class="nf">clear_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for the scribble clear button, to remove all scribbles.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scribble_list</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
@@ -687,7 +739,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">adjust_buttons</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.page_change"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.page_change">[docs]</a>    <span class="k">def</span> <span class="nf">page_change</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_number</span><span class="p">,</span> <span class="n">page_label</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.page_change">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.page_change">[docs]</a>
+    <span class="k">def</span> <span class="nf">page_change</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_number</span><span class="p">,</span> <span class="n">page_label</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Called when we change pages, to clear or restore scribbles</span>
 
 <span class="sd">        Args:</span>
@@ -721,7 +776,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">redraw_current_slide</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.pop_scribble"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.pop_scribble">[docs]</a>    <span class="k">def</span> <span class="nf">pop_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.pop_scribble">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.pop_scribble">[docs]</a>
+    <span class="k">def</span> <span class="nf">pop_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for the scribble undo button, to undo the last scribble.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_list</span><span class="p">:</span>
@@ -733,7 +791,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">redraw_current_slide</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.redo_scribble"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.redo_scribble">[docs]</a>    <span class="k">def</span> <span class="nf">redo_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.redo_scribble">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.redo_scribble">[docs]</a>
+    <span class="k">def</span> <span class="nf">redo_scribble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for the scribble undo button, to undo the last scribble.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribble_redo_list</span><span class="p">:</span>
@@ -744,7 +805,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">redraw_current_slide</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.on_configure_da"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.on_configure_da">[docs]</a>    <span class="k">def</span> <span class="nf">on_configure_da</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.on_configure_da">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.on_configure_da">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_configure_da</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Transfer configure resize to the cache.</span>
 
 <span class="sd">        Args:</span>
@@ -758,7 +822,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">resize_cache</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span> <span class="n">event</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">height</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.set_tools_orientation"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.set_tools_orientation">[docs]</a>    <span class="k">def</span> <span class="nf">set_tools_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.set_tools_orientation">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.set_tools_orientation">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_tools_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Changes the orientation of the highlighting tool box.</span>
 
 <span class="sd">        Args:</span>
@@ -782,7 +849,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;layout&#39;</span><span class="p">,</span> <span class="s1">&#39;highlight_tools&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tools_orientation</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.adjust_tools_orientation"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.adjust_tools_orientation">[docs]</a>    <span class="k">def</span> <span class="nf">adjust_tools_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.adjust_tools_orientation">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.adjust_tools_orientation">[docs]</a>
+    <span class="k">def</span> <span class="nf">adjust_tools_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Actually change the highlight tool elements orientations according to self.tools_orientation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">orientation</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">VERTICAL</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tools_orientation</span> <span class="o">==</span> <span class="s1">&#39;vertical&#39;</span> <span class="k">else</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">HORIZONTAL</span>
@@ -799,7 +869,10 @@
                                               <span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.switch_scribbling"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.switch_scribbling">[docs]</a>    <span class="k">def</span> <span class="nf">switch_scribbling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.switch_scribbling">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.switch_scribbling">[docs]</a>
+    <span class="k">def</span> <span class="nf">switch_scribbling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Starts the mode where one can read on top of the screen.</span>
 
 <span class="sd">        Args:</span>
@@ -817,7 +890,10 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_scribbling</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.enable_scribbling"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.enable_scribbling">[docs]</a>    <span class="k">def</span> <span class="nf">enable_scribbling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.enable_scribbling">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.enable_scribbling">[docs]</a>
+    <span class="k">def</span> <span class="nf">enable_scribbling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Enable the scribbling mode.</span>
 
 <span class="sd">        Returns:</span>
@@ -844,7 +920,10 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.disable_scribbling"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.disable_scribbling">[docs]</a>    <span class="k">def</span> <span class="nf">disable_scribbling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.disable_scribbling">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.disable_scribbling">[docs]</a>
+    <span class="k">def</span> <span class="nf">disable_scribbling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Disable the scribbling mode.</span>
 
 <span class="sd">        Returns:</span>
@@ -872,7 +951,10 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.load_preset"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.load_preset">[docs]</a>    <span class="k">def</span> <span class="nf">load_preset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.load_preset">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.load_preset">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_preset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Loads the preset color of a given number or designed by a given widget, as an event handler.</span>
 
 <span class="sd">        Args:</span>
@@ -906,7 +988,10 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.on_eraser_button_draw"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.on_eraser_button_draw">[docs]</a>    <span class="k">def</span> <span class="nf">on_eraser_button_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.on_eraser_button_draw">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.on_eraser_button_draw">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_eraser_button_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle drawing the eraser button.</span>
 
 <span class="sd">        Args:</span>
@@ -924,7 +1009,10 @@
         <span class="n">cairo_context</span><span class="o">.</span><span class="n">paint</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Scribbler.on_preset_button_draw"><a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.on_preset_button_draw">[docs]</a>    <span class="k">def</span> <span class="nf">on_preset_button_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Scribbler.on_preset_button_draw">
+<a class="viewcode-back" href="../../pympress.html#pympress.scribble.Scribbler.on_preset_button_draw">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_preset_button_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle drawing the marker/pencil buttons, with appropriate thickness and color.</span>
 
 <span class="sd">        Args:</span>
@@ -992,7 +1080,9 @@
         <span class="n">cairo_context</span><span class="o">.</span><span class="n">paint</span><span class="p">()</span>
 
         <span class="n">cairo_context</span><span class="o">.</span><span class="n">pop_group_to_source</span><span class="p">()</span>
-        <span class="n">cairo_context</span><span class="o">.</span><span class="n">paint</span><span class="p">()</span></div></div>
+        <span class="n">cairo_context</span><span class="o">.</span><span class="n">paint</span><span class="p">()</span></div>
+</div>
+
 </pre></div>
 
            </div>

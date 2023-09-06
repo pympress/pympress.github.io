@@ -11,9 +11,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/documentation_options.js?v=82e6e318"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -125,7 +125,9 @@
 <span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">util</span>
 
 
-<div class="viewcode-block" id="Config"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config">[docs]</a><span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">,</span> <span class="nb">object</span><span class="p">):</span>  <span class="c1"># python 2 fix</span>
+<div class="viewcode-block" id="Config">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config">[docs]</a>
+<span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">,</span> <span class="nb">object</span><span class="p">):</span>  <span class="c1"># python 2 fix</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Manage configuration :Get the configuration from its file and store its back.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: `dict`-tree of presenter layouts for various modes</span>
@@ -152,7 +154,9 @@
     <span class="c1">#: `dict` mapping accelerator keys to actions</span>
     <span class="n">shortcuts</span> <span class="o">=</span> <span class="p">{}</span>
 
-<div class="viewcode-block" id="Config.path_to_config"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.path_to_config">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Config.path_to_config">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.path_to_config">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">path_to_config</span><span class="p">(</span><span class="n">search_legacy_locations</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Return the path to the currently used configuration file.</span>
 
@@ -177,7 +181,10 @@
         <span class="k">return</span> <span class="n">user_config</span></div>
 
 
-<div class="viewcode-block" id="Config.toggle_portable_config"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.toggle_portable_config">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="Config.toggle_portable_config">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.toggle_portable_config">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">toggle_portable_config</span><span class="p">(</span><span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Create or remove a configuration file for portable installs.</span>
 
@@ -201,7 +208,10 @@
         <span class="n">gaction</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_boolean</span><span class="p">(</span><span class="n">Config</span><span class="o">.</span><span class="n">using_portable_config</span><span class="p">()))</span></div>
 
 
-<div class="viewcode-block" id="Config.using_portable_config"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.using_portable_config">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="Config.using_portable_config">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.using_portable_config">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">using_portable_config</span><span class="p">():</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Checks which configuration file location is in use.</span>
 
@@ -210,6 +220,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">portable_config</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_portable_config</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">portable_config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">portable_config</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span></div>
+
 
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
@@ -248,7 +259,9 @@
                 <span class="n">config</span><span class="o">.</span><span class="n">shortcuts</span><span class="p">[</span><span class="n">command</span><span class="p">]</span> <span class="o">=</span> <span class="n">keep_accels</span>
 
 
-<div class="viewcode-block" id="Config.register_actions"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.register_actions">[docs]</a>    <span class="k">def</span> <span class="nf">register_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">builder</span><span class="p">):</span>
+<div class="viewcode-block" id="Config.register_actions">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.register_actions">[docs]</a>
+    <span class="k">def</span> <span class="nf">register_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">builder</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Register actions that impact the config file only.</span>
 
 <span class="sd">        Args:</span>
@@ -268,7 +281,10 @@
         <span class="p">})</span></div>
 
 
-<div class="viewcode-block" id="Config.upgrade"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.upgrade">[docs]</a>    <span class="k">def</span> <span class="nf">upgrade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Config.upgrade">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.upgrade">[docs]</a>
+    <span class="k">def</span> <span class="nf">upgrade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Update obsolete config options when pympress updates.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;presenter&#39;</span><span class="p">,</span> <span class="s1">&#39;pointer&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;pointer_none&#39;</span><span class="p">:</span>
@@ -351,7 +367,10 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">remove_option</span><span class="p">(</span><span class="s1">&#39;shortcuts&#39;</span><span class="p">,</span> <span class="n">old</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Config.getlist"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.getlist">[docs]</a>    <span class="k">def</span> <span class="nf">getlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Config.getlist">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.getlist">[docs]</a>
+    <span class="k">def</span> <span class="nf">getlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Parse a config value and return the list by splitting the value on commas.</span>
 
 <span class="sd">        i.e. bar = foo,qux  returns the list [&#39;foo&#39;, &#39;qux&#39;]</span>
@@ -362,7 +381,10 @@
         <span class="k">return</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span></div>
 
 
-<div class="viewcode-block" id="Config.getint"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.getint">[docs]</a>    <span class="k">def</span> <span class="nf">getint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Config.getint">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.getint">[docs]</a>
+    <span class="k">def</span> <span class="nf">getint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Wrapper for configparser’s getint to handle parsing errors when a fallback is given.</span>
 
 <span class="sd">        See :meth:`~configparser.Configparser.getint()`</span>
@@ -378,7 +400,10 @@
             <span class="k">return</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;fallback&#39;</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="Config.getfloat"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.getfloat">[docs]</a>    <span class="k">def</span> <span class="nf">getfloat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Config.getfloat">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.getfloat">[docs]</a>
+    <span class="k">def</span> <span class="nf">getfloat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Wrapper for configparser’s to handle parsing errors when a fallback is given.</span>
 
 <span class="sd">        See :meth:`~configparser.Configparser.getfloat()`</span>
@@ -394,7 +419,10 @@
             <span class="k">return</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;fallback&#39;</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="Config.getboolean"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.getboolean">[docs]</a>    <span class="k">def</span> <span class="nf">getboolean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Config.getboolean">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.getboolean">[docs]</a>
+    <span class="k">def</span> <span class="nf">getboolean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Wrapper for configparser’s getboolean to handle parsing errors when a fallback is given.</span>
 
 <span class="sd">        :meth:`~configparser.Configparser.getboolean()`</span>
@@ -410,7 +438,10 @@
             <span class="k">return</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;fallback&#39;</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="Config.save_config"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.save_config">[docs]</a>    <span class="k">def</span> <span class="nf">save_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Config.save_config">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.save_config">[docs]</a>
+    <span class="k">def</span> <span class="nf">save_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Save the configuration to its file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># serialize the layouts</span>
@@ -421,7 +452,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">configfile</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Config.toggle_start"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.toggle_start">[docs]</a>    <span class="k">def</span> <span class="nf">toggle_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Config.toggle_start">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.toggle_start">[docs]</a>
+    <span class="k">def</span> <span class="nf">toggle_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gaction</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Generic function to toggle some boolean startup configuration.</span>
 
 <span class="sd">        Args:</span>
@@ -439,7 +473,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">start_conf</span><span class="p">,</span> <span class="s1">&#39;on&#39;</span> <span class="k">if</span> <span class="n">new_state</span> <span class="k">else</span> <span class="s1">&#39;off&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Config.validate_layout"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.validate_layout">[docs]</a>    <span class="k">def</span> <span class="nf">validate_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">expected_widgets</span><span class="p">,</span> <span class="n">optional_widgets</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()):</span>
+
+<div class="viewcode-block" id="Config.validate_layout">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.validate_layout">[docs]</a>
+    <span class="k">def</span> <span class="nf">validate_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">expected_widgets</span><span class="p">,</span> <span class="n">optional_widgets</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Validate layout: check whether the layout of widgets built from the config string is valid.</span>
 
 <span class="sd">        Args:</span>
@@ -502,7 +539,10 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Following placeable_widgets were not specified: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">widget_missing</span><span class="p">)))</span></div>
 
 
-<div class="viewcode-block" id="Config.update_layout_tree"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.update_layout_tree">[docs]</a>    <span class="k">def</span> <span class="nf">update_layout_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout_name</span><span class="p">,</span> <span class="n">layout</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Config.update_layout_tree">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.update_layout_tree">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_layout_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout_name</span><span class="p">,</span> <span class="n">layout</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Update the layout named `~layout_name`. Throws ValueError on invalid layouts.</span>
 
 <span class="sd">        Args:</span>
@@ -513,7 +553,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">[</span><span class="n">layout_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">layout</span></div>
 
 
-<div class="viewcode-block" id="Config.load_window_layouts"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.load_window_layouts">[docs]</a>    <span class="k">def</span> <span class="nf">load_window_layouts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Config.load_window_layouts">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.load_window_layouts">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_window_layouts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Parse and validate layouts loaded from config, with fallbacks if needed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">layout_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget_reqs</span><span class="p">:</span>
@@ -524,7 +567,10 @@
                 <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Invalid layout for </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">layout_name</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="Config.widget_layout_to_tree"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.widget_layout_to_tree">[docs]</a>    <span class="k">def</span> <span class="nf">widget_layout_to_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">pane_handle_pos</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Config.widget_layout_to_tree">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.widget_layout_to_tree">[docs]</a>
+    <span class="k">def</span> <span class="nf">widget_layout_to_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">pane_handle_pos</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Build a tree representing a widget hierarchy, leaves are strings and nodes are `dict`.</span>
 
 <span class="sd">        Recursive function. See validate_layout() for more info on the tree structure.</span>
@@ -585,7 +631,10 @@
                          <span class="s1">&#39;is not an expected container or named widget: &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="Config.get_layout"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.get_layout">[docs]</a>    <span class="k">def</span> <span class="nf">get_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout_name</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Config.get_layout">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.get_layout">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Getter for the `~layout_name` layout.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -594,7 +643,10 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">static_layout</span><span class="p">[</span><span class="n">layout_name</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="Config.update_layout_from_widgets"><a class="viewcode-back" href="../../pympress.html#pympress.config.Config.update_layout_from_widgets">[docs]</a>    <span class="k">def</span> <span class="nf">update_layout_from_widgets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout_name</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">pane_handle_pos</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Config.update_layout_from_widgets">
+<a class="viewcode-back" href="../../pympress.html#pympress.config.Config.update_layout_from_widgets">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_layout_from_widgets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout_name</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">pane_handle_pos</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Setter for the notes layout.</span>
 
 <span class="sd">        Args:</span>
@@ -604,7 +656,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">layout_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">static_layout</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update_layout_tree</span><span class="p">(</span><span class="n">layout_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget_layout_to_tree</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">pane_handle_pos</span><span class="p">))</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_layout_tree</span><span class="p">(</span><span class="n">layout_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget_layout_to_tree</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">pane_handle_pos</span><span class="p">))</span></div>
+</div>
+
 </pre></div>
 
            </div>

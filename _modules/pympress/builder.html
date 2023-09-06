@@ -11,9 +11,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/documentation_options.js?v=82e6e318"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -126,7 +126,9 @@
 <span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">util</span>
 
 
-<div class="viewcode-block" id="Builder"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder">[docs]</a><span class="k">class</span> <span class="nc">Builder</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
+<div class="viewcode-block" id="Builder">
+<a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder">[docs]</a>
+<span class="k">class</span> <span class="nc">Builder</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Builder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; GUI builder, inherits from :class:`~Gtk.Builder` to read XML descriptions of GUIs and load them.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: `set` of :class:`~Gtk.Widget`s that have been built by the builder, and translated</span>
@@ -197,7 +199,9 @@
             <span class="n">menu</span><span class="o">.</span><span class="n">append_item</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Builder.get_callback_handler"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.get_callback_handler">[docs]</a>    <span class="k">def</span> <span class="nf">get_callback_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler_name</span><span class="p">):</span>
+<div class="viewcode-block" id="Builder.get_callback_handler">
+<a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.get_callback_handler">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_callback_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Returns the handler from its name, searching in target.</span>
 
 <span class="sd">        Parse handler names and split on &#39;.&#39; to use recursion.</span>
@@ -221,7 +225,10 @@
         <span class="k">return</span> <span class="n">target</span></div>
 
 
-<div class="viewcode-block" id="Builder.signal_connector"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.signal_connector">[docs]</a>    <span class="k">def</span> <span class="nf">signal_connector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">builder</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">signal_name</span><span class="p">,</span> <span class="n">handler_name</span><span class="p">,</span> <span class="n">connect_object</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="o">*</span><span class="n">user_data</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Builder.signal_connector">
+<a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.signal_connector">[docs]</a>
+    <span class="k">def</span> <span class="nf">signal_connector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">builder</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">signal_name</span><span class="p">,</span> <span class="n">handler_name</span><span class="p">,</span> <span class="n">connect_object</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="o">*</span><span class="n">user_data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for signal connection. Implements the `~Gtk.BuilderConnectFunc` function interface.</span>
 
 <span class="sd">        Args:</span>
@@ -242,7 +249,10 @@
                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">signal_name</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">handler_name</span><span class="p">),</span> <span class="n">exc_info</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Builder.connect_signals"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.connect_signals">[docs]</a>    <span class="k">def</span> <span class="nf">connect_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_target</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Builder.connect_signals">
+<a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.connect_signals">[docs]</a>
+    <span class="k">def</span> <span class="nf">connect_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_target</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Signal connector connecting to properties of `base_target`, or properties of its properties, etc.</span>
 
 <span class="sd">        Args:</span>
@@ -252,7 +262,10 @@
         <span class="n">Builder</span><span class="o">.</span><span class="n">connect_signals_full</span><span class="p">(</span><span class="n">base_target</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">signal_connector</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Builder.load_ui"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.load_ui">[docs]</a>    <span class="k">def</span> <span class="nf">load_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Builder.load_ui">
+<a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.load_ui">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Loads the UI defined in the file named resource_name using the builder.</span>
 
 <span class="sd">        Args:</span>
@@ -284,7 +297,10 @@
                     <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Builder.list_attributes"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.list_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">list_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Builder.list_attributes">
+<a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.list_attributes">[docs]</a>
+    <span class="k">def</span> <span class="nf">list_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; List the None-valued attributes of target.</span>
 
 <span class="sd">        Args:</span>
@@ -298,7 +314,10 @@
                 <span class="k">pass</span></div>
 
 
-<div class="viewcode-block" id="Builder.load_widgets"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.load_widgets">[docs]</a>    <span class="k">def</span> <span class="nf">load_widgets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Builder.load_widgets">
+<a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.load_widgets">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_widgets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Fill in target with the missing elements introspectively.</span>
 
 <span class="sd">        This means that all attributes of `target` that are None now must exist under the same name in the builder.</span>
@@ -310,7 +329,10 @@
             <span class="nb">setattr</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">attr</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="Builder.replace_layout"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.replace_layout">[docs]</a>    <span class="k">def</span> <span class="nf">replace_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">top_widget</span><span class="p">,</span> <span class="n">leaf_widgets</span><span class="p">,</span> <span class="n">pane_resize_handler</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Builder.replace_layout">
+<a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.replace_layout">[docs]</a>
+    <span class="k">def</span> <span class="nf">replace_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">top_widget</span><span class="p">,</span> <span class="n">leaf_widgets</span><span class="p">,</span> <span class="n">pane_resize_handler</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Remix the layout below top_widget with the layout configuration given in &#39;layout&#39; (assumed to be valid!).</span>
 
 <span class="sd">        Args:</span>
@@ -412,7 +434,10 @@
         <span class="k">return</span> <span class="n">pane_handle_pos</span></div>
 
 
-<div class="viewcode-block" id="Builder.resize_paned"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.resize_paned">[docs]</a>    <span class="k">def</span> <span class="nf">resize_paned</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">paned</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">relpos</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Builder.resize_paned">
+<a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.resize_paned">[docs]</a>
+    <span class="k">def</span> <span class="nf">resize_paned</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">paned</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">relpos</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Resize `paned` to have its handle at `relpos`, then disconnect this signal handler.</span>
 
 <span class="sd">        Called from the :func:`Gtk.Widget.signals.size_allocate` signal.</span>
@@ -440,7 +465,10 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="Builder.setup_actions"><a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.setup_actions">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="Builder.setup_actions">
+<a class="viewcode-back" href="../../pympress.html#pympress.builder.Builder.setup_actions">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">setup_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">,</span> <span class="n">action_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Sets up actions with a given prefix, using the Application as the ActionMap.</span>
 
@@ -475,7 +503,9 @@
             <span class="k">if</span> <span class="n">enabled</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">action</span><span class="o">.</span><span class="n">set_enabled</span><span class="p">(</span><span class="n">enabled</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">action_map</span></div></div>
+        <span class="k">return</span> <span class="n">action_map</span></div>
+</div>
+
 </pre></div>
 
            </div>

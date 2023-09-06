@@ -11,9 +11,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/documentation_options.js?v=82e6e318"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -126,7 +126,9 @@
 <span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">util</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">document</span><span class="p">,</span> <span class="n">ui</span><span class="p">,</span> <span class="n">builder</span>
 
 
-<div class="viewcode-block" id="Pympress"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress">[docs]</a><span class="k">class</span> <span class="nc">Pympress</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Application</span><span class="p">):</span>
+<div class="viewcode-block" id="Pympress">
+<a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress">[docs]</a>
+<span class="k">class</span> <span class="nc">Pympress</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Application</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Class representing the single pympress Gtk application.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: The :class:`~pympress.ui.UI` object that is the interface of pympress</span>
@@ -205,7 +207,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">add_main_option</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="n">opt</span><span class="p">],</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">option_descriptions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]))</span>
 
 
-<div class="viewcode-block" id="Pympress.quit"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.quit">[docs]</a>    <span class="k">def</span> <span class="nf">quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>  <span class="c1"># noqa: A003 -- we need to override app.quit()</span>
+<div class="viewcode-block" id="Pympress.quit">
+<a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.quit">[docs]</a>
+    <span class="k">def</span> <span class="nf">quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>  <span class="c1"># noqa: A003 -- we need to override app.quit()</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Quit and ignore other arguments e.g. sent by signals.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gui</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">unsaved_changes</span><span class="p">():</span>
@@ -215,7 +219,10 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="Pympress.do_startup"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.do_startup">[docs]</a>    <span class="k">def</span> <span class="nf">do_startup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pympress.do_startup">
+<a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.do_startup">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_startup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Common start-up tasks for primary and remote instances.</span>
 
 <span class="sd">        NB. super(self) causes segfaults, Gtk.Application needs to be used as base.</span>
@@ -236,7 +243,10 @@
         <span class="n">Gtk</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">do_startup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Pympress.do_activate"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.do_activate">[docs]</a>    <span class="k">def</span> <span class="nf">do_activate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="n">GLib</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()):</span>
+
+<div class="viewcode-block" id="Pympress.do_activate">
+<a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.do_activate">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_activate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="n">GLib</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Activate: show UI windows.</span>
 
 <span class="sd">        Build them if they do not exist, otherwise bring to front.</span>
@@ -256,7 +266,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">p_win</span><span class="o">.</span><span class="n">present_with_time</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Pympress.set_action_enabled"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.set_action_enabled">[docs]</a>    <span class="k">def</span> <span class="nf">set_action_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pympress.set_action_enabled">
+<a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.set_action_enabled">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_action_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Parse an action name and set its enabled state to True or False.</span>
 
 <span class="sd">        Args:</span>
@@ -266,7 +279,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">set_enabled</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Pympress.set_action_state"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.set_action_state">[docs]</a>    <span class="k">def</span> <span class="nf">set_action_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pympress.set_action_state">
+<a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.set_action_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_action_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Parse an action name and set its state wrapped in a :class:`~GLib.Variant`.</span>
 
 <span class="sd">        Args:</span>
@@ -276,7 +292,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">change_state</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="o">.</span><span class="n">_glib_type_strings</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)],</span> <span class="n">value</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="Pympress.get_action_state"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.get_action_state">[docs]</a>    <span class="k">def</span> <span class="nf">get_action_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pympress.get_action_state">
+<a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.get_action_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_action_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Parse an action name and return its unwrapped state from the :class:`~GLib.Variant`.</span>
 
 <span class="sd">        Args:</span>
@@ -289,7 +308,10 @@
         <span class="k">return</span> <span class="n">builder</span><span class="o">.</span><span class="n">Builder</span><span class="o">.</span><span class="n">_glib_type_getters</span><span class="p">[</span><span class="n">state</span><span class="o">.</span><span class="n">get_type_string</span><span class="p">()](</span><span class="n">state</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Pympress.activate_action"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.activate_action">[docs]</a>    <span class="k">def</span> <span class="nf">activate_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pympress.activate_action">
+<a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.activate_action">[docs]</a>
+    <span class="k">def</span> <span class="nf">activate_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Parse an action name and activate it, with parameter wrapped in a :class:`~GLib.Variant` if it is not None.</span>
 
 <span class="sd">        Args:</span>
@@ -306,7 +328,10 @@
         <span class="n">Gio</span><span class="o">.</span><span class="n">ActionGroup</span><span class="o">.</span><span class="n">activate_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Pympress.do_open"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.do_open">[docs]</a>    <span class="k">def</span> <span class="nf">do_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">,</span> <span class="n">n_files</span><span class="p">,</span> <span class="n">hint</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pympress.do_open">
+<a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.do_open">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">,</span> <span class="n">n_files</span><span class="p">,</span> <span class="n">hint</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Handle opening files. In practice we only open once, the last one.</span>
 
 <span class="sd">        Args:</span>
@@ -321,7 +346,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">swap_document</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_uri</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="Pympress.do_shutdown"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.do_shutdown">[docs]</a>    <span class="k">def</span> <span class="nf">do_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pympress.do_shutdown">
+<a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.do_shutdown">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Perform various cleanups and save preferences.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gui</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -332,7 +360,10 @@
         <span class="n">util</span><span class="o">.</span><span class="n">close_opened_resources</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Pympress.set_log_level"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.set_log_level">[docs]</a>    <span class="k">def</span> <span class="nf">set_log_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pympress.set_log_level">
+<a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.set_log_level">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_log_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Action that sets the logging level (on the root logger of the active instance)</span>
 
 <span class="sd">        Args:</span>
@@ -343,7 +374,10 @@
         <span class="n">action</span><span class="o">.</span><span class="n">change_state</span><span class="p">(</span><span class="n">param</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Pympress.do_handle_local_options"><a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.do_handle_local_options">[docs]</a>    <span class="k">def</span> <span class="nf">do_handle_local_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opts_variant_dict</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pympress.do_handle_local_options">
+<a class="viewcode-back" href="../../pympress.html#pympress.app.Pympress.do_handle_local_options">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_handle_local_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opts_variant_dict</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Parse command line options, returned as a VariantDict</span>
 
 <span class="sd">        Returns:</span>
@@ -404,7 +438,9 @@
             <span class="k">elif</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">simple_actions</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">activate_action</span><span class="p">(</span><span class="n">simple_actions</span><span class="p">[</span><span class="n">opt</span><span class="p">])</span>
 
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span></div></div>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span></div>
+</div>
+
 </pre></div>
 
            </div>

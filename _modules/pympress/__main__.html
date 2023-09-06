@@ -11,9 +11,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/documentation_options.js?v=82e6e318"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -124,11 +124,14 @@
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">util</span><span class="o">.</span><span class="n">get_log_path</span><span class="p">(),</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="uncaught_handler"><a class="viewcode-back" href="../../pympress.html#pympress.__main__.uncaught_handler">[docs]</a><span class="k">def</span> <span class="nf">uncaught_handler</span><span class="p">(</span><span class="o">*</span><span class="n">exc_info</span><span class="p">):</span>
+<div class="viewcode-block" id="uncaught_handler">
+<a class="viewcode-back" href="../../pympress.html#pympress.__main__.uncaught_handler">[docs]</a>
+<span class="k">def</span> <span class="nf">uncaught_handler</span><span class="p">(</span><span class="o">*</span><span class="n">exc_info</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Exception handler, to log uncaught exceptions to our log file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;Uncaught exception:</span><span class="se">\n</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">()</span><span class="o">.</span><span class="n">formatException</span><span class="p">(</span><span class="n">exc_info</span><span class="p">)))</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">__excepthook__</span><span class="p">(</span><span class="o">*</span><span class="n">exc_info</span><span class="p">)</span></div>
+
 
 
 <span class="n">sys</span><span class="o">.</span><span class="n">excepthook</span> <span class="o">=</span> <span class="n">uncaught_handler</span>
@@ -187,10 +190,13 @@
 <span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">app</span>
 
 
-<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../pympress.html#pympress.__main__.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[:]):</span>
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../pympress.html#pympress.__main__.main">[docs]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[:]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Entry point of pympress. Parse command line arguments, instantiate the UI, and start the main loop.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">app</span><span class="o">.</span><span class="n">Pympress</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span></div>
+
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>

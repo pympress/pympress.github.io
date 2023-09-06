@@ -11,9 +11,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/documentation_options.js?v=82e6e318"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -121,7 +121,9 @@
 <span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">util</span><span class="p">,</span> <span class="n">extras</span>
 
 
-<div class="viewcode-block" id="PointerMode"><a class="viewcode-back" href="../../pympress.html#pympress.pointer.PointerMode">[docs]</a><span class="k">class</span> <span class="nc">PointerMode</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="PointerMode">
+<a class="viewcode-back" href="../../pympress.html#pympress.pointer.PointerMode">[docs]</a>
+<span class="k">class</span> <span class="nc">PointerMode</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Possible values for the pointer.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: Pointer switched on continuously</span>
@@ -132,7 +134,10 @@
     <span class="n">DISABLED</span> <span class="o">=</span> <span class="mi">0</span></div>
 
 
-<div class="viewcode-block" id="Pointer"><a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer">[docs]</a><span class="k">class</span> <span class="nc">Pointer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pointer">
+<a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer">[docs]</a>
+<span class="k">class</span> <span class="nc">Pointer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Manage and draw the software “laser pointer” to point at the slide.</span>
 
 <span class="sd">    Displays a pointer of chosen color on the current slide (in both windows), either on all the time or only when</span>
@@ -194,7 +199,9 @@
         <span class="p">})</span>
 
 
-<div class="viewcode-block" id="Pointer.load_pointer"><a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.load_pointer">[docs]</a>    <span class="k">def</span> <span class="nf">load_pointer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="Pointer.load_pointer">
+<a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.load_pointer">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_pointer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Perform the change of pointer using its color name.</span>
 
 <span class="sd">        Args:</span>
@@ -209,7 +216,10 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Failed loading pixbuf for pointer &quot;</span><span class="si">{}</span><span class="s1">&quot; from: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="p">)))</span></div>
 
 
-<div class="viewcode-block" id="Pointer.change_pointercolor"><a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.change_pointercolor">[docs]</a>    <span class="k">def</span> <span class="nf">change_pointercolor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pointer.change_pointercolor">
+<a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.change_pointercolor">[docs]</a>
+    <span class="k">def</span> <span class="nf">change_pointercolor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for a radio item selection as pointer mode (continuous, manual, none).</span>
 
 <span class="sd">        Args:</span>
@@ -222,7 +232,10 @@
         <span class="n">action</span><span class="o">.</span><span class="n">change_state</span><span class="p">(</span><span class="n">target</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Pointer.activate_pointermode"><a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.activate_pointermode">[docs]</a>    <span class="k">def</span> <span class="nf">activate_pointermode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pointer.activate_pointermode">
+<a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.activate_pointermode">[docs]</a>
+    <span class="k">def</span> <span class="nf">activate_pointermode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Activate the pointer as given by mode.</span>
 
 <span class="sd">        Depending on the given mode, shows or hides the laser pointer and the normal mouse pointer.</span>
@@ -260,7 +273,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">redraw_current_slide</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Pointer.change_pointermode"><a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.change_pointermode">[docs]</a>    <span class="k">def</span> <span class="nf">change_pointermode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pointer.change_pointermode">
+<a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.change_pointermode">[docs]</a>
+    <span class="k">def</span> <span class="nf">change_pointermode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback for a radio item selection as pointer mode (continuous, manual, none).</span>
 
 <span class="sd">        Args:</span>
@@ -276,7 +292,10 @@
         <span class="n">action</span><span class="o">.</span><span class="n">change_state</span><span class="p">(</span><span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">new_string</span><span class="p">(</span><span class="n">mode</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span></div>
 
 
-<div class="viewcode-block" id="Pointer.render_pointer"><a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.render_pointer">[docs]</a>    <span class="k">def</span> <span class="nf">render_pointer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">,</span> <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pointer.render_pointer">
+<a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.render_pointer">[docs]</a>
+    <span class="k">def</span> <span class="nf">render_pointer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cairo_context</span><span class="p">,</span> <span class="n">ww</span><span class="p">,</span> <span class="n">wh</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Draw the laser pointer on screen.</span>
 
 <span class="sd">        Args:</span>
@@ -291,7 +310,10 @@
             <span class="n">cairo_context</span><span class="o">.</span><span class="n">paint</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Pointer.track_pointer"><a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.track_pointer">[docs]</a>    <span class="k">def</span> <span class="nf">track_pointer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pointer.track_pointer">
+<a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.track_pointer">[docs]</a>
+    <span class="k">def</span> <span class="nf">track_pointer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Move the laser pointer at the mouse location.</span>
 
 <span class="sd">        Args:</span>
@@ -312,7 +334,10 @@
             <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="Pointer.track_enter_leave"><a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.track_enter_leave">[docs]</a>    <span class="k">def</span> <span class="nf">track_enter_leave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pointer.track_enter_leave">
+<a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.track_enter_leave">[docs]</a>
+    <span class="k">def</span> <span class="nf">track_enter_leave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Switches laser off/on in continuous mode on leave/enter slides.</span>
 
 <span class="sd">        In continuous mode, the laser pointer is switched off when the mouse leaves the slide</span>
@@ -342,7 +367,10 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="Pointer.toggle_pointer"><a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.toggle_pointer">[docs]</a>    <span class="k">def</span> <span class="nf">toggle_pointer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Pointer.toggle_pointer">
+<a class="viewcode-back" href="../../pympress.html#pympress.pointer.Pointer.toggle_pointer">[docs]</a>
+    <span class="k">def</span> <span class="nf">toggle_pointer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Track events defining when the laser is pointing.</span>
 
 <span class="sd">        Args:</span>
@@ -371,7 +399,9 @@
             <span class="k">return</span> <span class="kc">True</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span></div></div>
+            <span class="k">return</span> <span class="kc">False</span></div>
+</div>
+
 </pre></div>
 
            </div>

@@ -12,9 +12,9 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/documentation_options.js?v=82e6e318"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -92,7 +92,7 @@
            <div itemprop="articleBody">
              
   <section id="configuration-file">
-<h1>Configuration file<a class="headerlink" href="#configuration-file" title="Permalink to this heading">¶</a></h1>
+<h1>Configuration file<a class="headerlink" href="#configuration-file" title="Link to this heading">¶</a></h1>
 <p>Pympress has a number of options available from its configuration file.</p>
 <p>This file is usually located in:</p>
 <ul class="simple">
@@ -103,7 +103,7 @@
 </ul>
 <p>The path to the currently used configuration file can be checked in the <code class="docutils literal notranslate"><span class="pre">Help</span> <span class="pre">&gt;</span> <span class="pre">About</span></code> information window.</p>
 <section id="shortcuts">
-<h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this heading">¶</a></h2>
+<h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Link to this heading">¶</a></h2>
 <p>The shortcuts are parsed using <a class="reference external" href="https://lazka.github.io/pgi-docs/#Gtk-3.0/functions.html#Gtk.accelerator_parse"><code class="docutils literal notranslate"><span class="pre">Gtk.accelerator_parse()</span></code></a>:</p>
 <blockquote>
 <div><p>The format looks like “&lt;Control&gt;a” or “&lt;Shift&gt;&lt;Alt&gt;F1” or “&lt;Release&gt;z” (the last one is for key release).</p>
@@ -112,7 +112,7 @@
 <p>This means that any value in this <a class="reference external" href="https://lazka.github.io/pgi-docs/#Gdk-3.0/constants.html#Gdk.KEY_0">list of key constants</a> is valid (removing the initial <code class="docutils literal notranslate"><span class="pre">Gdk.KEY_</span></code> part). You can verify that this value is parsed correctly from the <code class="docutils literal notranslate"><span class="pre">Help</span> <span class="pre">&gt;</span> <span class="pre">Shortcuts</span></code> information window.</p>
 </section>
 <section id="layouts">
-<h2>Layouts<a class="headerlink" href="#layouts" title="Permalink to this heading">¶</a></h2>
+<h2>Layouts<a class="headerlink" href="#layouts" title="Link to this heading">¶</a></h2>
 <p>The panes (current slide, next slide, notes, annotations, etc.) can be rearranged arbitrarily by setting the entries of the <code class="docutils literal notranslate"><span class="pre">layout</span></code> section in the configuration file.
 Here are a couple examples of layouts, with <code class="docutils literal notranslate"><span class="pre">Cu</span></code> the current slide, <code class="docutils literal notranslate"><span class="pre">No</span></code> the notes half of the slide, <code class="docutils literal notranslate"><span class="pre">Nx</span></code> the next slide:</p>
 <ul>
@@ -189,7 +189,7 @@ Here are a couple examples of layouts, with <code class="docutils literal notran
 </ul>
 </section>
 <section id="themes-on-windows">
-<h2>Themes on Windows<a class="headerlink" href="#themes-on-windows" title="Permalink to this heading">¶</a></h2>
+<h2>Themes on Windows<a class="headerlink" href="#themes-on-windows" title="Link to this heading">¶</a></h2>
 <p>Pympress uses the default Gtk theme of your system, which makes it easy to change on many OSs either globally via your Gtk preferences or <a class="reference external" href="https://www.linuxuprising.com/2019/10/how-to-use-different-gtk-3-theme-for.html">per application</a>.
 Here’s the way to do it on windows:</p>
 <ol class="arabic">
