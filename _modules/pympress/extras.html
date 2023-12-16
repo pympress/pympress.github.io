@@ -13,7 +13,7 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/documentation_options.js?v=496f73d5"></script>
+        <script src="../../_static/documentation_options.js?v=ed17f7cc"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -31,7 +31,7 @@
 	<a href="../../index.html" class="icon icon-home"> Docs home</a>
 	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
 	<div class="version">
-		v1.8.4
+		v1.8.5
 	</div>
 
 	
@@ -55,10 +55,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../pympress.html">Pympress package</a></li>
 </ul>
 
-	
-	<hr style="border: 0; height: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.3); width:80%; margin: 10px auto;" />
-	<a href="../../genindex.html">Index</a>
-	<a href="../../py-modindex.html">Module index</a>
 	
 
         </div>
@@ -136,6 +132,10 @@
     <span class="n">annotations_treeview</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#: The containing :class:`~Gtk.ListStore` storing the annotations to be displayed</span>
     <span class="n">annotations_liststore</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: The :class:`~Gtk.TreeViewColumn` where the text is rendered</span>
+    <span class="n">annotation_column</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: The :class:`~Gtk.CellRendererText` defining how text is rendered</span>
+    <span class="n">annotation_renderer</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#: The :class:`~Gtk.Entry` in which we are currently editing an annotation, or None</span>
     <span class="n">editing</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -185,6 +185,17 @@
         <span class="k">if</span> <span class="n">rows</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">annotations_treeview</span><span class="o">.</span><span class="n">set_cursor</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="Annotations.rewrap_annotations">
+<a class="viewcode-back" href="../../pympress.html#pympress.extras.Annotations.rewrap_annotations">[docs]</a>
+    <span class="k">def</span> <span class="nf">rewrap_annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Update the wrap-width of the annotation column to fit its actual width</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotations_treeview</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">annotation_renderer</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s1">&#39;wrap-width&#39;</span><span class="p">,</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">annotation_column</span><span class="o">.</span><span class="n">queue_resize</span><span class="p">()</span></div>
 
 
 

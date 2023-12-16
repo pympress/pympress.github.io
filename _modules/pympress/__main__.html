@@ -13,7 +13,7 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/documentation_options.js?v=496f73d5"></script>
+        <script src="../../_static/documentation_options.js?v=ed17f7cc"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -31,7 +31,7 @@
 	<a href="../../index.html" class="icon icon-home"> Docs home</a>
 	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
 	<div class="version">
-		v1.8.4
+		v1.8.5
 	</div>
 
 	
@@ -55,10 +55,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../pympress.html">Pympress package</a></li>
 </ul>
 
-	
-	<hr style="border: 0; height: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.3); width:80%; margin: 10px auto;" />
-	<a href="../../genindex.html">Index</a>
-	<a href="../../py-modindex.html">Module index</a>
 	
 
         </div>
@@ -143,6 +139,10 @@
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;LANG&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">lang</span><span class="p">,</span> <span class="n">enc</span> <span class="o">=</span> <span class="n">locale</span><span class="o">.</span><span class="n">getdefaultlocale</span><span class="p">()</span>
         <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;LANG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lang</span>
+
+    <span class="c1"># Before any initialisation or imports</span>
+    <span class="n">util</span><span class="o">.</span><span class="n">make_windows_dpi_aware</span><span class="p">()</span>
+
 
 <span class="k">try</span><span class="p">:</span>
     <span class="n">loaded_locale</span> <span class="o">=</span> <span class="n">locale</span><span class="o">.</span><span class="n">setlocale</span><span class="p">(</span><span class="n">locale</span><span class="o">.</span><span class="n">LC_ALL</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>

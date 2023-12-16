@@ -13,7 +13,7 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/documentation_options.js?v=496f73d5"></script>
+        <script src="../../_static/documentation_options.js?v=ed17f7cc"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -31,7 +31,7 @@
 	<a href="../../index.html" class="icon icon-home"> Docs home</a>
 	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
 	<div class="version">
-		v1.8.4
+		v1.8.5
 	</div>
 
 	
@@ -55,10 +55,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../pympress.html">Pympress package</a></li>
 </ul>
 
-	
-	<hr style="border: 0; height: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.3); width:80%; margin: 10px auto;" />
-	<a href="../../genindex.html">Index</a>
-	<a href="../../py-modindex.html">Module index</a>
 	
 
         </div>
@@ -827,6 +823,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">p_da_notes</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">redraw_timeout</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">redraw_timeout</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_annotations</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">rewrap_annotations</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update_layout_from_widgets</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes_mode</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_central</span><span class="o">.</span><span class="n">get_children</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
                                                <span class="bp">self</span><span class="o">.</span><span class="n">pane_handle_pos</span><span class="p">)</span></div>
@@ -2151,6 +2149,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">size</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">()</span>
                 <span class="n">parent</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pane_handle_pos</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span> <span class="o">*</span> <span class="n">size</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">rewrap_annotations</span><span class="p">()</span>
 
         <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">redraw_panes</span><span class="p">)</span>
 

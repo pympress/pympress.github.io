@@ -13,7 +13,7 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../_static/documentation_options.js?v=496f73d5"></script>
+        <script src="../../../_static/documentation_options.js?v=ed17f7cc"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -31,7 +31,7 @@
 	<a href="../../../index.html" class="icon icon-home"> Docs home</a>
 	<img src="../../../_static/pympress.png" class="logo" alt="Logo"/>
 	<div class="version">
-		v1.8.4
+		v1.8.5
 	</div>
 
 	
@@ -55,10 +55,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../pympress.html">Pympress package</a></li>
 </ul>
 
-	
-	<hr style="border: 0; height: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.3); width:80%; margin: 10px auto;" />
-	<a href="../../../genindex.html">Index</a>
-	<a href="../../../py-modindex.html">Module index</a>
 	
 
         </div>
@@ -341,6 +337,11 @@
 <span class="sd">            `str`: the version of Gst used by the backend</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Gst</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">gst_opts</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">Gst</span><span class="o">.</span><span class="n">ElementFactory</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;gtksink&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Can not create a gtksink. Check the gtk plugin for GStreamer is installed.&#39;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;See https://github.com/Cimbali/pympress/issues/240&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Can not create a gtksink.&#39;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">Gst</span><span class="o">.</span><span class="n">version_string</span><span class="p">()</span></div>
 </div>

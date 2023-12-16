@@ -13,7 +13,7 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/documentation_options.js?v=496f73d5"></script>
+        <script src="../../_static/documentation_options.js?v=ed17f7cc"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -31,7 +31,7 @@
 	<a href="../../index.html" class="icon icon-home"> Docs home</a>
 	<img src="../../_static/pympress.png" class="logo" alt="Logo"/>
 	<div class="version">
-		v1.8.4
+		v1.8.5
 	</div>
 
 	
@@ -55,10 +55,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../pympress.html">Pympress package</a></li>
 </ul>
 
-	
-	<hr style="border: 0; height: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.3); width:80%; margin: 10px auto;" />
-	<a href="../../genindex.html">Index</a>
-	<a href="../../py-modindex.html">Module index</a>
 	
 
         </div>
@@ -121,6 +117,7 @@
 <span class="kn">import</span> <span class="nn">gettext</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">ctypes</span>
 <span class="kn">import</span> <span class="nn">pathlib</span>
 
 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
@@ -638,7 +635,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            display (:class:`~Gdk.Display`):  the current screen</span>
-<span class="sd">            *windows (`tuple` of :class:`~Gtk.Window`):  windows for wich to look up the monitor position</span>
+<span class="sd">            *windows (`tuple` of :class:`~Gtk.Window`):  windows for which to look up the monitor position</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            `tuple` of `Monitor`: The monitors for each window, followed by the best monitors for presenter and content</span>
@@ -682,6 +679,20 @@
 
         <span class="k">return</span> <span class="p">(</span><span class="o">*</span><span class="n">pos</span><span class="p">,</span> <span class="n">prim_area</span><span class="o">.</span><span class="n">most_intersection</span><span class="p">(</span><span class="n">all_geom</span><span class="p">),</span> <span class="n">prim_area</span><span class="o">.</span><span class="n">least_intersection</span><span class="p">(</span><span class="n">all_geom</span><span class="p">))</span></div>
 </div>
+
+
+
+<div class="viewcode-block" id="make_windows_dpi_aware">
+<a class="viewcode-back" href="../../pympress.html#pympress.util.make_windows_dpi_aware">[docs]</a>
+<span class="k">def</span> <span class="nf">make_windows_dpi_aware</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Set to avoid blurriness issues on High-DPI resolutions with scaling. &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">IS_WINDOWS</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">shcore</span><span class="p">,</span> <span class="s1">&#39;SetProcessDpiAwareness&#39;</span><span class="p">):</span>
+        <span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">shcore</span><span class="o">.</span><span class="n">SetProcessDpiAwareness</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">SetProcessDPIAware</span><span class="p">()</span></div>
 
 
 <span class="c1">##</span>
