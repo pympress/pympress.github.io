@@ -264,7 +264,7 @@ To disable this behaviour, untick “Content fullscreen” under the “Starting
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-h,</span> <span class="pre">--help</span></code>: Shows a list of all command line arguments.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">mm[:ss],</span> <span class="pre">--talk-time=mm[:ss]</span></code>: The estimated (intended) talk time in minutes and optionally seconds.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">position,</span> <span class="pre">--notes=position</span></code>: Set the position of notes on the pdf page (none, left, right, top, or bottom). Overrides the detection from the file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">position,</span> <span class="pre">--notes=position</span></code>: Set the position of notes on the pdf page (none, left, right, top, bottom, or after). Overrides the detection from the file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--log=level</span></code>: Set level of verbosity in log file (DEBUG, INFO, WARNING, ERROR).</p></li>
 </ul>
 </section>
@@ -375,14 +375,14 @@ For example, on ubuntu, you can run the following as root to make sure you have 
 <li><p>Get GTK+3, Poppler and their python bindings by executing <a class="reference external" href="https://sourceforge.net/projects/pygobjectwin32/">the PyGi installer</a>.  Be sure to tick all the necessary dependencies in the installer (Poppler, Cairo, Gdk-Pixbuf).</p></li>
 </ul>
 <p>Alternately, you can build your Gtk+3 stack from source using MSVC, see <a class="reference external" href="https://wiki.gnome.org/Projects/GTK+/Win32/MSVCCompilationOfGTKStack">the Gnome wiki</a> and <a class="reference external" href="https://github.com/wingtk/gvsbuild/">this python script that compiles the whole Gtk+3 stack</a>.
-This strategy has not been used successfully yet, due to problems building Poppler with its introspection bidings (i.e. typelib) − see <a class="reference external" href="https://github.com/Cimbali/pympress/issues/109">#109</a>.</p>
+This strategy has not been used successfully yet, due to problems building Poppler with its introspection bindings (i.e. typelib) − see <a class="reference external" href="https://github.com/Cimbali/pympress/issues/109">#109</a>.</p>
 </section>
 </section>
 <section id="contributing">
 <h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">¶</a></h1>
 <p>Feel free to clone this repo and use it, modify it, redistribute it, etc, under the GPLv2+.
 A <a class="reference external" href="https://github.com/Cimbali/pympress/graphs/contributors">number of contributors</a> have taken part in the development of pympress and submitted pull requests to improve it.</p>
-<p><strong>Be respectful of everyone and keep this community friendly, welcoming, and harrasment-free.
+<p><strong>Be respectful of everyone and keep this community friendly, welcoming, and harassment-free.
 Abusive behaviour will not be tolerated, and can be reported by email at me&#64;cimba.li − wrongdoers may be permanently banned.</strong></p>
 <p>Pympress has inline sphinx documentation (<a class="reference external" href="http://www.sphinx-doc.org/en/latest/ext/example_google.html">Google style</a>, contains rst syntax), and the <a class="reference external" href="https://pympress.github.io/">docs generated from it are hosted on the github pages of this repo</a>.</p>
 <section id="translations">
@@ -440,7 +440,7 @@ Vojta Netrh,
 Vulpeculus,
 and <!-- last translator --> Cimbali.</p>
 <p>If you also want to add or contribute to a translation, check <a class="reference external" href="https://poeditor.com/join/project/nKfRxeN8pS">pympress’ page on POEditor</a>.
-Note that old strings are kept and tagged <code class="docutils literal notranslate"><span class="pre">removed</span></code>, to give context and keep continuity between translations of succcessive versions.
+Note that old strings are kept and tagged <code class="docutils literal notranslate"><span class="pre">removed</span></code>, to give context and keep continuity between translations of successive versions.
 This means <code class="docutils literal notranslate"><span class="pre">removed</span></code> strings are unused and do not need translating.</p>
 </section>
 <section id="packages">
