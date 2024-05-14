@@ -14,7 +14,7 @@
   <![endif]-->
   
         <script src="../../_static/documentation_options.js?v=ed17f7cc"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -176,14 +176,19 @@
     <span class="kn">import</span> <span class="nn">cairo</span>
 <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;Gobject Introspections and/or pycairo module is missing&#39;</span><span class="p">,</span> <span class="n">exc_info</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;ERROR: Gobject Introspections and/or pycairo module is missing, &#39;</span> <span class="o">+</span>
-                   <span class="s1">&#39;make sure Gtk, pygobject and pycairo are installed on your system.&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Try your operating system’s package manager, or try running: pip install pygobject pycairo&#39;</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;pip will then download and compile pygobject and pycairo, &#39;</span> <span class="o">+</span>
-            <span class="s1">&#39;for which you need the Gtk and cairo headers (or development packages).&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;For instructions, refer to https://github.com/Cimbali/pympress/blob/master/README.md#dependencies&#39;</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;If using a virtualenv or anaconda, you can also try allowing system site packages.&#39;</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">ERROR: Gobject Introspections and/or pycairo module is missing. Make sure Gtk, pygobject and pycairo are installed.</span>
+
+<span class="s2">Try your operating system’s package manager, and ensure you installed pympress with access to system packages.</span>
+<span class="s2">Typically, this means having installed with:</span>
+<span class="s2">  pipx install --system-site-packages pympress</span>
+
+<span class="s2">Alternately, ask pip to download and compile pygobject and pycairo, for which you may need the Gtk and cairo headers</span>
+<span class="s2">(or development packages):</span>
+<span class="s2">  pipx inject pympress pygobject pycairo</span>
+
+<span class="s2">For further instructions, refer to https://github.com/Cimbali/pympress/blob/master/README.md#dependencies</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">))</span>
     <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 

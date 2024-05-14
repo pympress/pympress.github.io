@@ -15,7 +15,7 @@
   <![endif]-->
   
         <script src="_static/documentation_options.js?v=ed17f7cc"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -173,19 +173,59 @@ Those libraries really should already be installed on your system.</p></li>
 </details>
 </li>
 <li><p>Other systems, directly from PyPI <img alt="pypi version badge" src="https://img.shields.io/pypi/v/pympress?logo=pypi&amp;logoColor=yellow" /> − requires <a class="reference internal" href="#dependencies">python, gtk+3, poppler, and their python bindings</a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;pympress&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pipx</span> <span class="n">install</span> <span class="o">--</span><span class="n">system</span><span class="o">-</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="s2">&quot;pympress&quot;</span>
 </pre></div>
 </div>
 <details><summary>Troubleshooting</summary>
-<ul class="simple">
+<ul>
 <li><p>Make sure you have all <a class="reference internal" href="#dependencies">the dependencies</a>. (These are already included in binary packages or their dependencies.)</p></li>
-<li><p>Using pip, you may want to install with the <code class="docutils literal notranslate"><span class="pre">--user</span></code> option, or install from github or downloaded sources.
-See <a class="reference external" href="https://docs.python.org/3.7/installing/index.html">the python documentation on installing</a>.</p></li>
 <li><p>If your python environment lacks the Gobject Introspections module, try</p>
 <ol class="arabic simple">
-<li><p>using <code class="docutils literal notranslate"><span class="pre">--system-site-packages</span></code> for <a class="reference external" href="https://docs.python.org/3.7/library/venv.html">virtual environments</a>,</p></li>
-<li><p>installing pygobject from pip (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pygobject</span></code>, which requires the correct development/header packages.
+<li><p>using <code class="docutils literal notranslate"><span class="pre">--system-site-packages</span></code> for <a class="reference external" href="https://pipx.pypa.io/latest/docs/#pipx-install">pipx</a>
+or <a class="reference external" href="https://docs.python.org/3.11/library/venv.html">virtual environments</a>,</p></li>
+<li><p>installing pygobject and pycairo with pipx (<code class="docutils literal notranslate"><span class="pre">pipx</span> <span class="pre">inject</span> <span class="pre">pympress</span> <span class="pre">pygobject</span> <span class="pre">pycairo</span></code>),
+which requires the correct development/header packages be present on your system.
 See <a class="reference external" href="https://pygobject.readthedocs.io/en/latest/getting_started.html">the PyPI installation instructions of PyGObject for your system</a>).</p></li>
+</ol>
+</li>
+<li><p>As per <a class="reference external" href="https://docs.python.org/3.11/installing/index.html">the python documentation on installing</a>,
+it is recommended to install packages in virtual environments.
+Since mid 2022, the <a class="reference external" href="https://packaging.python.org/en/latest/key_projects/#pipx">pipx</a> tool automates this process.
+Your distribution (or Homebrew on macOS) should have a version you can install.
+Alternately, you can get the same effect with the standard venv and pip modules:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create virtual environment</span>
+python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>--system-site-packages<span class="w"> </span>~/.local/lib/venv/pympress
+<span class="c1"># Install pympress</span>
+~/.local/lib/venv/pympress/bin/python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pympress
+<span class="c1"># Link to the executable from a place in your path</span>
+ln<span class="w"> </span>-s<span class="w"> </span>~/.local/lib/venv/pympress/bin/pympress<span class="w"> </span>~/.local/bin/
+</pre></div>
+</div>
+<p>Note that:</p>
+<ul class="simple">
+<li><p>If you don’t want to use system packages, you can build and install pygobject/pycairo in the virtual environment using
+<code class="docutils literal notranslate"><span class="pre">~/.local/lib/venv/bin/pip</span> <span class="pre">install</span> <span class="pre">pygobject</span> <span class="pre">pycairo</span></code></p></li>
+<li><p>You can adjust the <code class="docutils literal notranslate"><span class="pre">~/.local/lib/venv/</span></code> path to your personal preference.</p></li>
+</ul>
+</li>
+<li><p>Unfortunately, installing pympress in a virtual environment means you will not get desktop integration
+(i.e. installing pympress’ desktop and png files to have pympress show up in your menus etc).</p>
+<p>This is <a class="reference external" href="https://discuss.python.org/t/should-there-be-a-new-standard-for-installing-arbitrary-data-files/7853/4">by design</a>,
+as desktop applications are intended to be installed through system packages (rpm, apt, etc.).
+You can work around this in 2 ways:</p>
+<ol class="arabic">
+<li><p>Manually (note that links/copied files will need to be removed):</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span><span class="s2">&quot;`pipx environment -V PIPX_LOCAL_VENVS`/pympress/share/applications/io.github.pympress.desktop&quot;</span><span class="w"> </span>~/.share/applications/
+ln<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;`pipx environment -V PIPX_LOCAL_VENVS`/pympress/share/pixmaps/pympress.png&quot;</span><span class="w"> </span>~/.share/pixmaps/
+</pre></div>
+</div>
+</li>
+<li><p>Relying on the deprecated data_files, that only work <a class="reference external" href="https://peps.python.org/pep-0668/">outside of virtual environments</a>.
+This means installing with <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--break-system-packages<span class="w"> </span>pympress
+</pre></div>
+</div>
+</li>
 </ol>
 </li>
 </ul>
