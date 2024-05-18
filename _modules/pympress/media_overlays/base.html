@@ -118,7 +118,7 @@
 <span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s1">&#39;Gtk&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0&#39;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">GLib</span><span class="p">,</span> <span class="n">Gio</span>
 
-<span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">builder</span>
+<span class="kn">from</span> <span class="nn">pympress</span> <span class="kn">import</span> <span class="n">document</span><span class="p">,</span> <span class="n">builder</span>
 
 
 <div class="viewcode-block" id="VideoOverlay">
@@ -145,10 +145,10 @@
     <span class="n">progress</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#: :class:`~Gtk.DrawingArea` where the media is rendered.</span>
     <span class="n">movie_zone</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="c1">#: `tuple` containing the left/top/right/bottom space around the drawing area in the PDF page</span>
-    <span class="n">relative_page_margins</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="c1">#: `tuple` containing the left/top/right/bottom space around the drawing area in the visible slide</span>
-    <span class="n">relative_margins</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: `tuple` containing the left/top/right/bottom coordinates of the drawing area in the PDF page</span>
+    <span class="n">relative_rect</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: `tuple` containing the left/top/right/bottom coordinates of the drawing area in the visible slide</span>
+    <span class="n">rect</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#: `bool` that tracks whether we should play automatically</span>
     <span class="n">autoplay</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="c1">#: `bool` that tracks whether we should play after we finished playing</span>
@@ -178,7 +178,7 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">VideoOverlay</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">container</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">relative_page_margins</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">media</span><span class="o">.</span><span class="n">relative_margins</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;y2&#39;</span><span class="p">,</span> <span class="s1">&#39;x2&#39;</span><span class="p">,</span> <span class="s1">&#39;y1&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relative_rect</span> <span class="o">=</span> <span class="p">(</span><span class="n">media</span><span class="o">.</span><span class="n">x1</span><span class="p">,</span> <span class="n">media</span><span class="o">.</span><span class="n">y1</span><span class="p">,</span> <span class="n">media</span><span class="o">.</span><span class="n">x2</span><span class="p">,</span> <span class="n">media</span><span class="o">.</span><span class="n">y2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_margins_for_page</span><span class="p">(</span><span class="n">page_type</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">load_ui</span><span class="p">(</span><span class="s1">&#39;media_overlay&#39;</span><span class="p">)</span>
@@ -296,7 +296,21 @@
 <span class="sd">        Arguments:</span>
 <span class="sd">            page_type (:class:`~pympress.document.PdfPage`): the part of the page to display</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">relative_margins</span> <span class="o">=</span> <span class="n">page_type</span><span class="o">.</span><span class="n">to_screen</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_page_margins</span><span class="p">)</span></div>
+        <span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bot</span> <span class="o">=</span> <span class="n">page_type</span><span class="o">.</span><span class="n">to_screen</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_rect</span><span class="p">)</span>
+
+        <span class="c1"># Some configurations generate incorrect media positions. Assume no one intentionally puts media on notes pages.</span>
+        <span class="k">if</span> <span class="n">page_type</span> <span class="o">==</span> <span class="n">document</span><span class="o">.</span><span class="n">PdfPage</span><span class="o">.</span><span class="n">RIGHT</span> <span class="ow">and</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Shifting media from LEFT notes page to RIGHT content page&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">page_type</span> <span class="o">==</span> <span class="n">document</span><span class="o">.</span><span class="n">PdfPage</span><span class="o">.</span><span class="n">TOP</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">top</span> <span class="o">&lt;</span> <span class="n">bot</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">top</span><span class="p">,</span> <span class="n">bot</span> <span class="o">=</span> <span class="n">top</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bot</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Shifting media from BOTTOM notes page to TOP content page&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bot</span>
+        <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Negative margin(s) clipped to 0 (might alter the aspect ratio?): &#39;</span> <span class="o">+</span>
+                           <span class="s1">&#39;LTRB = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">))</span></div>
 
 
 
@@ -309,10 +323,11 @@
             <span class="k">return</span>
 
         <span class="n">pw</span><span class="p">,</span> <span class="n">ph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_allocated_width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_allocated_height</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">media_overlay</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">margin_left</span>   <span class="o">=</span> <span class="n">pw</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_margins</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">media_overlay</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">margin_right</span>  <span class="o">=</span> <span class="n">pw</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_margins</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">media_overlay</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">margin_bottom</span> <span class="o">=</span> <span class="n">ph</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_margins</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">media_overlay</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">margin_top</span>    <span class="o">=</span> <span class="n">ph</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_margins</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span></div>
+        <span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rect</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">media_overlay</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">margin_left</span>   <span class="o">=</span> <span class="n">pw</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">media_overlay</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">margin_right</span>  <span class="o">=</span> <span class="n">pw</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">right</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">media_overlay</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">margin_bottom</span> <span class="o">=</span> <span class="n">ph</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">bot</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">media_overlay</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">margin_top</span>    <span class="o">=</span> <span class="n">ph</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
 
 
 
@@ -363,9 +378,9 @@
     <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Bring the widget to the top of the overlays if necessary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_margins</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Negative margin(s) clipped to 0 (might alter the aspect ratio?): &#39;</span> <span class="o">+</span>
-                           <span class="s1">&#39;LTRB = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_margins</span><span class="p">))</span>
+                           <span class="s1">&#39;LTRB = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">media_overlay</span><span class="o">.</span><span class="n">get_parent</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">add_overlay</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">media_overlay</span><span class="p">)</span>
