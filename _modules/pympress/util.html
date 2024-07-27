@@ -165,7 +165,7 @@
     <span class="c1"># Try and get a git describe output in case we are on a dirty/editable version</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;git --git-dir=</span><span class="si">{}</span><span class="s1"> describe --tags --long --dirty&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-        <span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">git_dir</span><span class="p">)</span>  <span class="c1"># after spliting in case path has whitespace</span>
+        <span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">git_dir</span><span class="p">)</span>  <span class="c1"># after splitting in case path has whitespace</span>
 
         <span class="n">git_version</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">)</span>
 

@@ -836,7 +836,7 @@
         <span class="c1"># For &quot;regular&quot; pages, there is no problem: just render them.</span>
         <span class="c1"># For other pages (i.e. half of a page), the widget already has correct</span>
         <span class="c1"># dimensions so we don&#39;t need to deal with that. But for right and bottom</span>
-        <span class="c1"># halfs we must translate the output in order to only show the correct half.</span>
+        <span class="c1"># halves we must translate the output in order to only show the correct half.</span>
         <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">PdfPage</span><span class="o">.</span><span class="n">RIGHT</span><span class="p">:</span>
             <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="n">pw</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">PdfPage</span><span class="o">.</span><span class="n">BOTTOM</span><span class="p">:</span>

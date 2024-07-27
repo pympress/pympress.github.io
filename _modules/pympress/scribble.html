@@ -221,7 +221,7 @@
     <span class="c1">#: The :class:`~Gio.Action` that contains the currently selected pen</span>
     <span class="n">pen_action</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="c1">#: `str` which is the mode for scribbling, one of 3 possile values:</span>
+    <span class="c1">#: `str` which is the mode for scribbling, one of 3 possible values:</span>
     <span class="c1"># global means one set of scribbles for the whole document</span>
     <span class="c1"># single-page means we manage a single page of scribbles, and clear everything on page change (historical behaviour)</span>
     <span class="c1"># per-page means we manage a set of scribbles per document page, and clear or restore them on page change</span>
@@ -862,7 +862,7 @@
         <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scribble_width_selector</span><span class="o">.</span><span class="n">get_size_request</span><span class="p">(),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tools_orientation</span> <span class="o">!=</span> <span class="s1">&#39;vertical&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scribble_width_selector</span><span class="o">.</span><span class="n">set_size_request</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
 
-        <span class="c1"># NB the parent container is layed out perpendicularly to its contents</span>
+        <span class="c1"># NB the parent container is laid out perpendicularly to its contents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scribble_overlay</span><span class="o">.</span><span class="n">set_orientation</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">HORIZONTAL</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tools_orientation</span> <span class="o">==</span> <span class="s1">&#39;vertical&#39;</span> <span class="k">else</span>
                                               <span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">)</span></div>
 

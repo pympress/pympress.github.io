@@ -220,7 +220,7 @@
     <span class="k">def</span> <span class="nf">handle_end</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; End of the stream reached: restart if looping, otherwise hide overlay</span>
 
-<span class="sd">        Overrided because, to implement looping, vlc plugin needs to be told to start on stream end, not to seek</span>
+<span class="sd">        Overridden because, to implement looping, vlc plugin needs to be told to start on stream end, not to seek</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">action_map</span><span class="o">.</span><span class="n">lookup_action</span><span class="p">(</span><span class="s1">&#39;play&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
