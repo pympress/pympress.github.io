@@ -1992,7 +1992,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scribbler</span><span class="o">.</span><span class="n">scribbling_mode</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;highlight&#39;</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">deck_mode</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;deck&#39;</span>
+            <span class="k">return</span> <span class="s1">&#39;deck-overview&#39;</span>
         <span class="k">elif</span> <span class="n">notes_mode</span><span class="o">.</span><span class="n">direction</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;page number&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;note_pages&#39;</span>
         <span class="k">elif</span> <span class="n">notes_mode</span><span class="p">:</span>
@@ -2012,7 +2012,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">new</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes_mode</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">new</span> <span class="o">!=</span> <span class="s1">&#39;deck-overview&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">layout_editor</span><span class="o">.</span><span class="n">set_current_layout</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
 
         <span class="n">pane_handles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">replace_layout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get_layout</span><span class="p">(</span><span class="n">new</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_central</span><span class="p">,</span>
