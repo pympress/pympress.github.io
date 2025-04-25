@@ -7,11 +7,13 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>What is Pympress? &mdash; Pympress developer documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
     <link rel="shortcut icon" href="_static/pympress.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=ed17f7cc"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
@@ -101,7 +103,7 @@
            <div itemprop="articleBody">
              
   <section id="what-is-pympress">
-<h1><img alt="Pympress logo" src="https://raw.githubusercontent.com/Cimbali/pympress/master/pympress/share/pixmaps/pympress-32.png" /> What is Pympress?<a class="headerlink" href="#what-is-pympress" title="Link to this heading">¶</a></h1>
+<h1><img alt="Pympress logo" src="https://raw.githubusercontent.com/Cimbali/pympress/master/pympress/share/pixmaps/pympress-32.png" /> What is Pympress?<a class="headerlink" href="#what-is-pympress" title="Link to this heading"></a></h1>
 <p>Pympress is a PDF presentation tool designed for dual-screen setups such as presentations and public talks.
 Highly configurable, fully-featured, and portable</p>
 <p>It comes with many great features (<a class="reference internal" href="#functionalities">more below</a>):</p>
@@ -116,7 +118,7 @@ Highly configurable, fully-featured, and portable</p>
 <img alt="A screenshot with Pympress’ 2 screens" src="https://pympress.github.io/resources/pympress-screenshot.png" /></p>
 </section>
 <section id="installing">
-<h1>Installing <a class="reference external" href="https://github.com/Cimbali/pympress/releases/latest"><img alt="github version badge" src="https://img.shields.io/github/v/release/Cimbali/pympress?label=Latest%20GitHub%20release&amp;logo=github" /></a><a class="headerlink" href="#installing" title="Link to this heading">¶</a></h1>
+<h1>Installing <a class="reference external" href="https://github.com/Cimbali/pympress/releases/latest"><img alt="github version badge" src="https://img.shields.io/github/v/release/Cimbali/pympress?label=Latest%20GitHub%20release&amp;logo=github" /></a><a class="headerlink" href="#installing" title="Link to this heading"></a></h1>
 <ul>
 <li><p>Ubuntu <img alt="ubuntu logo" src="https://pympress.github.io/os-icons/ubuntu.png" /> 20.04 focal or newer, Debian <img alt="debian logo" src="https://pympress.github.io/os-icons/debian.png" /> 11 Bullseye or newer
 <a class="reference external" href="https://packages.ubuntu.com/focal/pympress"><img alt="ubuntu version badge" src="https://img.shields.io/ubuntu/v/pympress?logo=ubuntu" /></a> <a class="reference external" href="https://packages.debian.org/testing/pympress"><img alt="debian version badge" src="https://img.shields.io/debian/v/pympress/testing?logo=debian" /></a> (maintained by <a class="reference external" href="https://github.com/mans0954">&#64;mans0954</a>)</p>
@@ -235,15 +237,15 @@ This means installing with <code class="docutils literal notranslate"><span clas
 </li>
 </ul>
 <section id="notes">
-<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h2>
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
 <p>To support playing embedded videos in the PDFs, your system must have VLC installed (with the same bitness as pympress).
 VLC is not distributed with pympress, but it is certainly available in your system’s package manager and <a class="reference external" href="https://www.videolan.org/vlc/">on their website</a>.</p>
 </section>
 </section>
 <section id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
+<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h1>
 <section id="opening-a-file">
-<h2>Opening a file<a class="headerlink" href="#opening-a-file" title="Link to this heading">¶</a></h2>
+<h2>Opening a file<a class="headerlink" href="#opening-a-file" title="Link to this heading"></a></h2>
 <p>Simply start Pympress and it will ask you what file you want to open.
 You can also start pympress from the command line with a file to open like so:
 <code class="docutils literal notranslate"><span class="pre">pympress</span> <span class="pre">slides.pdf</span></code>
@@ -251,7 +253,7 @@ or
 <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">pympress</span> <span class="pre">slides.pdf</span></code></p>
 </section>
 <section id="functionalities">
-<h2>Functionalities<a class="headerlink" href="#functionalities" title="Link to this heading">¶</a></h2>
+<h2>Functionalities<a class="headerlink" href="#functionalities" title="Link to this heading"></a></h2>
 <p>All functionalities are available from the menus of the window with slide previews. Don’t be afraid to experiment with them!</p>
 <p>Keyboard shortcuts are also listed in these menus. Some more usual shortcuts are often available, for example <code class="docutils literal notranslate"><span class="pre">Ctrl</span></code>+<code class="docutils literal notranslate"><span class="pre">L</span></code>, and <code class="docutils literal notranslate"><span class="pre">F11</span></code> also toggle fullscreen, though the main shortcut is just <code class="docutils literal notranslate"><span class="pre">F</span></code>.</p>
 <p>A few of the fancier functionalities are listed here:</p>
@@ -302,7 +304,7 @@ To disable this behaviour, untick “Content fullscreen” under the “Starting
 </ul>
 </section>
 <section id="command-line-arguments">
-<h2>Command line arguments<a class="headerlink" href="#command-line-arguments" title="Link to this heading">¶</a></h2>
+<h2>Command line arguments<a class="headerlink" href="#command-line-arguments" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-h,</span> <span class="pre">--help</span></code>: Shows a list of all command line arguments.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">mm[:ss],</span> <span class="pre">--talk-time=mm[:ss]</span></code>: The estimated (intended) talk time in minutes and optionally seconds.</p></li>
@@ -311,7 +313,7 @@ To disable this behaviour, untick “Content fullscreen” under the “Starting
 </ul>
 </section>
 <section id="media-and-autoplay">
-<h2>Media and autoplay<a class="headerlink" href="#media-and-autoplay" title="Link to this heading">¶</a></h2>
+<h2>Media and autoplay<a class="headerlink" href="#media-and-autoplay" title="Link to this heading"></a></h2>
 <p>To enable media playback, you need to have either:</p>
 <ul class="simple">
 <li><p>Gstreamer installed (enabled by default), with its gtk plugin (<code class="docutils literal notranslate"><span class="pre">libgstgtk</span></code>) which is sometimes packaged separately (e.g. as <code class="docutils literal notranslate"><span class="pre">gst-plugin-gtk</span></code> or <code class="docutils literal notranslate"><span class="pre">gstreamer1.0-gtk3</span></code>), and plugins gstreamer-good/-bad/-ugly based on which codecs you need, or</p></li>
@@ -351,7 +353,7 @@ To disable this behaviour, untick “Content fullscreen” under the “Starting
 </section>
 </section>
 <section id="dependencies">
-<h1>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h1>
+<h1>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h1>
 <p>Pympress relies on:</p>
 <ul class="simple">
 <li><p>Python (version ≥ 3.4, python 2.7 is supported only until pympress 1.5.1, and 3.x &lt; 3.4 until v1.6.4).</p></li>
@@ -372,7 +374,7 @@ and the <a class="reference external" href="https://pypi.org/project/python-vlc/
 <li><p>optionally Gstreamer to play videos (which is a Gtk library)</p></li>
 </ul>
 <section id="on-linux-platforms">
-<h2>On linux platforms<a class="headerlink" href="#on-linux-platforms" title="Link to this heading">¶</a></h2>
+<h2>On linux platforms<a class="headerlink" href="#on-linux-platforms" title="Link to this heading"></a></h2>
 <p>The dependencies are often installed by default, or easily available through your package or software manager.
 For example, on ubuntu, you can run the following as root to make sure you have all the prerequisites <em>assuming you use python3</em>:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>python3<span class="w"> </span>python3-pip<span class="w"> </span>libgtk-3-0<span class="w"> </span>libpoppler-glib8<span class="w"> </span>libcairo2<span class="w"> </span>python3-gi<span class="w"> </span>python3-cairo<span class="w"> </span>python3-gi-cairo<span class="w"> </span>gobject-introspection<span class="w"> </span>libgirepository-1.0-1<span class="w"> </span>libgirepository1.0-dev<span class="w"> </span>gir1.2-gtk-3.0<span class="w"> </span>gir1.2-poppler-0.18
@@ -392,14 +394,14 @@ For example, on ubuntu, you can run the following as root to make sure you have 
 </div>
 </section>
 <section id="on-macos">
-<h2>On macOS<a class="headerlink" href="#on-macos" title="Link to this heading">¶</a></h2>
+<h2>On macOS<a class="headerlink" href="#on-macos" title="Link to this heading"></a></h2>
 <p>Dependencies can be installed using <a class="reference external" href="https://brew.sh/">Homebrew</a>:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>--only-dependencies<span class="w"> </span>pympress
 </pre></div>
 </div>
 </section>
 <section id="on-windows">
-<h2>On windows<a class="headerlink" href="#on-windows" title="Link to this heading">¶</a></h2>
+<h2>On windows<a class="headerlink" href="#on-windows" title="Link to this heading"></a></h2>
 <p>The <a class="reference internal" href="#installing">binary installer for windows</a> comes with pympress and all its dependencies packaged.</p>
 <p>Alternately, in order to install from pypi or from source on windows, there are two ways to get the dependencies:</p>
 <ol class="arabic">
@@ -421,14 +423,14 @@ This strategy has not been used successfully yet, due to problems building Poppl
 </section>
 </section>
 <section id="contributing">
-<h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">¶</a></h1>
+<h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading"></a></h1>
 <p>Feel free to clone this repo and use it, modify it, redistribute it, etc, under the GPLv2+.
 A <a class="reference external" href="https://github.com/Cimbali/pympress/graphs/contributors">number of contributors</a> have taken part in the development of pympress and submitted pull requests to improve it.</p>
 <p><strong>Be respectful of everyone and keep this community friendly, welcoming, and harassment-free.
 Abusive behaviour will not be tolerated, and can be reported by email at me&#64;cimba.li − wrongdoers may be permanently banned.</strong></p>
 <p>Pympress has inline sphinx documentation (<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/example_google.html">Google style</a>, contains rst syntax), and the <a class="reference external" href="https://pympress.github.io/">docs generated from it are hosted on the github pages of this repo</a>.</p>
 <section id="translations">
-<h2>Translations<a class="headerlink" href="#translations" title="Link to this heading">¶</a></h2>
+<h2>Translations<a class="headerlink" href="#translations" title="Link to this heading"></a></h2>
 <p><img alt="Chinese (simplified)" src="https://img.shields.io/poeditor/progress/301055/zh-Hans?token=7a666b44c0985d16a7b59748f488275c&amp;label=%F0%9F%87%A8%F0%9F%87%B3%20Chinese%20%28simplified%29" />
 <img alt="Chinese (traditional)" src="https://img.shields.io/poeditor/progress/301055/zh-Hant?token=7a666b44c0985d16a7b59748f488275c&amp;label=%F0%9F%87%A8%F0%9F%87%B3%20Chinese%20%28traditional%29" />
 <img alt="Czech" src="https://img.shields.io/poeditor/progress/301055/cs?token=7a666b44c0985d16a7b59748f488275c&amp;label=%F0%9F%87%A8%F0%9F%87%BF%20Czech" />
@@ -490,7 +492,7 @@ Note that old strings are kept and tagged <code class="docutils literal notransl
 This means <code class="docutils literal notranslate"><span class="pre">removed</span></code> strings are unused and do not need translating.</p>
 </section>
 <section id="packages">
-<h2>Packages<a class="headerlink" href="#packages" title="Link to this heading">¶</a></h2>
+<h2>Packages<a class="headerlink" href="#packages" title="Link to this heading"></a></h2>
 <p>Official releases are made to <a class="reference external" href="https://pypi.org/">PyPI</a> and with <a class="reference external" href="https://github.com/Cimbali/pympress/releases">github releases</a>.
 The community maintains a number of other packages or recipes to install pympress (see <a class="reference internal" href="#installing">Install section</a>). Any additions welcome.</p>
 </section>

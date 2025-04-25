@@ -6,11 +6,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>pympress.util &mdash; Pympress developer documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
     <link rel="shortcut icon" href="../../_static/pympress.ico"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../_static/documentation_options.js?v=ed17f7cc"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
@@ -106,24 +108,24 @@
 <span class="sd">-------------------------------------------------</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">contextlib</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
-<span class="kn">import</span> <span class="nn">importlib</span>
-<span class="kn">import</span> <span class="nn">gettext</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">ctypes</span>
-<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gettext</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
 
 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
     <span class="c1"># Using parts introduced in 3.9</span>
-    <span class="kn">import</span> <span class="nn">importlib.resources</span> <span class="k">as</span> <span class="nn">importlib_resources</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">importlib.resources</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">importlib_resources</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="c1"># Backport dependency</span>
-    <span class="kn">import</span> <span class="nn">importlib_resources</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">importlib_resources</span>
 
 
 <span class="n">IS_POSIX</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span>
@@ -133,9 +135,9 @@
 
 <span class="k">if</span> <span class="n">IS_WINDOWS</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">winreg</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">winreg</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">_winreg</span> <span class="k">as</span> <span class="nn">winreg</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">_winreg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">winreg</span>
 
 
 <span class="c1">#: A :class:`~contextlib.ExitStack` containing all entered importlib context managers for used resources</span>
@@ -144,7 +146,7 @@
 
 <div class="viewcode-block" id="get_pympress_meta">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.get_pympress_meta">[docs]</a>
-<span class="k">def</span> <span class="nf">get_pympress_meta</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_pympress_meta</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Get metadata (version, etc) from pympress&#39; __init__.py or git describe.</span>
 
 <span class="sd">    Returns:</span>
@@ -180,7 +182,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">__get_resource_path</span><span class="p">(</span><span class="o">*</span><span class="n">path_parts</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">__get_resource_path</span><span class="p">(</span><span class="o">*</span><span class="n">path_parts</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Return the path to a resource, ensuring it was made available as a file for the duration of the program.</span>
 
 <span class="sd">    Args:</span>
@@ -197,7 +199,7 @@
 
 <div class="viewcode-block" id="close_opened_resources">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.close_opened_resources">[docs]</a>
-<span class="k">def</span> <span class="nf">close_opened_resources</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">close_opened_resources</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Close all importlib context managers for resources that we needed over the program lifetime. &quot;&quot;&quot;</span>
     <span class="n">_opened_resources</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
@@ -205,7 +207,7 @@
 
 <div class="viewcode-block" id="get_translation">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.get_translation">[docs]</a>
-<span class="k">def</span> <span class="nf">get_translation</span><span class="p">(</span><span class="n">domain</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_translation</span><span class="p">(</span><span class="n">domain</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns a gettext translation object.</span>
 
 <span class="sd">    This re-implements gettext’s translation() and find() to allow using a python 3.9 Traversable as localedir</span>
@@ -237,7 +239,7 @@
 
 <div class="viewcode-block" id="get_portable_config">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.get_portable_config">[docs]</a>
-<span class="k">def</span> <span class="nf">get_portable_config</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_portable_config</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns the path to the configuration file for a portable install (i.e. in the install root).</span>
 
 <span class="sd">    May return None if the install root is not a real directory (e.g. in a zip file).</span>
@@ -254,7 +256,7 @@
 
 <div class="viewcode-block" id="get_default_config">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.get_default_config">[docs]</a>
-<span class="k">def</span> <span class="nf">get_default_config</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_default_config</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns the path to the configuration file containing the defaults.</span>
 
 <span class="sd">    Returns:</span>
@@ -266,7 +268,7 @@
 
 <div class="viewcode-block" id="get_user_config">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.get_user_config">[docs]</a>
-<span class="k">def</span> <span class="nf">get_user_config</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user_config</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns the path to the configuration file in the user config directory</span>
 
 <span class="sd">    Returns:</span>
@@ -287,7 +289,7 @@
 
 <div class="viewcode-block" id="load_style_provider">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.load_style_provider">[docs]</a>
-<span class="k">def</span> <span class="nf">load_style_provider</span><span class="p">(</span><span class="n">style_provider</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_style_provider</span><span class="p">(</span><span class="n">style_provider</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Load the css and in a style provider</span>
 
 <span class="sd">    Args:</span>
@@ -303,7 +305,7 @@
 
 <div class="viewcode-block" id="get_icon_path">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.get_icon_path">[docs]</a>
-<span class="k">def</span> <span class="nf">get_icon_path</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_icon_path</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Get the path for an image from pympress&#39; resources</span>
 
 <span class="sd">    Args:</span>
@@ -318,7 +320,7 @@
 
 <div class="viewcode-block" id="get_ui_resource_file">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.get_ui_resource_file">[docs]</a>
-<span class="k">def</span> <span class="nf">get_ui_resource_file</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;.glade&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_ui_resource_file</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;.glade&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Load an UI definition file from pympress&#39; resources</span>
 
 <span class="sd">    Args:</span>
@@ -334,7 +336,7 @@
 
 <div class="viewcode-block" id="list_icons">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.list_icons">[docs]</a>
-<span class="k">def</span> <span class="nf">list_icons</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_icons</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; List the icons from pympress&#39; resources.</span>
 
 <span class="sd">    Returns:</span>
@@ -346,7 +348,7 @@
 
 <div class="viewcode-block" id="get_log_path">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.get_log_path">[docs]</a>
-<span class="k">def</span> <span class="nf">get_log_path</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_log_path</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns the appropriate path to the log file in the user app dirs.</span>
 
 <span class="sd">    Returns:</span>
@@ -368,7 +370,7 @@
 
 <div class="viewcode-block" id="fileopen">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.fileopen">[docs]</a>
-<span class="k">def</span> <span class="nf">fileopen</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fileopen</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Call the right function to open files, based on the platform.</span>
 
 <span class="sd">    Args:</span>
@@ -385,7 +387,7 @@
 
 <div class="viewcode-block" id="introspect_flag_value">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.introspect_flag_value">[docs]</a>
-<span class="k">def</span> <span class="nf">introspect_flag_value</span><span class="p">(</span><span class="n">flags_class</span><span class="p">,</span> <span class="n">nick</span><span class="p">,</span> <span class="n">fallback</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">introspect_flag_value</span><span class="p">(</span><span class="n">flags_class</span><span class="p">,</span> <span class="n">nick</span><span class="p">,</span> <span class="n">fallback</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Get the value of a flag from its class, given a value’s name (or nick)</span>
 
 <span class="sd">    Introspection technique (in particular __flags_values__ dict) inspired from pygtkcompat.</span>
@@ -411,7 +413,7 @@
 
 <div class="viewcode-block" id="hard_set_screensaver">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.hard_set_screensaver">[docs]</a>
-<span class="k">def</span> <span class="nf">hard_set_screensaver</span><span class="p">(</span><span class="n">disabled</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hard_set_screensaver</span><span class="p">(</span><span class="n">disabled</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Enable or disable the screensaver.</span>
 
 <span class="sd">    Args:</span>
@@ -459,7 +461,7 @@
 
 <div class="viewcode-block" id="NoMonitorPositions">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.NoMonitorPositions">[docs]</a>
-<span class="k">class</span> <span class="nc">NoMonitorPositions</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NoMonitorPositions</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; The Exception we raise when there is no way of figuring out the monitor position of windows &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
@@ -467,7 +469,7 @@
 
 <div class="viewcode-block" id="ScreenArea">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea">[docs]</a>
-<span class="k">class</span> <span class="nc">ScreenArea</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ScreenArea</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Convenience class to represent monitors or windows in terms of the area (position and size) they use on screen</span>
 
 <span class="sd">    This is similar to :class:`~Gdk.Monitor`, but necessary as we want to handle “mirrored” monitors as if they were a</span>
@@ -475,7 +477,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="ScreenArea.most_intersection">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.most_intersection">[docs]</a>
-    <span class="k">def</span> <span class="nf">most_intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">most_intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Find the rectangle that intersects most with `~rect` in `~candidates`</span>
 
 <span class="sd">        Args:</span>
@@ -500,7 +502,7 @@
 
 <div class="viewcode-block" id="ScreenArea.least_intersection">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.least_intersection">[docs]</a>
-    <span class="k">def</span> <span class="nf">least_intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">least_intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Find the rectangle that intersects least with `~rect` in `~candidates`</span>
 
 <span class="sd">        Args:</span>
@@ -521,21 +523,21 @@
 
 
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">obj</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">height</span>
 
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Return a complete representation of the object &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;ScreenArea(at </span><span class="si">{}</span><span class="s1"> size </span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="ScreenArea.intersection">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.intersection">[docs]</a>
-    <span class="k">def</span> <span class="nf">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Compute the intersection of 2 screen areas</span>
 
 <span class="sd">        Args:</span>
@@ -559,7 +561,7 @@
 
 <div class="viewcode-block" id="ScreenArea.equal">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.equal">[docs]</a>
-    <span class="k">def</span> <span class="nf">equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Check whether 2 areas cover the exact same space</span>
 
 <span class="sd">        Args:</span>
@@ -574,7 +576,7 @@
 
 <div class="viewcode-block" id="ScreenArea.contains">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.contains">[docs]</a>
-    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Check whether this area contains `~other`</span>
 
 <span class="sd">        Args:</span>
@@ -590,7 +592,7 @@
 
 <div class="viewcode-block" id="ScreenArea.intersects">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.ScreenArea.intersects">[docs]</a>
-    <span class="k">def</span> <span class="nf">intersects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">intersects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Check whether this area intersects `~other`</span>
 
 <span class="sd">        Args:</span>
@@ -606,7 +608,7 @@
 
 <div class="viewcode-block" id="Monitor">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.Monitor">[docs]</a>
-<span class="k">class</span> <span class="nc">Monitor</span><span class="p">(</span><span class="n">ScreenArea</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Monitor</span><span class="p">(</span><span class="n">ScreenArea</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; A specialised `~ScreenArea` representing a monitor, with an descriptive string and a monitor number &quot;&quot;&quot;</span>
     <span class="c1">#: A `str` to represent a user-friendly name for the monitor</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -614,13 +616,13 @@
     <span class="c1">#: An `int` that identifies the monitor in :class:`~Gdk.Display`</span>
     <span class="n">monitor_number</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">id_</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">id_</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Monitor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">id_</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">monitor_number</span> <span class="o">=</span> <span class="n">num</span>
 
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Return a complete representation of the object &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;Monitor(</span><span class="si">{}</span><span class="s1"> at </span><span class="si">{}</span><span class="s1"> size </span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
 
@@ -628,7 +630,7 @@
 <div class="viewcode-block" id="Monitor.lookup_monitors">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.Monitor.lookup_monitors">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">lookup_monitors</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="o">*</span><span class="n">windows</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lookup_monitors</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="o">*</span><span class="n">windows</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the info on the monitors</span>
 
 <span class="sd">        Args:</span>
@@ -682,7 +684,7 @@
 
 <div class="viewcode-block" id="make_windows_dpi_aware">
 <a class="viewcode-back" href="../../pympress.html#pympress.util.make_windows_dpi_aware">[docs]</a>
-<span class="k">def</span> <span class="nf">make_windows_dpi_aware</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_windows_dpi_aware</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Set to avoid blurriness issues on High-DPI resolutions with scaling. &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">IS_WINDOWS</span><span class="p">:</span>
         <span class="k">return</span>
